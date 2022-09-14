@@ -1,4 +1,7 @@
-package Characters;
+package Characters.Enemies;
+
+import Characters.Enemies.Creature;
+import Characters.Entity;
 
 public class Seeker extends Creature implements Entity {
 

@@ -1,4 +1,4 @@
-package Characters;
+package Characters.Enemies;
 
 import Board.Room;
 

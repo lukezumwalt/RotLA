@@ -1,7 +1,8 @@
-package Characters;
+package Characters.Friendlies;
 
-public class Blinker extends Creature implements Entity {
+import Characters.Entity;
 
+public class Runner extends Adventurer implements Entity {
     @Override
     public void move() {
 

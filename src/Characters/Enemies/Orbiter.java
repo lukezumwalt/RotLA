@@ -1,5 +1,6 @@
-package Characters;
+package Characters.Enemies;
 
+import Characters.Enemies.Creature;
 import Characters.Entity;
 
 public class Orbiter extends Creature implements Entity {

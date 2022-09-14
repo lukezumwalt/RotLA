@@ -1,6 +1,8 @@
-package Characters;
+package Characters.Friendlies;
 
-public class Brawler extends Adventurer implements Entity{
+import Characters.Entity;
+
+public class Brawler extends Adventurer implements Entity {
 
     static final int combatBonus = 2;
 

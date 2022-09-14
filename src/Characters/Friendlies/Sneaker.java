@@ -1,6 +1,8 @@
-package Characters;
+package Characters.Friendlies;
 
-public class Thief extends Adventurer implements Entity{
+import Characters.Entity;
+
+public class Sneaker extends Adventurer implements Entity {
     @Override
     public void move() {
 
