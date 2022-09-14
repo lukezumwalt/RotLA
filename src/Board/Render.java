@@ -41,7 +41,7 @@ public class Render {
     private void printStatus(){
 //        System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
         System.out.print("\n");
-        System.out.println("Characters.Brawler:\t x Treasure(s) / x Damage");
+        System.out.println("Characters.Friendlies.Brawler:\t x Treasure(s) / x Damage");
         System.out.println("Sneaker:\t x Treasure(s) / x Damage");
         System.out.println("Runner:\t\t x Treasure(s) / x Damage");
         System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
