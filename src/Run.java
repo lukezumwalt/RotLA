@@ -18,14 +18,7 @@ public class Run {
 //            }
 
 
-            // print turn
-            view.printTurn();
-
-            // print board
-            view.printBoard();
-
-            // print status
-            view.printStatus();
+            view.printFrame();
 
             // Exit Condition
             if(Objects.equals(input.nextLine(),"q")){

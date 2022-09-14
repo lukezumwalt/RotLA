@@ -8,22 +8,18 @@ public class Render {
     int turn = 0;
     static int[][][] board = new int[5][3][3];
 
-//    static void fillBoard(){
-//        for( int i = 0; i < 5; ++i ){
-//            for( int j = 0; j < 3; ++j ){
-//                for( int k = 0; k < 3; ++k ){
-//                    board[i][j][k] = 1;
-//                }
-//            }
-//        }
-//    }
+    public void printFrame(){
+        printTurn();
+        printBoard();
+        printStatus();
+    }
 
-    public void printTurn(){
+    private void printTurn(){
         System.out.println("RotLA Turn: " + turn);
         turn++;
     }
 
-    public void printBoard(){
+    private void printBoard(){
         System.out.println("+--------------------------------------------------+");
         System.out.println("| 0-1-1: - : -                                     |");
         System.out.println("| 1-0-0: - : -    1-0-1: - : -    1-0-2: - : -     |");
@@ -41,28 +37,15 @@ public class Render {
         System.out.println("+--------------------------------------------------+");
     }
 
-    public void printStatus(){
-        System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
-        System.out.println("Brawler - x Treasure(s) - x Damage");
-        System.out.println("Sneaker - x Treasure(s) - x Damage");
-        System.out.println("Runner - x Treasure(s) - x Damage");
-        System.out.println("Thief - x Treasure(s) - x Damage\n");
-        System.out.println("Orbiters - x Treasure(s) - x Damage");
-        System.out.println("Seekers - x Treasure(s) - x Damage");
-        System.out.println("Blinkers - x Treasure(s) - x Damage");
+    private void printStatus(){
+//        System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
+        System.out.print("\n");
+        System.out.println("Brawler:\t x Treasure(s) / x Damage");
+        System.out.println("Sneaker:\t x Treasure(s) / x Damage");
+        System.out.println("Runner:\t\t x Treasure(s) / x Damage");
+        System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
+        System.out.println("Orbiters:\t x Remaining");
+        System.out.println("Seekers:\t x Remaining");
+        System.out.println("Blinkers:\t x Remaining");
     }
-
-    public void printRoom(){
-        //
-    }
-
-//    private char[] getAdventurers( Room r ){
-//        //
-//        return new char[0];
-//    }
-//
-//    private char[] getCreatures( Room r ){
-//        //
-//        return new char[0];
-//    }
 }
