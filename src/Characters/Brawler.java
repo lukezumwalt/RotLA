@@ -1,6 +1,9 @@
+package Characters;
+
 public class Brawler extends Adventurer implements Entity{
 
     static final int combatBonus = 2;
+
 
     @Override
     public boolean fight(Entity target){

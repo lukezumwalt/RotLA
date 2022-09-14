@@ -1,4 +1,6 @@
-public class Orbiter implements Entity{
+package Characters;
+
+public class Blinker extends Creature implements Entity {
 
     @Override
     public void move() {

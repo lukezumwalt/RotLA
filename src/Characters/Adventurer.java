@@ -1,3 +1,7 @@
+package Characters;
+
+import Board.Room;
+
 public class Adventurer {
     private String type;
     private int health;
@@ -13,6 +17,7 @@ public class Adventurer {
     String getType(){
         return type;
     }
+    void setType( String t ){ type = t; };
     int getHealth(){
         return health;
     }

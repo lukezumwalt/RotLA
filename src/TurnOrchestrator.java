@@ -1,3 +1,5 @@
+import Characters.Entity;
+
 public class TurnOrchestrator {
 
     // process entity

@@ -1,4 +1,4 @@
-import BoardRenderer.Render;
+import Board.Render;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -8,6 +8,10 @@ public class Run {
 
         Render view = new Render();
         Scanner input = new Scanner(System.in);
+        Engine game = new Engine();
+
+        game.initialize();
+
         boolean gameOver = false;
 
         // Primary Run Loop

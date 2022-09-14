@@ -1,4 +1,6 @@
-import java.lang.reflect.Array;
+package Board;
+
+import Characters.Entity;
 import java.util.ArrayList;
 
 public class Room {
@@ -8,4 +10,7 @@ public class Room {
         adjacentRooms = new ArrayList<>();
     }
     ArrayList<Entity> occupants = new ArrayList<>();
+
+    boolean checkIfTreasure(){ return treasureAvailable; }
+
 }

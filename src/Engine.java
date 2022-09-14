@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+import Board.Room;
+import Characters.Entity;
+import Characters.Sneaker;
+
 public class Engine extends TurnOrchestrator {
 
     // Game Board
@@ -10,7 +14,7 @@ public class Engine extends TurnOrchestrator {
     ArrayList<Entity> Adventurers = new ArrayList<Entity>();
     ArrayList<Entity> Creatures = new ArrayList<Entity>();
 
-    void initializeGame(){
+    void initialize(){
         // Instantiate Game Board
         initializeBoard();
         // Instantiate Adventurers
@@ -23,18 +27,19 @@ public class Engine extends TurnOrchestrator {
         //
     }
     void initializeAdventurers(){
-        Adventurers.add(new Brawler());
-        Adventurers.get(0).move();
-//        Adventurers.add(new Sneaker());
+        Adventurers.add(new Characters.Brawler());
+        Adventurers.add(new Characters.Sneaker());
+        Adventurers.add(new Characters.Runner());
+        Adventurers.add(new Characters.Thief());
     }
     void initializeCreatures(){
-        Entity o = new Orbiter();
-//        Entity s = new Seeker();
-//        Entity b = new Blinker();
+        Characters.Entity o = new Characters.Orbiter();
+        Characters.Entity s = new Characters.Seeker();
+        Characters.Entity b = new Characters.Blinker();
         for( int i = 0; i < 4; ++i ) {
             Creatures.add(o);
-//            Creatures.add(s);
-//            Creatures.add(b);
+            Creatures.add(s);
+            Creatures.add(b);
         }
     }
 

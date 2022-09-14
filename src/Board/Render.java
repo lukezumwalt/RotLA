@@ -1,17 +1,18 @@
-package BoardRenderer;
+package Board;
 
 public class Render {
 
     // NOTE:    THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
     //          IT IS STATIC NOW FOR DEMONSTRATION
+    // @TODO: BUG, the second print lags until the third query but only for the second print loop.
 
     int turn = 0;
-    static int[][][] board = new int[5][3][3];
 
     public void printFrame(){
         printTurn();
         printBoard();
         printStatus();
+        System.out.println("\n\n");
     }
 
     private void printTurn(){
@@ -40,7 +41,7 @@ public class Render {
     private void printStatus(){
 //        System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
         System.out.print("\n");
-        System.out.println("Brawler:\t x Treasure(s) / x Damage");
+        System.out.println("Characters.Brawler:\t x Treasure(s) / x Damage");
         System.out.println("Sneaker:\t x Treasure(s) / x Damage");
         System.out.println("Runner:\t\t x Treasure(s) / x Damage");
         System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
