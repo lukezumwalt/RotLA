@@ -1,20 +1,15 @@
 import java.util.ArrayList;
 
 import Board.Room;
-import Characters.Enemies.Blinker;
-import Characters.Enemies.Orbiter;
-import Characters.Enemies.Seeker;
 import Characters.Entity;
-import Characters.Friendlies.Brawler;
-import Characters.Friendlies.Runner;
-import Characters.Friendlies.Sneaker;
-import Characters.Friendlies.Thief;
+import Characters.Enemies.*;
+import Characters.Friendlies.*;
 
 public class Engine extends TurnOrchestrator {
 
     // Game Board
     Room[][][] Facility = new Room[5][3][3];
-    Room Entrance = new Room();
+    Room Entrance = new Room(0,1,1);
 
     // Characters
     ArrayList<Entity> Adventurers = new ArrayList<Entity>();

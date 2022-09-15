@@ -2,9 +2,11 @@ package Board;
 
 public class Render {
 
-    // NOTE:    THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
-    //          IT IS STATIC NOW FOR DEMONSTRATION
-    // @TODO: BUG, the second print lags until the third query but only for the second print loop.
+    /*
+     NOTE:    THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
+              IT IS STATIC NOW FOR DEMONSTRATION
+     @TODO: BUG, the second print lags until the third query but only for the second print loop.
+    */
 
     int turn = 0;
 
@@ -48,5 +50,9 @@ public class Render {
         System.out.println("Orbiters:\t x Remaining");
         System.out.println("Seekers:\t x Remaining");
         System.out.println("Blinkers:\t x Remaining");
+    }
+
+    private void inspectAndReportFacility(){
+
     }
 }

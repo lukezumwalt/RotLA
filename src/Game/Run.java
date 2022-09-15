@@ -29,5 +29,6 @@ public class Run {
                 gameOver = true;
             }
         }
+        input.close();
     }
 }

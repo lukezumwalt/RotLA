@@ -8,6 +8,7 @@ public class TurnOrchestrator {
         return e;
     }
 
+    for
 
 
         // adventurers
