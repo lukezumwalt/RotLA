@@ -8,12 +8,15 @@ import java.util.Collection;
 
 public class Room {
 
+    int[][][] Room = new int[5][3][3];
+
     // CONSTRUCTORS
     public Room() {
 
     }
-    public Room(int floor, int x, int y){
-        coordinates = new int[]{floor, x, y};
+
+    public Room(int floor, int x, int y) {
+        coordinates = new int[] { floor, x, y };
     }
 
     // POSITION
@@ -24,20 +27,28 @@ public class Room {
 
     // TREASURE
     private boolean treasureAvailable = true;
-    boolean checkIfTreasure(){ return treasureAvailable; }
-    public void takeTreasure(){ treasureAvailable = false; }
+
+    boolean checkIfTreasure() {
+        return treasureAvailable;
+    }
+
+    public void takeTreasure() {
+        treasureAvailable = false;
+    }
 
     // OCCUPANCY
     private ArrayList<Entity> occupantAdventurers;
     private ArrayList<Entity> occupantCreatures;
+
     public ArrayList<Entity> getOccupantAdventurers() {
         return occupantAdventurers;
     }
-    public ArrayList<Entity> getOccupantCreatures(){
+
+    public ArrayList<Entity> getOccupantCreatures() {
         return occupantCreatures;
     }
 
-    public void leaveRoom( Entity e ){
+    public void leaveRoom(Entity e) {
         switch (e.getEntityType()) {
             default -> throw new IllegalStateException("Unexpected value: " + e.getEntityType());
             case "adventurer" -> occupantAdventurers.remove(e);
@@ -45,10 +56,11 @@ public class Room {
         }
     }
 
-    public void occupyAdventurer( Entity me ){
-        occupantAdventurers.add( me );
+    public void occupyAdventurer(Entity me) {
+        occupantAdventurers.add(me);
     }
-    public void occupyCreature( Entity me ){
-        occupantCreatures.add( me );
+
+    public void occupyCreature(Entity me) {
+        occupantCreatures.add(me);
     }
 }

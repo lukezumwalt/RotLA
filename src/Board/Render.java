@@ -1,28 +1,41 @@
 package Board;
 
+import Engine;
+
 public class Render {
 
     /*
-     NOTE:    THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
-              IT IS STATIC NOW FOR DEMONSTRATION
-     @TODO: BUG, the second print lags until the third query but only for the second print loop.
-    */
+     * NOTE: THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
+     * IT IS STATIC NOW FOR DEMONSTRATION
+     * 
+     * @TODO: BUG, the second print lags until the third query but only for the
+     * second print loop.
+     */
 
     int turn = 0;
 
-    public void printFrame(){
+    public void printFrame() {
         printTurn();
         printBoard();
         printStatus();
         System.out.println("\n\n");
     }
 
-    private void printTurn(){
+    private void printTurn() {
         System.out.println("RotLA Turn: " + turn);
         turn++;
     }
 
-    private void printBoard(){
+    private void printBoard() {
+        for (int i = 0; i < 6; i++)
+            for (int j = 0; j < 3; j++)
+                for (int z = 0; z < 3; z++) {
+                    System.out.println("arr[" + i
+                            + "]["
+                            + j + "]["
+                            + z + "] = "
+                            + Facility[i][j][z]);
+                }
         System.out.println("+--------------------------------------------------+");
         System.out.println("| 0-1-1: - : -                                     |");
         System.out.println("| 1-0-0: - : -    1-0-1: - : -    1-0-2: - : -     |");
@@ -40,8 +53,8 @@ public class Render {
         System.out.println("+--------------------------------------------------+");
     }
 
-    private void printStatus(){
-//        System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
+    private void printStatus() {
+        // System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
         System.out.print("\n");
         System.out.println("Characters.Friendlies.Brawler:\t x Treasure(s) / x Damage");
         System.out.println("Sneaker:\t x Treasure(s) / x Damage");
@@ -52,7 +65,7 @@ public class Render {
         System.out.println("Blinkers:\t x Remaining");
     }
 
-    private void inspectAndReportFacility(){
+    private void inspectAndReportFacility() {
 
     }
 }
