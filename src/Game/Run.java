@@ -1,3 +1,5 @@
+package Game;
+
 import Board.Render;
 
 import java.util.Objects;
@@ -14,13 +16,12 @@ public class Run {
 
         boolean gameOver = false;
 
-        // Primary Run Loop
+        // Primary Game.Run Loop
         while ( !gameOver ) {
 
 //            for (int i = 0; i < ENTITY_TOTAL; ++i) {
 //                processEntity(entityList[i]);
 //            }
-
 
             view.printFrame();
 

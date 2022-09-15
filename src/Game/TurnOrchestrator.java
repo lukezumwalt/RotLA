@@ -1,4 +1,11 @@
+package Game;
+
+import Board.Room;
 import Characters.Entity;
+import Characters.Friendlies.Adventurer;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class TurnOrchestrator {
 
@@ -8,20 +15,28 @@ public class TurnOrchestrator {
         return e;
     }
 
-    for
+    private void processAdventurers( ArrayList<Entity> Adventurers ){
+        ArrayList<Entity> targets = new ArrayList<>();
+        for( Entity player : Adventurers ){
+            Room thisRoom = player.checkRoom();
+            if( thisRoom.getOccupantCreatures().size() == 0 ){
+                player.move();
+            }
+            for( Entity target : thisRoom.getOccupantCreatures() ){
+                player.fight(target);
+            }
+        }
+    }
 
-
-        // adventurers
-            // movement
-                // dice roll
-            // combat
-                // dice roll
-                // health track
-            // treasure hunt
-        // creatures
-            // movement
-                // dice roll
-            // combat
-                // dice roll
-    // check win conditions
+    private void processCreatures( ArrayList<Entity> Creatures ){
+        for( Entity monster : Creatures ){
+            Room thisRoom = monster.checkRoom();
+            if( thisRoom.getOccupantAdventurers().size() == 0 ){
+                monster.move();
+            }
+            for( Entity target : thisRoom.getOccupantAdventurers() ){
+                monster.fight(target);
+            }
+        }
+    }
 }

@@ -1,3 +1,5 @@
+package Game;
+
 import java.util.ArrayList;
 
 import Board.Room;
@@ -44,5 +46,8 @@ public class Engine extends TurnOrchestrator {
         }
     }
 
+    public Room getRoom(int[] coordinates) {
+        return Facility[coordinates[0]][coordinates[1]][coordinates[2]];
+    }
 
 }
