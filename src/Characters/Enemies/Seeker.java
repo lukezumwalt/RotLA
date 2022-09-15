@@ -1,5 +1,6 @@
 package Characters.Enemies;
 
+import Board.Room;
 import Characters.Enemies.Creature;
 import Characters.Entity;
 
@@ -13,5 +14,15 @@ public class Seeker extends Creature implements Entity {
     @Override
     public boolean fight(Entity target) {
         return false;
+    }
+
+    @Override
+    public String getEntityType() {
+        return null;
+    }
+
+    @Override
+    public Room checkRoom() {
+        return null;
     }
 }

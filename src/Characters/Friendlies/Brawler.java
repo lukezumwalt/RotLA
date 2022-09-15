@@ -1,16 +1,19 @@
 package Characters.Friendlies;
 
+import Board.Room;
 import Characters.Entity;
+import Utilities.Dice;
+
+import java.lang.annotation.Documented;
 
 public class Brawler extends Adventurer implements Entity {
 
     static final int combatBonus = 2;
 
-
     @Override
     public boolean fight(Entity target){
-        int myRoll = 0;//roll6d(2) + combatBonus;
-        int targetRoll = 0;//roll6d(2);
+        int myRoll = Dice.rollD6(2) + combatBonus;
+        int targetRoll = Dice.rollD6(2);
 
         if( myRoll > targetRoll ) {
             // Victory
@@ -30,6 +33,13 @@ public class Brawler extends Adventurer implements Entity {
 
     @Override
     public void move() {
-
+//        currentRoom.checkAdjacent();
+        // finally:
+        checkRoom().leaveRoom( this );
+        checkRoom().occupyAdventurer( this );
     }
+
+    @Override
+    public Room checkRoom(){ return currentRoom; }
+    public String getEntityType(){ return entityType; }
 }

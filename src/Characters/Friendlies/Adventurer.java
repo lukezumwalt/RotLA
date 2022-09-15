@@ -1,13 +1,15 @@
 package Characters.Friendlies;
 
 import Board.Room;
+import Characters.Entity;
+
 
 public class Adventurer {
     private String type;
     private int health;
     private int treasureCount;
-    Room currentRoom;
-
+    protected Room currentRoom;
+    protected final String entityType = "adventurer";
 
     void takeDamage(){
         health--;
@@ -23,5 +25,9 @@ public class Adventurer {
     }
     int getTreasureCount(){
         return treasureCount;
+    }
+    void collectTreasure( Room r ){
+        r.takeTreasure();
+        treasureCount++;
     }
 }
