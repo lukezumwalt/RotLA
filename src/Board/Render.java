@@ -1,7 +1,5 @@
 package Board;
 
-import Engine;
-
 public class Render {
 
     /*
@@ -34,7 +32,7 @@ public class Render {
                             + "]["
                             + j + "]["
                             + z + "] = "
-                            + Facility[i][j][z]);
+                            + Game.Engine.Facility[i][j][z]);
                 }
         System.out.println("+--------------------------------------------------+");
         System.out.println("| 0-1-1: - : -                                     |");
