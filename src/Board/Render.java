@@ -36,7 +36,8 @@ public class Render {
                                     + "-"
                                     + j + "-"
                                     + z + ": "
-                                    + Board.Room.Facility[i][j][z] + " |");
+                                    + Board.Room.Facility[i][j][z].getOccupantAdventurers() +
+                                    " : " + Board.Room.Facility[i][j][z].getOccupantCreatures());
                         } else if (z == 2) {
                             System.out.println("| " + i
                                     + "-"

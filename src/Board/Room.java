@@ -39,14 +39,20 @@ public class Room {
     }
 
     // OCCUPANCY
-    private ArrayList<Entity> occupantAdventurers;
-    private ArrayList<Entity> occupantCreatures;
+    private static ArrayList<Entity> occupantAdventurers;
+    private static ArrayList<Entity> occupantCreatures;
 
     public ArrayList<Entity> getOccupantAdventurers() {
+        if (occupantAdventurers == null) {
+            return null;
+        }
         return occupantAdventurers;
     }
 
     public ArrayList<Entity> getOccupantCreatures() {
+        if (occupantCreatures == null) {
+            return null;
+        }
         return occupantCreatures;
     }
 
@@ -58,11 +64,11 @@ public class Room {
         }
     }
 
-    public void occupyAdventurer(Entity me) {
+    public static void occupyAdventurer(Entity me) {
         occupantAdventurers.add(me);
     }
 
-    public void occupyCreature(Entity me) {
+    public static void occupyCreature(Entity me) {
         occupantCreatures.add(me);
     }
 }
