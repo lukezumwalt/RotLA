@@ -9,6 +9,8 @@ import java.util.Collection;
 public class Room {
 
     int[][][] Room = new int[5][3][3];
+    public static Room[][][] Facility = new Room[5][3][3];
+    public static Room Entrance = Facility[0][1][1];
 
     // CONSTRUCTORS
     public Room() {

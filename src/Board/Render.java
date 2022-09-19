@@ -25,30 +25,43 @@ public class Render {
     }
 
     private void printBoard() {
-        // for (int i = 0; i < 6; i++)
-        // for (int j = 0; j < 3; j++)
-        // for (int z = 0; z < 3; z++) {
-        // System.out.println("arr[" + i
-        // + "]["
-        // + j + "]["
-        // + z + "] = "
-        // + Game.Engine.Facility[i][j][z]);
-        // }
         System.out.println("+--------------------------------------------------+");
-        System.out.println("| 0-1-1: - : -                                     |");
-        System.out.println("| 1-0-0: - : -    1-0-1: - : -    1-0-2: - : -     |");
-        System.out.println("| 1-1-0: - : -    1-1-1: - : -    1-1-2: - : -     |");
-        System.out.println("| 1-2-0: - : -    1-2-1: - : -    1-2-2: - : -     |");
-        System.out.println("| 2-0-0: - : -    2-0-1: - : -    2-0-2: - : -     |");
-        System.out.println("| 2-1-0: - : -    2-1-1: - : -    2-1-2: - : -     |");
-        System.out.println("| 2-2-0: - : -    2-2-1: - : -    2-2-2: - : -     |");
-        System.out.println("| 3-0-0: - : -    3-0-1: - : -    3-0-2: - : -     |");
-        System.out.println("| 3-1-0: - : -    3-1-1: - : -    3-1-2: - : -     |");
-        System.out.println("| 3-2-0: - : -    3-2-1: - : -    3-2-2: - : -     |");
-        System.out.println("| 4-0-0: - : -    4-0-1: - : -    4-0-2: - : -     |");
-        System.out.println("| 4-1-0: - : -    4-1-1: - : -    4-1-2: - : -     |");
-        System.out.println("| 4-2-0: - : -    4-2-1: - : -    4-2-2: - : -     |");
-        System.out.println("+--------------------------------------------------+");
+        System.out.println("| 0-1-1: " + Room.Entrance + ": " + " |");
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int z = 0; z < 3; z++) {
+                    if (i != 0) {
+                        if (z < 2) {
+                            System.out.print("| " + i
+                                    + "-"
+                                    + j + "-"
+                                    + z + ": "
+                                    + Board.Room.Facility[i][j][z] + " |");
+                        } else if (z == 2) {
+                            System.out.println("| " + i
+                                    + "-"
+                                    + j + "-"
+                                    + z + ": "
+                                    + Board.Room.Facility[i][j][z] + " |");
+                        }
+                    }
+                }
+            }
+        }
+        // System.out.println("| 0-1-1: - : - |");
+        // System.out.println("| 1-0-0: - : - 1-0-1: - : - 1-0-2: - : - |");
+        // System.out.println("| 1-1-0: - : - 1-1-1: - : - 1-1-2: - : - |");
+        // System.out.println("| 1-2-0: - : - 1-2-1: - : - 1-2-2: - : - |");
+        // System.out.println("| 2-0-0: - : - 2-0-1: - : - 2-0-2: - : - |");
+        // System.out.println("| 2-1-0: - : - 2-1-1: - : - 2-1-2: - : - |");
+        // System.out.println("| 2-2-0: - : - 2-2-1: - : - 2-2-2: - : - |");
+        // System.out.println("| 3-0-0: - : - 3-0-1: - : - 3-0-2: - : - |");
+        // System.out.println("| 3-1-0: - : - 3-1-1: - : - 3-1-2: - : - |");
+        // System.out.println("| 3-2-0: - : - 3-2-1: - : - 3-2-2: - : - |");
+        // System.out.println("| 4-0-0: - : - 4-0-1: - : - 4-0-2: - : - |");
+        // System.out.println("| 4-1-0: - : - 4-1-1: - : - 4-1-2: - : - |");
+        // System.out.println("| 4-2-0: - : - 4-2-1: - : - 4-2-2: - : - |");
+        // System.out.println("+--------------------------------------------------+");
     }
 
     private void printStatus() {

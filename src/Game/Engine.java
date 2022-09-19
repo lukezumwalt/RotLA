@@ -10,8 +10,8 @@ import Characters.Friendlies.*;
 public class Engine extends TurnOrchestrator {
 
     // Game Board
-    public static Room[][][] Facility = new Room[5][3][3];
-    Room Entrance = Facility[0][1][1];
+    // public static Room[][][] Facility = new Room[5][3][3];
+    Room Entrance = Room.Facility[0][1][1];
     // Room Entrance = new Room(0, 1, 1);
 
     // Characters
@@ -31,14 +31,9 @@ public class Engine extends TurnOrchestrator {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int z = 0; z < 3; z++) {
-                    System.out.println("Facility[" + i
-                            + "]["
-                            + j + "]["
-                            + z + "] = "
-                            + Facility[i][j][z]);
-                    if (Facility[i][j][z] == Entrance) {
+                    if (Room.Facility[i][j][z] == Entrance) {
                         // add adventurers here
-                    } else if (Facility[i][j][z] != Entrance) {
+                    } else if (Room.Facility[i][j][z] != Entrance) {
                         // Randomized adding creatures here
                     }
                 }
@@ -65,7 +60,7 @@ public class Engine extends TurnOrchestrator {
     }
 
     public Room getRoom(int[] coordinates) {
-        return Facility[coordinates[0]][coordinates[1]][coordinates[2]];
+        return Room.Facility[coordinates[0]][coordinates[1]][coordinates[2]];
     }
 
 }
