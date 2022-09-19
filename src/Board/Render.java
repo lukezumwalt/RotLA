@@ -25,15 +25,15 @@ public class Render {
     }
 
     private void printBoard() {
-        for (int i = 0; i < 6; i++)
-            for (int j = 0; j < 3; j++)
-                for (int z = 0; z < 3; z++) {
-                    System.out.println("arr[" + i
-                            + "]["
-                            + j + "]["
-                            + z + "] = "
-                            + Game.Engine.Facility[i][j][z]);
-                }
+        // for (int i = 0; i < 6; i++)
+        // for (int j = 0; j < 3; j++)
+        // for (int z = 0; z < 3; z++) {
+        // System.out.println("arr[" + i
+        // + "]["
+        // + j + "]["
+        // + z + "] = "
+        // + Game.Engine.Facility[i][j][z]);
+        // }
         System.out.println("+--------------------------------------------------+");
         System.out.println("| 0-1-1: - : -                                     |");
         System.out.println("| 1-0-0: - : -    1-0-1: - : -    1-0-2: - : -     |");
