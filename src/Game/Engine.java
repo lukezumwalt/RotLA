@@ -23,13 +23,13 @@ public class Engine extends TurnOrchestrator {
     ArrayList<Entity> Creatures = new ArrayList<Entity>();
 
     void initialize() {
-        // Instantiate Game Board
-        createBlankBoard();
-        initializeBoard();
         // Instantiate Adventurers
         initializeAdventurers();
         // Instantiate Creatures
         initializeCreatures();
+        // Instantiate Game Board
+        createBlankBoard();
+        initializeBoard();
     }
 
     private void createBlankBoard(){
@@ -44,15 +44,18 @@ public class Engine extends TurnOrchestrator {
 
     private void initializeBoard() {
         Characters.Enemies.Orbiter O = new Orbiter();
-        Facility.get("011").occupyAdventurer(new Brawler());
-        Facility.get("011").occupyAdventurer(new Runner());
-        Facility.get("011").occupyAdventurer(new Sneaker());
-        Facility.get("011").occupyAdventurer(new Thief());
+
+        // Place all adventurers in the spawn room
+        for( Entity a : Adventurers ){
+            Facility.get("011").occupyAdventurer((Adventurer) a);
+        }
+
         for (int i = 1; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
                     // Randomized adding creatures here
-                    Facility.get(coordinateToKey(i,j,k)).occupyCreature(O);
+                    Facility.get(coordinateToKey(i,j,k)).occupyCreature(new Orbiter());
+                    Facility.get(coordinateToKey(i,j,k)).occupyCreature(new Seeker());
 //                    System.out.println("Adding Orbiter!! "+i+j+k);
                 }
             }
