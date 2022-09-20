@@ -62,7 +62,7 @@ public class Render {
         // System.out.println("| 4-0-0: - : - 4-0-1: - : - 4-0-2: - : - |");
         // System.out.println("| 4-1-0: - : - 4-1-1: - : - 4-1-2: - : - |");
         // System.out.println("| 4-2-0: - : - 4-2-1: - : - 4-2-2: - : - |");
-        // System.out.println("+--------------------------------------------------+");
+        System.out.println("+--------------------------------------------------+");
     }
 
     private void printStatus() {

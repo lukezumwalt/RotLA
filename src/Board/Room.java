@@ -39,8 +39,8 @@ public class Room {
     }
 
     // OCCUPANCY
-    private static ArrayList<Entity> occupantAdventurers;
-    private static ArrayList<Entity> occupantCreatures;
+    private static Room occupantAdventurers = new ArrayList<Entity>();
+    private static ArrayList<Entity> occupantCreatures = new ArrayList<Entity>();
 
     public ArrayList<Entity> getOccupantAdventurers() {
         if (occupantAdventurers == null) {
@@ -64,8 +64,9 @@ public class Room {
         }
     }
 
-    public static void occupyAdventurer(Entity me) {
+    public static Room occupyAdventurer(Entity me) {
         occupantAdventurers.add(me);
+        return occupantAdventurers;
     }
 
     public static void occupyCreature(Entity me) {

@@ -39,6 +39,7 @@ public class Engine extends TurnOrchestrator {
                         Room.occupyAdventurer(B);
                     } else if (Room.Facility[i][j][z] != Entrance) {
                         // Randomized adding creatures here
+                        Room.Facility[i][j][z] = Room.occupyAdventurer(R);
                         Room.occupyAdventurer(R);
                         Room.occupyCreature(O);
                     }
