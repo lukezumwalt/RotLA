@@ -4,6 +4,10 @@ import Board.Room;
 import Characters.Entity;
 
 public class Runner extends Adventurer implements Entity {
+
+    public Runner(){
+        sign = "R";
+    }
     @Override
     public void move() {
 

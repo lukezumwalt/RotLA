@@ -6,6 +6,10 @@ import Characters.Entity;
 
 public class Orbiter extends Creature implements Entity {
 
+    public Orbiter(){
+        sign = "O";
+    }
+
     @Override
     public void move() {
         checkRoom().occupyCreature( this );

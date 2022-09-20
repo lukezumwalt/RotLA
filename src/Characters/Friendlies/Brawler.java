@@ -10,6 +10,10 @@ public class Brawler extends Adventurer implements Entity {
 
     static final int combatBonus = 2;
 
+    public Brawler(){
+        sign = "B";
+    }
+
     @Override
     public boolean fight(Entity target){
         int myRoll = Dice.rollD6(2) + combatBonus;

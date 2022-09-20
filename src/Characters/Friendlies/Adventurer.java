@@ -10,6 +10,8 @@ public class Adventurer {
     private int treasureCount;
     protected Room currentRoom;
     protected final String entityType = "adventurer";
+    protected String sign;
+    public String getSign(){ return sign; }
 
     void takeDamage(){
         health--;

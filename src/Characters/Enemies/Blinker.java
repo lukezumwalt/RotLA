@@ -6,6 +6,10 @@ import Characters.Entity;
 
 public class Blinker extends Creature implements Entity {
 
+    public Blinker(){
+        sign = "B";
+    }
+
     @Override
     public void move() {
 

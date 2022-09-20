@@ -6,6 +6,10 @@ import Characters.Entity;
 
 public class Seeker extends Creature implements Entity {
 
+    public Seeker(){
+        sign = "S";
+    }
+
     @Override
     public void move() {
 

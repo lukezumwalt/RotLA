@@ -28,25 +28,24 @@ public class Render {
 
     private void printBoard() {
         System.out.println("+--------------------------------------------------+");
-        System.out.println("| 0-1-1: " + Engine.Entrance + ": " + " |");
-        for (int i = 0; i < 5; i++) {
+        System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " |");
+        for (int i = 1; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int z = 0; z < 3; z++) {
-                    if (i != 0) {
-                        if (z < 2) {
-                            System.out.print("| " + i
-                                    + "-"
-                                    + j + "-"
-                                    + z + ": "
-                                    + Engine.Facility[i][j][z].getOccupantAdventurers() +
-                                    " : " + Engine.Facility[i][j][z].getOccupantCreatures());
-                        } else if (z == 2) {
-                            System.out.println("| " + i
-                                    + "-"
-                                    + j + "-"
-                                    + z + ": "
-                                    + Engine.Facility[i][j][z] + " |");
-                        }
+                    if (z < 2) {
+                        System.out.print("| " + i
+                                + "-"
+                                + j + "-"
+                                + z + ": "
+                                + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantAdventurers() +
+                                " : " + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantCreatures());
+                    } else if (z == 2) {
+                        System.out.println("| " + i
+                                + "-"
+                                + j + "-"
+                                + z + ": "
+                                + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantAdventurers() +
+                                " : " + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantCreatures() + " |");
                     }
                 }
             }

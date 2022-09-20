@@ -1,6 +1,8 @@
 package Board;
 
+import Characters.Enemies.Creature;
 import Characters.Entity;
+import Characters.Friendlies.Adventurer;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -10,17 +12,18 @@ public class Room {
 
     // CONSTRUCTORS
     public Room() {
-
+        occupantAdventurers = new ArrayList<Adventurer>();
+        occupantCreatures = new ArrayList<Creature>();
     }
 
-    public Room(int floor, int x, int y) {
-        coordinates = new int[] { floor, x, y };
+    public Room(int level, int x, int y) {
+        coordinates = new int[] { level, x, y };
     }
 
     // POSITION
     protected int[] coordinates;
-    {
-        coordinates = new int[3];
+    public int[] getCoordinates(){
+        return coordinates;
     }
 
     // TREASURE
@@ -35,21 +38,38 @@ public class Room {
     }
 
     // OCCUPANCY
-    private static ArrayList<Entity> occupantAdventurers = new ArrayList<Entity>();
-    private static ArrayList<Entity> occupantCreatures = new ArrayList<Entity>();
+//    private static ArrayList<Entity> occupantAdventurers = new ArrayList<Entity>();
+    private static ArrayList<Adventurer> occupantAdventurers;
+    private static ArrayList<Creature> occupantCreatures;
 
-    public ArrayList<Entity> getOccupantAdventurers() {
+    public ArrayList<Adventurer> getOccupantAdventurers() {
         if (occupantAdventurers == null) {
             return null;
         }
         return occupantAdventurers;
     }
 
-    public ArrayList<Entity> getOccupantCreatures() {
+    public ArrayList<Creature> getOccupantCreatures() {
         if (occupantCreatures == null) {
             return null;
         }
         return occupantCreatures;
+    }
+
+    public String renderOccupantAdventurers(){
+        String retVal = "";
+        for( Adventurer a : occupantAdventurers ){
+            retVal += a.getSign();
+        }
+        return retVal;
+    }
+
+    public String renderOccupantCreatures(){
+        String retVal = "";
+        for( Creature a : occupantCreatures ){
+            retVal += a.getSign();
+        }
+        return retVal;
     }
 
     public void leaveRoom(Entity e) {
@@ -60,11 +80,11 @@ public class Room {
         }
     }
 
-    public void occupyAdventurer(Entity me) {
+    public void occupyAdventurer(Adventurer me) {
         occupantAdventurers.add(me);
     }
 
-    public void occupyCreature(Entity me) {
+    public void occupyCreature(Creature me) {
         occupantCreatures.add(me);
     }
 }

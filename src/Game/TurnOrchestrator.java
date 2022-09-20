@@ -1,6 +1,7 @@
 package Game;
 
 import Board.Room;
+import Characters.Enemies.Creature;
 import Characters.Entity;
 import Characters.Friendlies.Adventurer;
 
@@ -22,8 +23,8 @@ public class TurnOrchestrator {
             if( thisRoom.getOccupantCreatures().size() == 0 ){
                 player.move();
             }
-            for( Entity target : thisRoom.getOccupantCreatures() ){
-                player.fight(target);
+            for( Creature target : thisRoom.getOccupantCreatures() ){
+                player.fight((Entity) target);
             }
         }
     }
@@ -34,8 +35,8 @@ public class TurnOrchestrator {
             if( thisRoom.getOccupantAdventurers().size() == 0 ){
                 monster.move();
             }
-            for( Entity target : thisRoom.getOccupantAdventurers() ){
-                monster.fight(target);
+            for( Adventurer target : thisRoom.getOccupantAdventurers() ){
+                monster.fight((Entity) target);
             }
         }
     }
