@@ -75,8 +75,8 @@ public class Room {
     public void leaveRoom(Entity e) {
         switch (e.getEntityType()) {
             default -> throw new IllegalStateException("Unexpected value: " + e.getEntityType());
-            case "adventurer" -> occupantAdventurers.remove(e);
-            case "creature" -> occupantCreatures.remove(e);
+            case "adventurer" -> this.occupantAdventurers.remove(e);
+            case "creature" -> this.occupantCreatures.remove(e);
         }
     }
 
