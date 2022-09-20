@@ -39,8 +39,8 @@ public class Room {
 
     // OCCUPANCY
 //    private static ArrayList<Entity> occupantAdventurers = new ArrayList<Entity>();
-    private static ArrayList<Adventurer> occupantAdventurers;
-    private static ArrayList<Creature> occupantCreatures;
+    private ArrayList<Adventurer> occupantAdventurers;
+    private ArrayList<Creature> occupantCreatures;
 
     public ArrayList<Adventurer> getOccupantAdventurers() {
         if (occupantAdventurers == null) {
@@ -58,7 +58,7 @@ public class Room {
 
     public String renderOccupantAdventurers(){
         String retVal = "";
-        for( Adventurer a : occupantAdventurers ){
+        for( Adventurer a : this.occupantAdventurers ){
             retVal += a.getSign();
         }
         return retVal;
@@ -66,7 +66,7 @@ public class Room {
 
     public String renderOccupantCreatures(){
         String retVal = "";
-        for( Creature a : occupantCreatures ){
+        for( Creature a : this.occupantCreatures ){
             retVal += a.getSign();
         }
         return retVal;
@@ -81,10 +81,10 @@ public class Room {
     }
 
     public void occupyAdventurer(Adventurer me) {
-        occupantAdventurers.add(me);
+        this.occupantAdventurers.add(me);
     }
 
     public void occupyCreature(Creature me) {
-        occupantCreatures.add(me);
+        this.occupantCreatures.add(me);
     }
 }
