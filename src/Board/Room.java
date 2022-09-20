@@ -8,10 +8,6 @@ import java.util.Collection;
 
 public class Room {
 
-    int[][][] Room = new int[5][3][3];
-    public static Room[][][] Facility = new Room[5][3][3];
-    public static Room Entrance = Facility[0][1][1];
-
     // CONSTRUCTORS
     public Room() {
 
@@ -39,7 +35,7 @@ public class Room {
     }
 
     // OCCUPANCY
-    private static Room occupantAdventurers = new ArrayList<Entity>();
+    private static ArrayList<Entity> occupantAdventurers = new ArrayList<Entity>();
     private static ArrayList<Entity> occupantCreatures = new ArrayList<Entity>();
 
     public ArrayList<Entity> getOccupantAdventurers() {
@@ -64,12 +60,11 @@ public class Room {
         }
     }
 
-    public static Room occupyAdventurer(Entity me) {
+    public void occupyAdventurer(Entity me) {
         occupantAdventurers.add(me);
-        return occupantAdventurers;
     }
 
-    public static void occupyCreature(Entity me) {
+    public void occupyCreature(Entity me) {
         occupantCreatures.add(me);
     }
 }

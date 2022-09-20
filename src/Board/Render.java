@@ -1,5 +1,7 @@
 package Board;
 
+import Game.Engine;
+
 public class Render {
 
     /*
@@ -26,7 +28,7 @@ public class Render {
 
     private void printBoard() {
         System.out.println("+--------------------------------------------------+");
-        System.out.println("| 0-1-1: " + Room.Entrance + ": " + " |");
+        System.out.println("| 0-1-1: " + Engine.Entrance + ": " + " |");
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int z = 0; z < 3; z++) {
@@ -36,14 +38,14 @@ public class Render {
                                     + "-"
                                     + j + "-"
                                     + z + ": "
-                                    + Board.Room.Facility[i][j][z].getOccupantAdventurers() +
-                                    " : " + Board.Room.Facility[i][j][z].getOccupantCreatures());
+                                    + Engine.Facility[i][j][z].getOccupantAdventurers() +
+                                    " : " + Engine.Facility[i][j][z].getOccupantCreatures());
                         } else if (z == 2) {
                             System.out.println("| " + i
                                     + "-"
                                     + j + "-"
                                     + z + ": "
-                                    + Board.Room.Facility[i][j][z] + " |");
+                                    + Engine.Facility[i][j][z] + " |");
                         }
                     }
                 }
