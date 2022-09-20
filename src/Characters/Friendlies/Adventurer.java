@@ -5,11 +5,10 @@ import Characters.Entity;
 
 
 public class Adventurer {
-    private String type;
     private int health;
     private int treasureCount;
     protected Room currentRoom;
-    protected final String entityType = "adventurer";
+    protected String entityType = "adventurer";
     protected String sign;
     public String getSign(){ return sign; }
 
@@ -18,10 +17,6 @@ public class Adventurer {
     }
 
     //! Getter Suite
-    String getType(){
-        return type;
-    }
-    void setType( String t ){ type = t; };
     int getHealth(){
         return health;
     }

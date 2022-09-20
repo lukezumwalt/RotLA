@@ -8,6 +8,7 @@ public class Seeker extends Creature implements Entity {
 
     public Seeker(){
         sign = "S";
+        entityType = "creature";
     }
 
     @Override
