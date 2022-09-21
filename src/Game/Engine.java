@@ -9,6 +9,7 @@ import Board.Room;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
+import Utilities.CircularLinkedList;
 
 import static Board.Room.mapNeighborhood;
 
@@ -87,6 +88,7 @@ public class Engine {
 
             // Place creature in room.
             Facility.get(coordinateToKey(floor,x,y)).occupyCreature(c);
+            c.setCurrentRoom(Facility.get(coordinateToKey(floor,x,y)));
         }
     }
 
@@ -103,6 +105,47 @@ public class Engine {
             Creatures.add(new Seeker());
             Creatures.add(new Blinker());
         }
+
+        // Build out orbiter movement options..
+        CircularLinkedList F1 = new CircularLinkedList();
+        F1.add(coordinateToKey(1,0,0));
+        F1.add(coordinateToKey(1,0,1));
+        F1.add(coordinateToKey(1,0,2));
+        F1.add(coordinateToKey(1,1,0));
+        F1.add(coordinateToKey(1,1,2));
+        F1.add(coordinateToKey(1,2,0));
+        F1.add(coordinateToKey(1,2,1));
+        F1.add(coordinateToKey(1,2,2));
+
+        CircularLinkedList F2 = new CircularLinkedList();
+        F2.add(coordinateToKey(2,0,0));
+        F2.add(coordinateToKey(2,0,1));
+        F2.add(coordinateToKey(2,0,2));
+        F2.add(coordinateToKey(2,1,0));
+        F2.add(coordinateToKey(2,1,2));
+        F2.add(coordinateToKey(2,2,0));
+        F2.add(coordinateToKey(2,2,1));
+        F2.add(coordinateToKey(2,2,2));
+
+        CircularLinkedList F3 = new CircularLinkedList();
+        F3.add(coordinateToKey(3,0,0));
+        F3.add(coordinateToKey(3,0,1));
+        F3.add(coordinateToKey(3,0,2));
+        F3.add(coordinateToKey(3,1,0));
+        F3.add(coordinateToKey(3,1,2));
+        F3.add(coordinateToKey(3,2,0));
+        F3.add(coordinateToKey(3,2,1));
+        F3.add(coordinateToKey(3,2,2));
+
+        CircularLinkedList F4 = new CircularLinkedList();
+        F4.add(coordinateToKey(4,0,0));
+        F4.add(coordinateToKey(4,0,1));
+        F4.add(coordinateToKey(4,0,2));
+        F4.add(coordinateToKey(4,1,0));
+        F4.add(coordinateToKey(4,1,2));
+        F4.add(coordinateToKey(4,2,0));
+        F4.add(coordinateToKey(4,2,1));
+        F4.add(coordinateToKey(4,2,2));
     }
 
     public static String coordinateToKey(int floor, int x, int y) {
@@ -115,37 +158,46 @@ public class Engine {
             Room thisRoom = player.checkRoom();
 
             // Runner gets 3 "actions" per turn.
+            //! @TODO: Expand this to do more than move
             if ("runner".equals(player.getName())) {
                 for (int i = 0; i < 4; i++) {
                     player.move();
                 }
             }
 
-            // Treasure check
+            // Combat check, must be done before treasure check.
+            if( thisRoom.getOccupantCreatures().size() > 0 ) {
+                for (Creature target : thisRoom.getOccupantCreatures()) {
+                    player.fight((Entity) target);
+                }
+                // Combat consumes the turn.
+//                continue;
+            }
+
+            // Treasure check.
             if(thisRoom.checkIfTreasure()){
                 if( player.rollForTreasure() ){
                     ((Adventurer)player).collectTreasure(thisRoom);
+                    // Collection consumes the turn.
+                    continue;
                 }
             }
+
+            // No treasure and no creatures, move on broth!
             player.move();
-//                case "sneaker":
-//                case "thief":
-//            for( Creature target : thisRoom.getOccupantCreatures() ){
-//                player.fight((Entity) target);
-//            }
-//            player.move();
-//            for( Creature target : thisRoom.getOccupantCreatures() ){
-//                player.fight((Entity) target);
-//            }
         }
     }
 
-    public void processCreatures( ArrayList<Entity> Creatures ){
+    public void processCreatures( ){
         for( Entity monster : Creatures ){
             Room thisRoom = monster.checkRoom();
+
+            // If no Adventurers to fight, move on.
             if( thisRoom.getOccupantAdventurers().size() == 0 ){
                 monster.move();
             }
+
+            // After either moving or not, fight any Adventurers in the room.
             for( Adventurer target : thisRoom.getOccupantAdventurers() ){
                 monster.fight((Entity) target);
             }
