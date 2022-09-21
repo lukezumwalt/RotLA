@@ -10,6 +10,7 @@ public class Adventurer {
     protected Room currentRoom;
     protected String entityType = "adventurer";
     protected String sign;
+    protected String name;
     public String getSign(){ return sign; }
 
     void takeDamage(){
@@ -26,5 +27,8 @@ public class Adventurer {
     void collectTreasure( Room r ){
         r.takeTreasure();
         treasureCount++;
+    }
+    public void setCurrentRoom( Room r ){
+        currentRoom = r;
     }
 }

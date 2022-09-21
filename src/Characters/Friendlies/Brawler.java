@@ -5,6 +5,11 @@ import Characters.Entity;
 import Utilities.Dice;
 
 import java.lang.annotation.Documented;
+import java.util.Arrays;
+import java.util.Random;
+
+import static Board.Room.inspectNeighbors;
+import static Game.Engine.Facility;
 
 public class Brawler extends Adventurer implements Entity {
 
@@ -12,6 +17,7 @@ public class Brawler extends Adventurer implements Entity {
 
     public Brawler(){
         sign = "B";
+        name = "brawler";
     }
 
     @Override
@@ -37,13 +43,27 @@ public class Brawler extends Adventurer implements Entity {
 
     @Override
     public void move() {
-//        currentRoom.checkAdjacent();
+        // check room to return valid moves
+        String[] addresses = inspectNeighbors(this.currentRoom);
+        // randomly select a valid move from that list
+        int choice;
+        if( addresses.length <= 1 ) {
+            choice = 0;
+        }
+        else {
+            Random r = new Random();
+            choice = r.nextInt(0,addresses.length);
+        }
+        Room newRoom = Facility.get(addresses[choice]);
+
         // finally:
-        checkRoom().leaveRoom( this );
-        checkRoom().occupyAdventurer( this );
+        this.currentRoom.leaveRoom( this );
+        this.setCurrentRoom( newRoom );
+        newRoom.occupyAdventurer(this);
     }
 
     @Override
     public Room checkRoom(){ return currentRoom; }
     public String getEntityType(){ return entityType; }
+    public String getName(){ return name; }
 }

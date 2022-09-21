@@ -7,5 +7,6 @@ public interface Entity {
     void move();
     boolean fight(Entity target);
     String getEntityType();
+    String getName();
     Room checkRoom();
 }

@@ -3,13 +3,16 @@ package Game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import Board.Room;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
 
-public class Engine extends TurnOrchestrator {
+import static Board.Room.mapNeighborhood;
+
+public class Engine {
 
     Engine() {
         Facility = new HashMap<>();
@@ -30,13 +33,17 @@ public class Engine extends TurnOrchestrator {
         // Instantiate Game Board
         createBlankBoard();
         initializeBoard();
+        mapNeighborhood();
     }
 
     private void createBlankBoard() {
-        for (int i = 0; i < 5; ++i) {
+        // Spawn Room
+        Facility.put("011",new Room(0,1,1));
+        // Dungeon
+        for (int i = 1; i < 5; ++i) {
             for (int j = 0; j < 3; ++j) {
                 for (int k = 0; k < 3; ++k) {
-                    Facility.put(coordinateToKey(i, j, k), new Room());
+                    Facility.put(coordinateToKey(i, j, k), new Room(i,j,k));
                 }
             }
         }
@@ -46,8 +53,17 @@ public class Engine extends TurnOrchestrator {
         Characters.Enemies.Orbiter O = new Orbiter();
 
         // Place all adventurers in the spawn room
-        for( Entity a : Adventurers ){
-            Facility.get("011").occupyAdventurer((Adventurer) a);
+        for( Entity a0 : Adventurers ){
+            Adventurer a = (Adventurer)a0;
+            Facility.get("011").occupyAdventurer(a);
+            a.setCurrentRoom(Facility.get("011"));
+        }
+
+        // Place all creatures in random rooms
+        Random r = new Random();
+        for( Entity c0 : Creatures ){
+            Creature c = (Creature)c0;
+
         }
 
         for (int i = 1; i < 5; i++) {
@@ -81,8 +97,43 @@ public class Engine extends TurnOrchestrator {
         }
     }
 
-    public String coordinateToKey(int x, int y, int z) {
+    public static String coordinateToKey(int x, int y, int z) {
         return String.valueOf(x) + String.valueOf(y) + String.valueOf(z);
+    }
+
+    public void processAdventurers(){
+        ArrayList<Entity> targets = new ArrayList<>();
+        for( Entity player : Adventurers ){
+            Room thisRoom = player.checkRoom();
+            //                case "brawler":
+            if ("runner".equals(player.getName())) {
+                for (int i = 0; i < 4; i++) {
+                    player.move();
+                }
+            }
+            player.move();
+//                case "sneaker":
+//                case "thief":
+//            for( Creature target : thisRoom.getOccupantCreatures() ){
+//                player.fight((Entity) target);
+//            }
+//            player.move();
+//            for( Creature target : thisRoom.getOccupantCreatures() ){
+//                player.fight((Entity) target);
+//            }
+        }
+    }
+
+    public void processCreatures( ArrayList<Entity> Creatures ){
+        for( Entity monster : Creatures ){
+            Room thisRoom = monster.checkRoom();
+            if( thisRoom.getOccupantAdventurers().size() == 0 ){
+                monster.move();
+            }
+            for( Adventurer target : thisRoom.getOccupantAdventurers() ){
+                monster.fight((Entity) target);
+            }
+        }
     }
 
     // public Room getRoom(int[] coordinates) {

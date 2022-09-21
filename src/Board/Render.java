@@ -12,13 +12,15 @@ public class Render {
      * second print loop.
      */
 
-    int turn = 0;
+    public Render(){
+        turn = 0;
+    }
+    private int turn;
 
     public void printFrame() {
         printTurn();
         printBoard();
         printStatus();
-        System.out.println("\n\n");
     }
 
     private void printTurn() {
@@ -67,8 +69,6 @@ public class Render {
     }
 
     private void printStatus() {
-        // System.out.println("\n====-===+===-===+===-===+===-===+===-===+===-===+====\n");
-        System.out.print("\n");
         System.out.println("Characters.Friendlies.Brawler:\t x Treasure(s) / x Damage");
         System.out.println("Sneaker:\t x Treasure(s) / x Damage");
         System.out.println("Runner:\t\t x Treasure(s) / x Damage");

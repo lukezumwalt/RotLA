@@ -8,7 +8,7 @@ public class Blinker extends Creature implements Entity {
 
     public Blinker(){
         sign = "B";
-        entityType = "creature";
+        name = "blinker";
     }
 
     @Override
@@ -30,4 +30,6 @@ public class Blinker extends Creature implements Entity {
     public Room checkRoom() {
         return null;
     }
+
+    public String getName(){ return name; }
 }

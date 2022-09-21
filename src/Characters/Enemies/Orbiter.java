@@ -8,7 +8,7 @@ public class Orbiter extends Creature implements Entity {
 
     public Orbiter(){
         sign = "O";
-        entityType = "creature";
+        name = "orbiter";
     }
 
     @Override
@@ -26,4 +26,5 @@ public class Orbiter extends Creature implements Entity {
 
     @Override
     public Room checkRoom(){ return this.currentRoom; }
+    public String getName(){ return name; }
 }

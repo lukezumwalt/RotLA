@@ -4,6 +4,7 @@ import Board.Render;
 
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Run {
     public static void main(String[] args) {
@@ -24,9 +25,10 @@ public class Run {
 //            }
 
             view.printFrame();
+            game.processAdventurers();
 
             // Exit Condition
-            if(Objects.equals(input.nextLine(),"q")){
+            if(Objects.equals(input.nextLine(),"gg")){
                 gameOver = true;
             }
         }

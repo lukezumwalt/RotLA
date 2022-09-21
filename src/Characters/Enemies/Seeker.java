@@ -8,7 +8,7 @@ public class Seeker extends Creature implements Entity {
 
     public Seeker(){
         sign = "S";
-        entityType = "creature";
+        name = "seeker";
     }
 
     @Override
@@ -30,4 +30,5 @@ public class Seeker extends Creature implements Entity {
     public Room checkRoom() {
         return null;
     }
+    public String getName(){ return name; }
 }
