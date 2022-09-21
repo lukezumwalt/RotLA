@@ -1,6 +1,11 @@
 package Board;
 
+import Characters.Entity;
+import Characters.Friendlies.Adventurer;
 import Game.Engine;
+
+import static Game.Engine.coordinateToKey;
+import static Game.Engine.getAdventurers;
 
 public class Render {
 
@@ -33,21 +38,24 @@ public class Render {
         System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " |");
         for (int i = 1; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
-                for (int z = 0; z < 3; z++) {
-                    if (z < 2) {
+                for (int k = 0; k < 3; k++) {
+                    if (k < 2) {
                         System.out.print("| " + i
                                 + "-"
                                 + j + "-"
-                                + z + ": "
-                                + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantAdventurers() +
-                                " : " + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantCreatures());
-                    } else if (z == 2) {
+                                + k + ":\t"
+                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
+                                + " :\t"
+                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures()
+                                + " ");
+                    } else {
                         System.out.println("| " + i
                                 + "-"
                                 + j + "-"
-                                + z + ": "
-                                + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantAdventurers() +
-                                " : " + Engine.Facility.get(Integer.toString(i)+Integer.toString(j)+Integer.toString(z)).renderOccupantCreatures() + " |");
+                                + k + ":\t"
+                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
+                                + " :\t"
+                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures());
                     }
                 }
             }
@@ -69,10 +77,14 @@ public class Render {
     }
 
     private void printStatus() {
-        System.out.println("Characters.Friendlies.Brawler:\t x Treasure(s) / x Damage");
-        System.out.println("Sneaker:\t x Treasure(s) / x Damage");
-        System.out.println("Runner:\t\t x Treasure(s) / x Damage");
-        System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
+        for (Entity a0: getAdventurers()) {
+            Adventurer a = (Adventurer)a0;
+            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth()) + "Damage" );
+        }
+//        System.out.println("Brawler:\t " + getAdventurers().get(0) + " Treasure(s) / x Damage");
+//        System.out.println("Sneaker:\t x Treasure(s) / x Damage");
+//        System.out.println("Runner:\t\t x Treasure(s) / x Damage");
+//        System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
         System.out.println("Orbiters:\t x Remaining");
         System.out.println("Seekers:\t x Remaining");
         System.out.println("Blinkers:\t x Remaining");
