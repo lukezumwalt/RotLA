@@ -34,4 +34,4 @@ An example of encapsulation can be found in the Adventurer.java file at line 10.
 An example of abstraction can be found in the Orbiter.java at line 7. All of the entity classes, creatures and adventurers extend their corresponding superclasses. For example, Orbiter extends Creature that implements Entity.<br>
 An example of polymorphism can be found in Orbiter.java, Blinker.java, and Seeker.java as they all are extensions of the Creature superclass. The associated code lines are Orbiter.java at line 7, Blinker.java at line 7, and Seeker.java at line 7.<br>
 An example of cohesion can be found in Render.java at line 22. This is a good example because Render.java holds all the print statements and methods for the game simulation. This is considered high cohesion since they are highly related to the class they are within.<br>
-An example of identity can be found in Render.java in line 81. We can see how the Adventurer a is set equal to Adventurer a0. <br>
+An example of identity can be found in Render.java in line 78. We can see how the Adventurer a is set equal to Adventurer a0. <br>
