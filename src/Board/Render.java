@@ -43,18 +43,18 @@ public class Render {
                         System.out.print("| " + i
                                 + "-"
                                 + j + "-"
-                                + k + ":\t"
+                                + k + ": "
                                 + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
-                                + " :\t"
+                                + " : "
                                 + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures()
                                 + " ");
                     } else {
                         System.out.println("| " + i
                                 + "-"
                                 + j + "-"
-                                + k + ":\t"
+                                + k + ": "
                                 + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
-                                + " :\t"
+                                + " : "
                                 + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures());
                     }
                 }
@@ -79,7 +79,7 @@ public class Render {
     private void printStatus() {
         for (Entity a0: getAdventurers()) {
             Adventurer a = (Adventurer)a0;
-            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth()) + "Damage" );
+            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth()) + " Damage" );
         }
 //        System.out.println("Brawler:\t " + getAdventurers().get(0) + " Treasure(s) / x Damage");
 //        System.out.println("Sneaker:\t x Treasure(s) / x Damage");

@@ -26,6 +26,7 @@ public class Run {
 
             view.printFrame();
             game.processAdventurers();
+            game.processCreatures();
 
 
             // Exit Conditions
