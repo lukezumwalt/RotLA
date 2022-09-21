@@ -28,7 +28,7 @@ OpenJDK 64-Bit Server VM Temurin-17.0.4.1+1 (build 17.0.4.1+1, mixed mode, shari
 ***********
 COMMENTS
 ***********
-The Raiders of Lost Arctangent program is a fully simulated game adaptation of Temple of the Beastmen, made by Lester Smith of Game Designer’s Workshop. By running this program, the game will autonomously run until the game is won, either by all treasure being found, all adventurers being killed, or all creatures being killed. In this repository, you will find the code to run the game autonomously, as well as, the terminal output of one completed game and another output of 30 completed games within corresponding text files.<br>
+The Raiders of Lost Arctangent program is a fully simulated game adaptation of Temple of the Beastmen, made by Lester Smith of Game Designer’s Workshop. By running this program, the game will autonomously run until the game is won, either by all treasure being found, all adventurers being killed, or all creatures being killed. In this repository, you will find the code to run the game autonomously, as well as, the terminal output of one completed game and another output of 30 completed games within corresponding text files. Users must press enter to transition between turns.<br>
 <br>
 An example of inheritance can be found in the Brawler.java file at line 12. Runner.java at line 13, Sneaker.java at line 13, and Thief.java at line 13.
 All of the Adventurer subclasses inherit from the Adventurer superclass.<br>
