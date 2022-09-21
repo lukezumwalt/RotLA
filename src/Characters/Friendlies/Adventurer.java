@@ -29,4 +29,6 @@ public class Adventurer {
     public void setCurrentRoom( Room r ){
         currentRoom = r;
     }
+
+//    public abstract boolean rollForTreasure();
 }

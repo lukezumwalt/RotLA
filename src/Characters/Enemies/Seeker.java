@@ -30,5 +30,11 @@ public class Seeker extends Creature implements Entity {
     public Room checkRoom() {
         return null;
     }
+
+    @Override
+    public boolean rollForTreasure() {
+        return false;
+    }
+
     public String getName(){ return name; }
 }

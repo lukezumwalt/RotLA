@@ -113,15 +113,19 @@ public class Engine {
         ArrayList<Entity> targets = new ArrayList<>();
         for( Entity player : Adventurers ){
             Room thisRoom = player.checkRoom();
-            //                case "brawler":
+
+            // Runner gets 3 "actions" per turn.
             if ("runner".equals(player.getName())) {
                 for (int i = 0; i < 4; i++) {
                     player.move();
                 }
             }
+
+            // Treasure check
             if(thisRoom.checkIfTreasure()){
-//                thisRoom.takeTreasure();
-                ((Adventurer)player).collectTreasure(thisRoom);
+                if( player.rollForTreasure() ){
+                    ((Adventurer)player).collectTreasure(thisRoom);
+                }
             }
             player.move();
 //                case "sneaker":

@@ -10,6 +10,7 @@ import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
+import static Utilities.Dice.rollD6;
 
 public class Brawler extends Adventurer implements Entity {
 
@@ -22,8 +23,8 @@ public class Brawler extends Adventurer implements Entity {
 
     @Override
     public boolean fight(Entity target){
-        int myRoll = Dice.rollD6(2) + combatBonus;
-        int targetRoll = Dice.rollD6(2);
+        int myRoll = rollD6(2) + combatBonus;
+        int targetRoll = rollD6(2);
 
         if( myRoll > targetRoll ) {
             // Victory
@@ -66,4 +67,11 @@ public class Brawler extends Adventurer implements Entity {
     public Room checkRoom(){ return currentRoom; }
     public String getEntityType(){ return entityType; }
     public String getName(){ return name; }
+
+    public boolean rollForTreasure(){
+        if( rollD6(2) >= 10 ){
+            return true;
+        }
+        return false;
+    }
 }

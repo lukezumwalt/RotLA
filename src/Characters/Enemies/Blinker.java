@@ -31,5 +31,10 @@ public class Blinker extends Creature implements Entity {
         return null;
     }
 
+    @Override
+    public boolean rollForTreasure() {
+        return false;
+    }
+
     public String getName(){ return name; }
 }

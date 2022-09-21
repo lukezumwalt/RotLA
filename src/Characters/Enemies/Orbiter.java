@@ -26,5 +26,11 @@ public class Orbiter extends Creature implements Entity {
 
     @Override
     public Room checkRoom(){ return this.currentRoom; }
+
+    @Override
+    public boolean rollForTreasure() {
+        return false;
+    }
+
     public String getName(){ return name; }
 }

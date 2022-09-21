@@ -7,6 +7,7 @@ import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
+import static Utilities.Dice.rollD6;
 
 public class Sneaker extends Adventurer implements Entity {
 
@@ -40,6 +41,12 @@ public class Sneaker extends Adventurer implements Entity {
         return false;
     }
 
+    public boolean rollForTreasure() {
+        if( rollD6(2) >= 10 ){
+            return true;
+        }
+        return false;
+    }
     @Override
     public Room checkRoom(){ return currentRoom; }
     public String getEntityType(){ return entityType; }

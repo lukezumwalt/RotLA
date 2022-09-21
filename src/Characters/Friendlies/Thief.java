@@ -7,6 +7,7 @@ import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
+import static Utilities.Dice.rollD6;
 
 public class Thief extends Adventurer implements Entity {
 
@@ -14,6 +15,7 @@ public class Thief extends Adventurer implements Entity {
         sign = "T";
         name = "Thief";
     }
+    protected static final int treasureRollMod = 1;
     @Override
     public void move() {
         // check room to return valid moves
@@ -40,6 +42,12 @@ public class Thief extends Adventurer implements Entity {
         return false;
     }
 
+    public boolean rollForTreasure() {
+        if( (rollD6(2) + treasureRollMod) >= 10 ){
+            return true;
+        }
+        return false;
+    }
     @Override
     public Room checkRoom(){ return currentRoom; }
     public String getEntityType(){ return entityType; }
