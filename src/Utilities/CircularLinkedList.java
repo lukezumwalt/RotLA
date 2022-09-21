@@ -5,23 +5,22 @@ package Utilities;
 // point forwards and the final node points back to the first in the list.
 
 public class CircularLinkedList {
-    public class Node {
+    public static class Node {
+        String coordinateKey;
+        public Node next;
 
-        // CONSTRUCTORS
         public Node(String coordinateKey) {
             this.coordinateKey = coordinateKey;
         }
 
-        // PUBLIC ATTRIBUTES
-        public String coordinateKey;
-        public Node next;
+        public String getCoordinateKey(){
+            return this.coordinateKey;
+        }
     }
 
-    // PUBLIC ATTRIBUTES
     public Node head = null;
     public Node tail = null;
 
-    // PUBLIC METHODS
     public void add(String keyCoordinates) {
         Node newNode = new Node(keyCoordinates);
         // Checks if list is empty
@@ -31,16 +30,16 @@ public class CircularLinkedList {
             tail = newNode;
             newNode.next = head;
         } else {
-            // If not empty, tail points to new node
+            // If not empty, current tail points to new node
             tail.next = newNode;
             // New node becomes the tail
             tail = newNode;
-            // Tail now points to head
+            // New tail now points to head
             tail.next = head;
         }
     }
 
-    public String getNext(Node N) {
-        return N.next.coordinateKey;
+    public Node getNext(Node N){
+        return N.next;
     }
 }
