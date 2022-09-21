@@ -26,8 +26,8 @@ public class Adventurer {
         r.takeTreasure();
         treasureCount++;
     }
-    public void setCurrentRoom( Room r ){
-        currentRoom = r;
+    public void setCurrentRoom( Room newRoom ){
+        currentRoom = newRoom;
     }
 
 //    public abstract boolean rollForTreasure();

@@ -2,10 +2,7 @@ package Characters.Friendlies;
 
 import Board.Room;
 import Characters.Entity;
-import Utilities.Dice;
 
-import java.lang.annotation.Documented;
-import java.util.Arrays;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;

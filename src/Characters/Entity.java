@@ -9,6 +9,5 @@ public interface Entity {
     String getEntityType();
     String getName();
     Room checkRoom();
-
     boolean rollForTreasure();
 }
