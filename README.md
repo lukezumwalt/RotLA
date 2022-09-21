@@ -4,7 +4,7 @@ Raiders of the Lost Arctangent: a game project based on Temple of the Beastmen
 ***********
 NAMES
 ***********
-Lukas Zumwalt
+Lukas Zumwalt<br>
 Marie Hargan
 
 ***********
