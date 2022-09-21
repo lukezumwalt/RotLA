@@ -102,8 +102,6 @@ public class Room {
         return Neighborhood.get(key);
     }
 
-//    public static final String[] allRooms = {"100","101","102","100",}
-
     public static Map<String, String[]> Neighborhood = new HashMap<>();
     public static void mapNeighborhood() {
         // Spawn Room
