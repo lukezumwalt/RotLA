@@ -10,6 +10,7 @@ public class Adventurer {
     protected String sign;
     protected String name;
     protected int health;
+    protected static boolean alive;
 
     // PRIVATE METHODS
     /*
@@ -49,5 +50,9 @@ public class Adventurer {
      */
     public int getTreasureCount() {
         return treasureCount;
+    }
+
+    public boolean getAlive() {
+        return alive;
     }
 }

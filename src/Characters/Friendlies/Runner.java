@@ -21,13 +21,26 @@ public class Runner extends Adventurer implements Entity {
         sign = "R";
         name = "Runner";
         health = 3;
+        alive = true;
     }
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        // ! @TODO: roll dice to fight creature
-        // win if roll is greater than creature
+        int myRoll = rollD6(2);
+        int targetRoll = rollD6(2);
+
+        if (myRoll > targetRoll) {
+            // Victory
+            return true;
+            // target.die();
+        } else if (myRoll == targetRoll) {
+            // Tie
+            return false;
+        } else {
+            // Loss
+            takeDamage();
+        }
         return false;
     }
 

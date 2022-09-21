@@ -4,6 +4,7 @@ import Board.Room;
 import Characters.Enemies.Creature;
 import Characters.Entity;
 import Utilities.CircularLinkedList;
+import static Utilities.Dice.rollD6;
 
 /*
  * code example of Polymorphism
@@ -21,13 +22,26 @@ public class Orbiter extends Creature implements Entity {
     public Orbiter() {
         sign = "O";
         name = "orbiter";
+        alive = true;
     }
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        // ! @TODO: fight with dice method return true if
-        // creature dice roll > adventurer dice roll
+        int myRoll = rollD6(2);
+        int targetRoll = rollD6(2);
+
+        if (myRoll > targetRoll) {
+            // Victory
+            return true;
+            // target.die();
+        } else if (myRoll == targetRoll) {
+            // Tie
+            return false;
+        } else {
+            // Loss
+            alive = false;
+        }
         return false;
     }
 

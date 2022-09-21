@@ -29,6 +29,8 @@ public class Run {
             game.processAdventurers();
             game.processCreatures();
 
+            // game.killCreatures();
+
             // Exit Conditions
             if (game.endConditionMet()) {
                 break;

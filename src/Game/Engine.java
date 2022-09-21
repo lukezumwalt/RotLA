@@ -106,6 +106,19 @@ public class Engine {
         }
     }
 
+    // public void killCreatures() {
+    // for (Entity monster1 : Creatures) {
+    // checkAliveCreatures(monster1);
+    // }
+    // }
+
+    // public static void checkAliveCreatures(Entity monster) {
+    // if (monster.getAlive() == true) {
+    // Engine.Creatures.remove(monster);
+    // }
+    // return;
+    // }
+
     public boolean endConditionMet() {
 
         // Treasure Victory Check

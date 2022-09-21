@@ -21,10 +21,11 @@ public class Brawler extends Adventurer implements Entity {
         sign = "B";
         name = "Brawler";
         health = 3;
+        alive = true;
     }
 
-    // ATTRIBUTES
-    static final int combatBonus = 2;
+    // PRIVATE ATTRIBUTES
+    private static final int combatBonus = 2;
 
     // PUBLIC METHODS
     @Override

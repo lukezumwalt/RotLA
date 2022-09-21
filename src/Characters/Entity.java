@@ -10,6 +10,8 @@ public interface Entity {
 
     public Room checkRoom();
 
+    public boolean getAlive();
+
     public boolean rollForTreasure();
 
     public String getEntityType();

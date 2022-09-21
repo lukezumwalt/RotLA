@@ -9,6 +9,7 @@ import java.util.Random;
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
 import static Game.Engine.coordinateToKey;
+import static Utilities.Dice.rollD6;
 
 /*
  * code example of Polymorphism
@@ -21,13 +22,26 @@ public class Blinker extends Creature implements Entity {
     public Blinker() {
         sign = "B";
         name = "blinker";
+        alive = true;
     }
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        // ! @TODO: fight with dice method return true if
-        // creature dice roll > adventurer dice roll
+        int myRoll = rollD6(2);
+        int targetRoll = rollD6(2);
+
+        if (myRoll > targetRoll) {
+            // Victory
+            return true;
+            // target.die();
+        } else if (myRoll == targetRoll) {
+            // Tie
+            return false;
+        } else {
+            // Loss
+            alive = false;
+        }
         return false;
     }
 
