@@ -23,12 +23,12 @@ public class Seeker extends Creature implements Entity {
 
     @Override
     public String getEntityType() {
-        return null;
+        return entityType;
     }
 
     @Override
     public Room checkRoom() {
-        return null;
+        return currentRoom;
     }
 
     @Override

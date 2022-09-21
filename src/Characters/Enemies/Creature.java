@@ -12,4 +12,8 @@ public class Creature {
     void die(){
 
     }
+
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
+    }
 }

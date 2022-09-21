@@ -3,6 +3,7 @@ package Characters.Enemies;
 import Board.Room;
 import Characters.Enemies.Creature;
 import Characters.Entity;
+import Utilities.CircularLinkedList;
 
 public class Orbiter extends Creature implements Entity {
 
@@ -13,7 +14,7 @@ public class Orbiter extends Creature implements Entity {
 
     @Override
     public void move() {
-        checkRoom().occupyCreature( this );
+//        checkRoom().occupyCreature( this );
     }
 
     @Override
@@ -22,10 +23,10 @@ public class Orbiter extends Creature implements Entity {
     }
 
     @Override
-    public String getEntityType() { return this.entityType; }
+    public String getEntityType() { return entityType; }
 
     @Override
-    public Room checkRoom(){ return this.currentRoom; }
+    public Room checkRoom(){ return currentRoom; }
 
     @Override
     public boolean rollForTreasure() {
