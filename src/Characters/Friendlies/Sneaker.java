@@ -12,7 +12,7 @@ public class Sneaker extends Adventurer implements Entity {
 
     public Sneaker(){
         sign = "S";
-        name = "sneaker";
+        name = "Sneaker";
     }
     @Override
     public void move() {

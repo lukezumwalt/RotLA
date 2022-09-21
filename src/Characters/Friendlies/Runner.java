@@ -12,7 +12,7 @@ public class Runner extends Adventurer implements Entity {
 
     public Runner(){
         sign = "R";
-        name = "runner";
+        name = "Runner";
     }
     @Override
     public void move() {

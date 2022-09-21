@@ -1,30 +1,28 @@
 package Characters.Friendlies;
 
 import Board.Room;
-import Characters.Entity;
-
 
 public class Adventurer {
-    private int health;
-    private int treasureCount;
     protected Room currentRoom;
-    protected String entityType = "adventurer";
+    protected final String entityType = "adventurer";
     protected String sign;
     protected String name;
+    private int health;
+    private int treasureCount;
     public String getSign(){ return sign; }
 
-    void takeDamage(){
+    public void takeDamage(){
         health--;
     }
 
     //! Getter Suite
-    int getHealth(){
+    public int getHealth(){
         return health;
     }
-    int getTreasureCount(){
+    public int getTreasureCount(){
         return treasureCount;
     }
-    void collectTreasure( Room r ){
+    public void collectTreasure( Room r ){
         r.takeTreasure();
         treasureCount++;
     }

@@ -12,7 +12,7 @@ public class Thief extends Adventurer implements Entity {
 
     public Thief(){
         sign = "T";
-        name = "thief";
+        name = "Thief";
     }
     @Override
     public void move() {

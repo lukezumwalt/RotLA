@@ -17,7 +17,7 @@ public class Brawler extends Adventurer implements Entity {
 
     public Brawler(){
         sign = "B";
-        name = "brawler";
+        name = "Brawler";
     }
 
     @Override
