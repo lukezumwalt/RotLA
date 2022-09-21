@@ -42,8 +42,8 @@ public class Render {
     // then it calls render for adventurers or creatures found
     // in the room based on if the key matches the room key.
     private void printBoard() {
-        System.out.println("+----------------------------------------------------------------------------------+");
-        System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " |");
+        System.out.println("+-----------------------------------------------------------------------------------+");
+        System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " ]");
         for (int i = 1; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
@@ -70,7 +70,7 @@ public class Render {
                 }
             }
         }
-        System.out.println("+----------------------------------------------------------------------------------+");
+        System.out.println("+-----------------------------------------------------------------------------------+");
     }
 
     // prints the health and treasure status of all entities
