@@ -14,6 +14,7 @@ public class Runner extends Adventurer implements Entity {
     public Runner(){
         sign = "R";
         name = "Runner";
+        health = 3;
     }
     @Override
     public void move() {

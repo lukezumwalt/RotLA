@@ -14,6 +14,7 @@ public class Sneaker extends Adventurer implements Entity {
     public Sneaker(){
         sign = "S";
         name = "Sneaker";
+        health = 3;
     }
     @Override
     public void move() {

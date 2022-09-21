@@ -14,6 +14,7 @@ public class Thief extends Adventurer implements Entity {
     public Thief(){
         sign = "T";
         name = "Thief";
+        health = 3;
     }
     protected static final int treasureRollMod = 1;
     @Override

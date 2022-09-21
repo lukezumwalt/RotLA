@@ -7,7 +7,7 @@ public class Adventurer {
     protected final String entityType = "adventurer";
     protected String sign;
     protected String name;
-    private int health;
+    protected int health;
     private int treasureCount;
     public String getSign(){ return sign; }
 
