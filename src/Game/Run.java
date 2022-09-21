@@ -9,6 +9,7 @@ import java.util.TreeMap;
 public class Run {
     public static void main(String[] args) {
 
+        // instantiate objects
         Render view = new Render();
         Scanner input = new Scanner(System.in);
         Engine game = new Engine();
@@ -18,23 +19,22 @@ public class Run {
         boolean gameOver = false;
 
         // Primary Game.Run Loop
-        while ( true ) {
+        while (true) {
 
-//            for (int i = 0; i < ENTITY_TOTAL; ++i) {
-//                processEntity(entityList[i]);
-//            }
+            // for (int i = 0; i < ENTITY_TOTAL; ++i) {
+            // processEntity(entityList[i]);
+            // }
 
             view.printFrame();
             game.processAdventurers();
             game.processCreatures();
 
-
             // Exit Conditions
-            if( game.endConditionMet() ){
+            if (game.endConditionMet()) {
                 break;
             }
             // Debugging condition
-            if(Objects.equals(input.nextLine(),"gg")){
+            if (Objects.equals(input.nextLine(), "gg")) {
                 break;
             }
         }

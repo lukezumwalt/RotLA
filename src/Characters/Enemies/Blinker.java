@@ -10,30 +10,39 @@ import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
 import static Game.Engine.coordinateToKey;
 
+/*
+ * code example of Polymorphism
+ * Orbiter, Seeker, and
+ * Blinker are all extensions of Creature
+ */
 public class Blinker extends Creature implements Entity {
 
-    public Blinker(){
+    // CONSTRUCTORS
+    public Blinker() {
         sign = "B";
         name = "blinker";
     }
 
+    // PUBLIC METHODS
     @Override
     public void move() {
         // Blinker moves to any random room in the Facility.
         Random r = new Random();
-        int floor = r.nextInt(3)+1;
+        int floor = r.nextInt(3) + 1;
         int x = r.nextInt(2);
         int y = r.nextInt(2);
-        Room newRoom = Facility.get(coordinateToKey(floor,x,y));
+        Room newRoom = Facility.get(coordinateToKey(floor, x, y));
 
         // Update knowledge of position.
-        this.currentRoom.leaveRoom( this );
-        this.setCurrentRoom( newRoom );
+        this.currentRoom.leaveRoom(this);
+        this.setCurrentRoom(newRoom);
         newRoom.occupyCreature(this);
     }
 
     @Override
     public boolean fight(Entity target) {
+        // ! @TODO: fight with dice method return true if
+        // creature dice roll > adventurer dice roll
         return false;
     }
 
@@ -49,8 +58,11 @@ public class Blinker extends Creature implements Entity {
 
     @Override
     public boolean rollForTreasure() {
+        // creatures do not get treasure so always return false
         return false;
     }
 
-    public String getName(){ return name; }
+    public String getName() {
+        return name;
+    }
 }

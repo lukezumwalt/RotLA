@@ -9,30 +9,39 @@ import static Game.Engine.getAdventurers;
 
 public class Render {
 
-    /*
-     * NOTE: THIS ENTIRE CLASS / PACKAGE WILL BE REFACTORED TO BE VARIABLE
-     * IT IS STATIC NOW FOR DEMONSTRATION
-     * 
-     * @TODO: BUG, the second print lags until the third query but only for the
-     * second print loop.
-     */
-
-    public Render(){
+    // CONSTRUCTOR
+    public Render() {
         turn = 0;
     }
+
+    // PRIVATE ATTRIBUTES
     private int turn;
 
+    // PUBLIC METHODS
+
+    /*
+     * Code example of Cohesion
+     * All methods are relevant to Render class
+     * since they are all print methods of the
+     * game.
+     */
     public void printFrame() {
         printTurn();
         printBoard();
         printStatus();
     }
 
+    // PRIVATE METHODS
+    // prints turn number
     private void printTurn() {
         System.out.println("RotLA Turn: " + turn);
         turn++;
     }
 
+    // printBoard access the Map via get methods that
+    // reference a stringg called a key.
+    // then it calls render for adventurers or creatures found
+    // in the room based on if the key matches the room key.
     private void printBoard() {
         System.out.println("+--------------------------------------------------+");
         System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " |");
@@ -44,53 +53,40 @@ public class Render {
                                 + "-"
                                 + j + "-"
                                 + k + ": "
-                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
+                                + Engine.Facility.get(coordinateToKey(i, j, k)).renderOccupantAdventurers()
                                 + " : "
-                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures()
+                                + Engine.Facility.get(coordinateToKey(i, j, k)).renderOccupantCreatures()
                                 + " ");
                     } else {
                         System.out.println("| " + i
                                 + "-"
                                 + j + "-"
                                 + k + ": "
-                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantAdventurers()
+                                + Engine.Facility.get(coordinateToKey(i, j, k)).renderOccupantAdventurers()
                                 + " : "
-                                + Engine.Facility.get(coordinateToKey(i,j,k)).renderOccupantCreatures());
+                                + Engine.Facility.get(coordinateToKey(i, j, k)).renderOccupantCreatures());
                     }
                 }
             }
         }
-        // System.out.println("| 0-1-1: - : - |");
-        // System.out.println("| 1-0-0: - : - 1-0-1: - : - 1-0-2: - : - |");
-        // System.out.println("| 1-1-0: - : - 1-1-1: - : - 1-1-2: - : - |");
-        // System.out.println("| 1-2-0: - : - 1-2-1: - : - 1-2-2: - : - |");
-        // System.out.println("| 2-0-0: - : - 2-0-1: - : - 2-0-2: - : - |");
-        // System.out.println("| 2-1-0: - : - 2-1-1: - : - 2-1-2: - : - |");
-        // System.out.println("| 2-2-0: - : - 2-2-1: - : - 2-2-2: - : - |");
-        // System.out.println("| 3-0-0: - : - 3-0-1: - : - 3-0-2: - : - |");
-        // System.out.println("| 3-1-0: - : - 3-1-1: - : - 3-1-2: - : - |");
-        // System.out.println("| 3-2-0: - : - 3-2-1: - : - 3-2-2: - : - |");
-        // System.out.println("| 4-0-0: - : - 4-0-1: - : - 4-0-2: - : - |");
-        // System.out.println("| 4-1-0: - : - 4-1-1: - : - 4-1-2: - : - |");
-        // System.out.println("| 4-2-0: - : - 4-2-1: - : - 4-2-2: - : - |");
         System.out.println("+--------------------------------------------------+");
     }
 
+    // prints the health and treasure status of all entities
+    /*
+     * code example of Identity
+     * Adventurer a = (Adventurer) a0
+     * uses identity as a vehicle for printing proper
+     * status
+     */
     private void printStatus() {
-        for (Entity a0: getAdventurers()) {
-            Adventurer a = (Adventurer)a0;
-            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth()) + " Damage" );
+        for (Entity a0 : getAdventurers()) {
+            Adventurer a = (Adventurer) a0;
+            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
+                    + " Damage");
         }
-//        System.out.println("Brawler:\t " + getAdventurers().get(0) + " Treasure(s) / x Damage");
-//        System.out.println("Sneaker:\t x Treasure(s) / x Damage");
-//        System.out.println("Runner:\t\t x Treasure(s) / x Damage");
-//        System.out.println("Thief:\t\t x Treasure(s) / x Damage\n");
         System.out.println("Orbiters:\t x Remaining");
         System.out.println("Seekers:\t x Remaining");
         System.out.println("Blinkers:\t x Remaining");
-    }
-
-    private void inspectAndReportFacility() {
-
     }
 }

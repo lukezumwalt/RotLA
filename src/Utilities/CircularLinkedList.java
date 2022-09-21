@@ -6,17 +6,22 @@ package Utilities;
 
 public class CircularLinkedList {
     public class Node {
-        String coordinateKey;
-        Node next;
 
+        // CONSTRUCTORS
         public Node(String coordinateKey) {
             this.coordinateKey = coordinateKey;
         }
+
+        // PUBLIC ATTRIBUTES
+        public String coordinateKey;
+        public Node next;
     }
 
+    // PUBLIC ATTRIBUTES
     public Node head = null;
     public Node tail = null;
 
+    // PUBLIC METHODS
     public void add(String keyCoordinates) {
         Node newNode = new Node(keyCoordinates);
         // Checks if list is empty
@@ -35,7 +40,7 @@ public class CircularLinkedList {
         }
     }
 
-    public String getNext(Node N){
+    public String getNext(Node N) {
         return N.next.coordinateKey;
     }
 }

@@ -3,32 +3,51 @@ package Characters.Friendlies;
 import Board.Room;
 
 public class Adventurer {
+
+    // PROTECTED ATTRIBUTES
     protected Room currentRoom;
     protected final String entityType = "adventurer";
     protected String sign;
     protected String name;
     protected int health;
-    private int treasureCount;
-    public String getSign(){ return sign; }
 
-    public void takeDamage(){
+    // PRIVATE METHODS
+    /*
+     * code example of Encapsulation
+     * treasureCount is private and
+     * can only be accessed via getter
+     * method
+     */
+    private int treasureCount;
+
+    // PUBLIC METHODS
+    public void takeDamage() {
         health--;
     }
 
-    //! Getter Suite
-    public int getHealth(){
-        return health;
-    }
-    public int getTreasureCount(){
-        return treasureCount;
-    }
-    public void collectTreasure( Room r ){
+    public void collectTreasure(Room r) {
         r.takeTreasure();
         treasureCount++;
     }
-    public void setCurrentRoom( Room newRoom ){
+
+    public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
     }
 
-//    public abstract boolean rollForTreasure();
+    // ! Getter Suite
+    public String getSign() {
+        return sign;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    /*
+     * code example of Encapsulation
+     * getter method for private attribute
+     */
+    public int getTreasureCount() {
+        return treasureCount;
+    }
 }

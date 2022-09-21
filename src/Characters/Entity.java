@@ -3,11 +3,16 @@ package Characters;
 import Board.Room;
 
 public interface Entity {
-    // Methods
-    void move();
-    boolean fight(Entity target);
-    String getEntityType();
-    String getName();
-    Room checkRoom();
-    boolean rollForTreasure();
+    // PUBLIC METHODS
+    public boolean fight(Entity target);
+
+    public void move();
+
+    public Room checkRoom();
+
+    public boolean rollForTreasure();
+
+    public String getEntityType();
+
+    public String getName();
 }
