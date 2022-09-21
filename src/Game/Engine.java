@@ -22,8 +22,15 @@ public class Engine {
     public static Map<String, Room> Facility;
 
     // Characters
-    ArrayList<Entity> Adventurers = new ArrayList<Entity>();
-    ArrayList<Entity> Creatures = new ArrayList<Entity>();
+    private static ArrayList<Entity> Adventurers = new ArrayList<Entity>();
+    private static ArrayList<Entity> Creatures = new ArrayList<Entity>();
+
+    public static ArrayList<Entity> getAdventurers(){
+        return Adventurers;
+    }
+    public static ArrayList<Entity> getCreatures(){
+        return Creatures;
+    }
 
     void initialize() {
         // Instantiate Adventurers
@@ -59,7 +66,7 @@ public class Engine {
             a.setCurrentRoom(Facility.get("011"));
         }
 
-        // Place all creatures in random rooms
+        // Place all creatures in random rooms.
         Random r = new Random();
         for( Entity c0 : Creatures ){
             Creature c = (Creature)c0;
@@ -112,6 +119,10 @@ public class Engine {
                     player.move();
                 }
             }
+            if(thisRoom.checkIfTreasure()){
+//                thisRoom.takeTreasure();
+                ((Adventurer)player).collectTreasure(thisRoom);
+            }
             player.move();
 //                case "sneaker":
 //                case "thief":
@@ -135,6 +146,34 @@ public class Engine {
                 monster.fight((Entity) target);
             }
         }
+    }
+
+    public boolean endConditionMet() {
+
+        // Treasure Victory Check
+        int totalTreasure = 0;
+        for( Entity a: Adventurers ){
+            totalTreasure += ((Adventurer)a).getTreasureCount();
+        }
+        if( totalTreasure >= 10 ){
+            System.out.println("\n\nADVENTURERS WIN!\n\tThey collected: " + totalTreasure + " treasure!\n\n\tGG!");
+            return true;
+        }
+
+        // Dead Creatures Victory Check
+        if( Creatures.size() == 0 ){
+            System.out.println("\n\nADVENTURERS WIN!\n\tThey defeated every creature!\n\n\tGG!");
+            return true;
+        }
+
+        // Dead Adventurers Victory Check
+        if( Adventurers.size() == 0 ){
+            System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
+            return true;
+        }
+
+        // No Victory Condition
+        return false;
     }
 
     // public Room getRoom(int[] coordinates) {

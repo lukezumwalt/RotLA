@@ -18,7 +18,7 @@ public class Run {
         boolean gameOver = false;
 
         // Primary Game.Run Loop
-        while ( !gameOver ) {
+        while ( true ) {
 
 //            for (int i = 0; i < ENTITY_TOTAL; ++i) {
 //                processEntity(entityList[i]);
@@ -27,9 +27,14 @@ public class Run {
             view.printFrame();
             game.processAdventurers();
 
-            // Exit Condition
+
+            // Exit Conditions
+            if( game.endConditionMet() ){
+                break;
+            }
+            // Debugging condition
             if(Objects.equals(input.nextLine(),"gg")){
-                gameOver = true;
+                break;
             }
         }
         input.close();
