@@ -3,10 +3,17 @@ package Characters.Enemies;
 import Board.Room;
 
 public class Creature {
-    protected String entityType;
     protected Room currentRoom;
+    protected final String entityType = "creature";
+    protected String sign;
+    protected String name;
+    public String getSign(){ return sign; }
 
     void die(){
 
+    }
+
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
     }
 }

@@ -2,18 +2,27 @@ package Characters.Friendlies;
 
 import Board.Room;
 import Characters.Entity;
-import Utilities.Dice;
 
-import java.lang.annotation.Documented;
+import java.util.Random;
+
+import static Board.Room.inspectNeighbors;
+import static Game.Engine.Facility;
+import static Utilities.Dice.rollD6;
 
 public class Brawler extends Adventurer implements Entity {
 
     static final int combatBonus = 2;
 
+    public Brawler(){
+        sign = "B";
+        name = "Brawler";
+        health = 3;
+    }
+
     @Override
     public boolean fight(Entity target){
-        int myRoll = Dice.rollD6(2) + combatBonus;
-        int targetRoll = Dice.rollD6(2);
+        int myRoll = rollD6(2) + combatBonus;
+        int targetRoll = rollD6(2);
 
         if( myRoll > targetRoll ) {
             // Victory
@@ -33,13 +42,34 @@ public class Brawler extends Adventurer implements Entity {
 
     @Override
     public void move() {
-//        currentRoom.checkAdjacent();
+        // check room to return valid moves
+        String[] addresses = inspectNeighbors(this.currentRoom);
+        // randomly select a valid move from that list
+        int choice;
+        if( addresses.length <= 1 ) {
+            choice = 0;
+        }
+        else {
+            Random r = new Random();
+            choice = r.nextInt(0,addresses.length);
+        }
+        Room newRoom = Facility.get(addresses[choice]);
+
         // finally:
-        checkRoom().leaveRoom( this );
-        checkRoom().occupyAdventurer( this );
+        this.currentRoom.leaveRoom( this );
+        this.setCurrentRoom( newRoom );
+        newRoom.occupyAdventurer(this);
     }
 
     @Override
     public Room checkRoom(){ return currentRoom; }
     public String getEntityType(){ return entityType; }
+    public String getName(){ return name; }
+
+    public boolean rollForTreasure(){
+        if( rollD6(2) >= 10 ){
+            return true;
+        }
+        return false;
+    }
 }
