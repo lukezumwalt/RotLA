@@ -25,6 +25,13 @@ public class Blinker extends Creature implements Entity {
 
     // PUBLIC METHODS
     @Override
+    public boolean fight(Entity target) {
+        // ! @TODO: fight with dice method return true if
+        // creature dice roll > adventurer dice roll
+        return false;
+    }
+
+    @Override
     public void move() {
         // Blinker moves to any random room in the Facility.
         Random r = new Random();
@@ -40,18 +47,6 @@ public class Blinker extends Creature implements Entity {
     }
 
     @Override
-    public boolean fight(Entity target) {
-        // ! @TODO: fight with dice method return true if
-        // creature dice roll > adventurer dice roll
-        return false;
-    }
-
-    @Override
-    public String getEntityType() {
-        return entityType;
-    }
-
-    @Override
     public Room checkRoom() {
         return currentRoom;
     }
@@ -60,6 +55,11 @@ public class Blinker extends Creature implements Entity {
     public boolean rollForTreasure() {
         // creatures do not get treasure so always return false
         return false;
+    }
+
+    @Override
+    public String getEntityType() {
+        return entityType;
     }
 
     public String getName() {

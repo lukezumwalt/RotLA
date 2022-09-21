@@ -25,12 +25,6 @@ public class Orbiter extends Creature implements Entity {
 
     // PUBLIC METHODS
     @Override
-    public void move() {
-        // ! @TODO: Orbiter moves to any random room on outer
-        // edge a.k.a. not the center room of given level.
-    }
-
-    @Override
     public boolean fight(Entity target) {
         // ! @TODO: fight with dice method return true if
         // creature dice roll > adventurer dice roll
@@ -38,8 +32,9 @@ public class Orbiter extends Creature implements Entity {
     }
 
     @Override
-    public String getEntityType() {
-        return entityType;
+    public void move() {
+        // ! @TODO: Orbiter moves to any random room on outer
+        // edge a.k.a. not the center room of given level.
     }
 
     @Override
@@ -51,6 +46,11 @@ public class Orbiter extends Creature implements Entity {
     public boolean rollForTreasure() {
         // creatures do not get treasure so always return false
         return false;
+    }
+
+    @Override
+    public String getEntityType() {
+        return entityType;
     }
 
     public String getName() {

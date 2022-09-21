@@ -9,7 +9,7 @@ import static Game.Engine.getAdventurers;
 
 public class Render {
 
-    // CONSTRUCTOR
+    // CONSTRUCTORS
     public Render() {
         turn = 0;
     }
@@ -18,7 +18,6 @@ public class Render {
     private int turn;
 
     // PUBLIC METHODS
-
     /*
      * Code example of Cohesion
      * All methods are relevant to Render class
