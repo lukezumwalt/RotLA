@@ -52,7 +52,7 @@ public class Engine {
     private void initializeBoard() {
         Characters.Enemies.Orbiter O = new Orbiter();
 
-        // Place all adventurers in the spawn room
+        // Place all adventurers in the adventurer spawn room.
         for( Entity a0 : Adventurers ){
             Adventurer a = (Adventurer)a0;
             Facility.get("011").occupyAdventurer(a);
@@ -63,22 +63,27 @@ public class Engine {
         Random r = new Random();
         for( Entity c0 : Creatures ){
             Creature c = (Creature)c0;
+            int x, y, floor;
 
-        }
+            // Selecting floor and position for a creature to spawn, excluding adventurer spawn room.
+            x = r.nextInt(2);
+            y = r.nextInt(2);
+            floor = r.nextInt(4-1)+1;
 
-        for (int i = 1; i < 5; i++) {
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 3; k++) {
-                    // Randomized adding creatures here
-                    Facility.get(coordinateToKey(i,j,k)).occupyCreature(new Orbiter());
-                    Facility.get(coordinateToKey(i,j,k)).occupyCreature(new Seeker());
+            // Condition for which an orbiter can legally spawn, as they must avoid center rooms.
+            if("O".equals(c.getSign())){
+                while(x==1 && y==1){
+                    x = r.nextInt(2);
+                    y = r.nextInt(2);
                 }
             }
+
+            // Place creature in room.
+            Facility.get(coordinateToKey(floor,x,y)).occupyCreature(c);
         }
     }
 
     private void initializeAdventurers() {
-        // ! @TODO: use these guys to populate board
         Adventurers.add(new Brawler());
         Adventurers.add(new Sneaker());
         Adventurers.add(new Runner());
@@ -86,19 +91,15 @@ public class Engine {
     }
 
     private void initializeCreatures() {
-        // ! @TODO: use these guys to populate board
-        Characters.Entity o = new Orbiter();
-        Characters.Entity s = new Seeker();
-        Characters.Entity b = new Blinker();
         for (int i = 0; i < 4; ++i) {
-            Creatures.add(o);
-            Creatures.add(s);
-            Creatures.add(b);
+            Creatures.add(new Orbiter());
+            Creatures.add(new Seeker());
+            Creatures.add(new Blinker());
         }
     }
 
-    public static String coordinateToKey(int x, int y, int z) {
-        return String.valueOf(x) + String.valueOf(y) + String.valueOf(z);
+    public static String coordinateToKey(int floor, int x, int y) {
+        return String.valueOf(floor) + String.valueOf(x) + String.valueOf(y);
     }
 
     public void processAdventurers(){
