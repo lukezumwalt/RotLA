@@ -150,6 +150,7 @@ public class Engine {
     }
 
     public void processCreatures() {
+        ArrayList<Entity> mobsToDie = new ArrayList<>();
         for (Entity monster : Creatures) {
             Room thisRoom = monster.checkRoom();
 
@@ -160,8 +161,14 @@ public class Engine {
 
             // After either moving or not, fight any Adventurers in the room.
             for (Adventurer target : thisRoom.getOccupantAdventurers()) {
-                monster.fight((Entity) target);
+                if(!monster.fight((Entity) target)){
+                    mobsToDie.add(monster);
+                }
             }
+        }
+        for(Entity m: mobsToDie){
+            Creatures.remove(m);
+            m.checkRoom().leaveRoom(m);
         }
     }
 
