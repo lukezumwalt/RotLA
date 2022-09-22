@@ -41,3 +41,8 @@ An example of polymorphism can be found in Orbiter.java, Blinker.java, and Seeke
 An example of cohesion can be found in Render.java at line 22. This is a good example because Render.java holds all the print statements and methods for the game simulation. This is considered high cohesion since they are highly related to the class they are within.<br>
 <br>
 An example of identity can be found in Render.java in line 78. We can see how the Adventurer a is set equal to Adventurer a0. <br>
+
+*********
+UML UPDATE
+*********
+The main structure stayed relatively the same. The biggest change that was made was that the subclasses of Adventurer and Creature are now also inherited from the Entity class. The Entity class acts as an entry way for all of our characters which was true in version 1.0 of our UML and true for this current version. The current version, however, has more access. We also removed TurnOrchestrator and encapsulated those methods in the Engine class. We also set up an explicit file structure using cohesive java packages, which is captured in the UML. This supports comprehensive inheritance and readability. Outside of these changes, we instantiated a more robust design of attributes and methods in each of the classes.<br>
