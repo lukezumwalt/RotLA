@@ -28,14 +28,14 @@ public class Orbiter extends Creature implements Entity {
 
         // Randomly choose clockwise/counter-clockwise
         Random r = new Random();
-        if(r.nextInt(2)+1 == 1){
+        if(r.nextBoolean()){
             clockwiseFlag = true;
         }
         else{
             clockwiseFlag = false;
         }
     }
-    boolean clockwiseFlag;
+    protected boolean clockwiseFlag;
 
     // PUBLIC METHODS
     @Override
