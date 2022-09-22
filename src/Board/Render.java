@@ -1,11 +1,13 @@
 package Board;
 
 import Characters.Entity;
+import Characters.Enemies.Creature;
 import Characters.Friendlies.Adventurer;
 import Game.Engine;
 
 import static Game.Engine.coordinateToKey;
 import static Game.Engine.getAdventurers;
+import static Game.Engine.getCreatures;
 
 public class Render {
 
@@ -81,13 +83,27 @@ public class Render {
      * status
      */
     private void printStatus() {
+        int oCount = 0;
+        int sCount = 0;
+        int bCount = 0;
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
             System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
                     + " Damage");
         }
-        System.out.println("Orbiters:\t x Remaining");
-        System.out.println("Seekers:\t x Remaining");
-        System.out.println("Blinkers:\t x Remaining");
+        for (Entity c0 : getCreatures()) {
+            Creature c = (Creature) c0;
+            String cSign = c0.getSign();
+            if (cSign == "O") {
+                oCount++;
+            } else if (cSign == "S") {
+                sCount++;
+            } else if (cSign == "B") {
+                bCount++;
+            }
+        }
+        System.out.println("Orbiters:\t" + oCount + " Remaining");
+        System.out.println("Seekers:\t" + sCount + " Remaining");
+        System.out.println("Blinkers:\t" + bCount + " Remaining");
     }
 }
