@@ -4,7 +4,6 @@ import Board.Render;
 
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class Run {
     public static void main(String[] args) {
@@ -16,20 +15,9 @@ public class Run {
 
         game.initialize();
 
-        boolean gameOver = false;
-
+        System.out.println("Press [Enter] to begin...");
         // Primary Game.Run Loop
         while (true) {
-
-            // for (int i = 0; i < ENTITY_TOTAL; ++i) {
-            // processEntity(entityList[i]);
-            // }
-
-            view.printFrame();
-            game.processAdventurers();
-            game.processCreatures();
-
-            // game.killCreatures();
 
             // Exit Conditions
             if (game.endConditionMet()) {
@@ -39,6 +27,10 @@ public class Run {
             if (Objects.equals(input.nextLine(), "gg")) {
                 break;
             }
+
+            view.printFrame();
+            game.processAdventurers();
+            game.processCreatures();
         }
         input.close();
     }

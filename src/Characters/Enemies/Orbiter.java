@@ -59,9 +59,6 @@ public class Orbiter extends Creature implements Entity {
 
     @Override
     public void move() {
-        // ! @TODO: Orbiter moves to any random room on outer
-        // edge a.k.a. not the center room of given level.
-
         // Get indices from current room
         int floor = checkRoom().getCoordinates()[0];
         int x = checkRoom().getCoordinates()[1];
@@ -101,7 +98,6 @@ public class Orbiter extends Creature implements Entity {
             }
 
         }
-
         this.currentRoom.leaveRoom(this);
         this.setCurrentRoom(Facility.get(coordinateToKey(floor,x,y)));
         Facility.get(coordinateToKey(floor,x,y)).occupyCreature(this);

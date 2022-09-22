@@ -40,7 +40,7 @@ public class Render {
     }
 
     // printBoard access the Map via get methods that
-    // reference a stringg called a key.
+    // reference a string called a key.
     // then it calls render for adventurers or creatures found
     // in the room based on if the key matches the room key.
     private void printBoard() {

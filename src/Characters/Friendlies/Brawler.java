@@ -30,41 +30,51 @@ public class Brawler extends Adventurer implements Entity {
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        int myRoll = rollD6(2) + combatBonus;
-        int targetRoll = rollD6(2);
+        if( health <= 0 ) {
+            // do nothing
+        }
+        else {
+            int myRoll = rollD6(2) + combatBonus;
+            int targetRoll = rollD6(2);
 
-        if (myRoll > targetRoll) {
-            // Victory
-            return true;
-            // target.die();
-        } else if (myRoll == targetRoll) {
-            // Tie
-            return false;
-        } else {
-            // Loss
-            this.takeDamage();
+            if (myRoll > targetRoll) {
+                // Victory
+                return true;
+            } else if (myRoll == targetRoll) {
+                // Tie
+                return false;
+            } else {
+                // Loss
+                this.takeDamage();
+            }
         }
         return false;
     }
 
     @Override
     public void move() {
-        // check room to return valid moves
-        String[] addresses = inspectNeighbors(this.currentRoom);
-        // randomly select a valid move from that list
-        int choice;
-        if (addresses.length <= 1) {
-            choice = 0;
-        } else {
-            Random r = new Random();
-            choice = r.nextInt(0, addresses.length);
+        if( health <= 0 ){
+            // do nothing, ya dead
+            return;
         }
-        Room newRoom = Facility.get(addresses[choice]);
+        else {
+            // check room to return valid moves
+            String[] addresses = inspectNeighbors(this.currentRoom);
+            // randomly select a valid move from that list
+            int choice;
+            if (addresses.length <= 1) {
+                choice = 0;
+            } else {
+                Random r = new Random();
+                choice = r.nextInt(0, addresses.length);
+            }
+            Room newRoom = Facility.get(addresses[choice]);
 
-        // finally:
-        this.currentRoom.leaveRoom(this);
-        this.setCurrentRoom(newRoom);
-        newRoom.occupyAdventurer(this);
+            // finally:
+            this.currentRoom.leaveRoom(this);
+            this.setCurrentRoom(newRoom);
+            newRoom.occupyAdventurer(this);
+        }
     }
 
     @Override

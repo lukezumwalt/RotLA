@@ -1,5 +1,6 @@
 package Game;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import Board.Room;
@@ -26,7 +27,6 @@ public class Engine {
     private static ArrayList<Entity> Creatures = new ArrayList<Entity>();
 
     // PUBLIC METHODS
-    // ! Getter Suite
     public static ArrayList<Entity> getAdventurers() {
         return Adventurers;
     }
@@ -56,17 +56,66 @@ public class Engine {
             Room thisRoom = player.checkRoom();
 
             // Runner gets 3 "actions" per turn.
-            // ! @TODO: Expand this to do more than move
             if ("runner".equals(player.getName())) {
                 for (int i = 0; i < 4; i++) {
+                    // Combat check, must be done before treasure check.
+                    if (thisRoom.getOccupantCreatures().size() > 0) {
+                        ArrayList<Entity> mobsToKill = new ArrayList<>();
+                        for (Creature target : thisRoom.getOccupantCreatures()) {
+                            if(player.fight((Entity) target)){
+                                // kill target creature on player victory (i.e. remove from list)
+                                Creatures.remove(target);
+                                mobsToKill.add((Entity) target);
+                            }
+                        }
+                        for(Entity k: mobsToKill){
+                            k.checkRoom().leaveRoom(k);
+                        }
+                        // Combat consumes the turn.
+                        continue;
+                    }
+                    // Treasure check.
+                    if (thisRoom.checkIfTreasure()) {
+                        if (player.rollForTreasure()) {
+                            ((Adventurer) player).collectTreasure(thisRoom);
+                            // Collection consumes the turn.
+                            continue;
+                        }
+                    }
+                    // No treasure and no creatures, move on!
                     player.move();
+                    // Final creature-combat check after final movement.
+                    if (thisRoom.getOccupantCreatures().size() > 0) {
+                        ArrayList<Entity> mobsToKill = new ArrayList<>();
+                        for (Creature target : thisRoom.getOccupantCreatures()) {
+                            if(player.fight((Entity) target)){
+                                // kill target creature on player victory (i.e. remove from list)
+                                Creatures.remove(target);
+                                mobsToKill.add((Entity) target);
+                            }
+                        }
+                        for(Entity k: mobsToKill){
+                            k.checkRoom().leaveRoom(k);
+                        }
+                    }
                 }
+                continue;
             }
+
+            //! Everyone else only gets once chance for the song and dance.
 
             // Combat check, must be done before treasure check.
             if (thisRoom.getOccupantCreatures().size() > 0) {
+                ArrayList<Entity> mobsToKill = new ArrayList<>();
                 for (Creature target : thisRoom.getOccupantCreatures()) {
-                    player.fight((Entity) target);
+                    if(player.fight((Entity) target)){
+                        // kill target creature on player victory (i.e. remove from list)
+                        Creatures.remove(target);
+                        mobsToKill.add((Entity) target);
+                    }
+                }
+                for(Entity k: mobsToKill){
+                    k.checkRoom().leaveRoom(k);
                 }
                 // Combat consumes the turn.
                  continue;
@@ -81,8 +130,22 @@ public class Engine {
                 }
             }
 
-            // No treasure and no creatures, move on broth!
+            // No treasure and no creatures, move on!
             player.move();
+            // Final creature-combat check after final movement.
+            if (thisRoom.getOccupantCreatures().size() > 0) {
+                ArrayList<Entity> mobsToKill = new ArrayList<>();
+                for (Creature target : thisRoom.getOccupantCreatures()) {
+                    if(player.fight((Entity) target)){
+                        // kill target creature on player victory (i.e. remove from list)
+                        Engine.Creatures.remove(target);
+                        mobsToKill.add((Entity) target);
+                    }
+                }
+                for(Entity k: mobsToKill){
+                    k.checkRoom().leaveRoom(k);
+                }
+            }
         }
     }
 
@@ -101,19 +164,6 @@ public class Engine {
             }
         }
     }
-
-    // public void killCreatures() {
-    // for (Entity monster1 : Creatures) {
-    // checkAliveCreatures(monster1);
-    // }
-    // }
-
-    // public static void checkAliveCreatures(Entity monster) {
-    // if (monster.getAlive() == true) {
-    // Engine.Creatures.remove(monster);
-    // }
-    // return;
-    // }
 
     public boolean endConditionMet() {
 
@@ -134,7 +184,11 @@ public class Engine {
         }
 
         // Dead Adventurers Victory Check
-        if (Adventurers.size() == 0) {
+        int totalHealth = 0;
+        for( Entity a: Adventurers){
+            totalHealth += ((Adventurer)a).getHealth();
+        }
+        if (totalHealth == 0) {
             System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
             return true;
         }
