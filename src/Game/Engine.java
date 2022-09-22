@@ -1,9 +1,6 @@
 package Game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import Board.Room;
 import Characters.Entity;
@@ -73,7 +70,7 @@ public class Engine {
                     player.fight((Entity) target);
                 }
                 // Combat consumes the turn.
-                // continue;
+                 continue;
             }
 
             // Treasure check.
@@ -190,6 +187,7 @@ public class Engine {
                     x = r.nextInt(2);
                     y = r.nextInt(2);
                 }
+                ((Orbiter)c).setCurrentRoomNode(new CircularLinkedList.Node(coordinateToKey(floor, x, y)));
             }
 
             // Place creature in room.
@@ -205,6 +203,15 @@ public class Engine {
         Adventurers.add(new Thief());
     }
 
+    // A lot of overhead for our selection of an orbiter movement scheme.
+    //! @TODO: In future refactor, visit more concise ways to capture orbiter movement...
+    CircularLinkedList F1 = new CircularLinkedList();
+    CircularLinkedList F2 = new CircularLinkedList();
+    CircularLinkedList F3 = new CircularLinkedList();
+    CircularLinkedList F4 = new CircularLinkedList();
+
+    public static ArrayList<CircularLinkedList> OrbiterDungeonMap = new ArrayList<>();
+
     private void initializeCreatures() {
         for (int i = 0; i < 4; ++i) {
             Creatures.add(new Orbiter());
@@ -213,7 +220,6 @@ public class Engine {
         }
 
         // Build out orbiter movement options..
-        CircularLinkedList F1 = new CircularLinkedList();
         F1.add(coordinateToKey(1, 0, 0));
         F1.add(coordinateToKey(1, 0, 1));
         F1.add(coordinateToKey(1, 0, 2));
@@ -223,7 +229,6 @@ public class Engine {
         F1.add(coordinateToKey(1, 2, 1));
         F1.add(coordinateToKey(1, 2, 2));
 
-        CircularLinkedList F2 = new CircularLinkedList();
         F2.add(coordinateToKey(2, 0, 0));
         F2.add(coordinateToKey(2, 0, 1));
         F2.add(coordinateToKey(2, 0, 2));
@@ -233,7 +238,6 @@ public class Engine {
         F2.add(coordinateToKey(2, 2, 1));
         F2.add(coordinateToKey(2, 2, 2));
 
-        CircularLinkedList F3 = new CircularLinkedList();
         F3.add(coordinateToKey(3, 0, 0));
         F3.add(coordinateToKey(3, 0, 1));
         F3.add(coordinateToKey(3, 0, 2));
@@ -243,7 +247,6 @@ public class Engine {
         F3.add(coordinateToKey(3, 2, 1));
         F3.add(coordinateToKey(3, 2, 2));
 
-        CircularLinkedList F4 = new CircularLinkedList();
         F4.add(coordinateToKey(4, 0, 0));
         F4.add(coordinateToKey(4, 0, 1));
         F4.add(coordinateToKey(4, 0, 2));
@@ -252,5 +255,10 @@ public class Engine {
         F4.add(coordinateToKey(4, 2, 0));
         F4.add(coordinateToKey(4, 2, 1));
         F4.add(coordinateToKey(4, 2, 2));
+
+        OrbiterDungeonMap.add(F1);
+        OrbiterDungeonMap.add(F2);
+        OrbiterDungeonMap.add(F3);
+        OrbiterDungeonMap.add(F4);
     }
 }

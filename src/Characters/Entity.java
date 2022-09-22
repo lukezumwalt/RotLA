@@ -17,4 +17,6 @@ public interface Entity {
     public String getEntityType();
 
     public String getName();
+
+    public String getSign();
 }
