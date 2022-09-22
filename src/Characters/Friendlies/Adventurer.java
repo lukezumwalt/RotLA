@@ -12,7 +12,7 @@ public class Adventurer {
     protected int health;
     protected static boolean alive;
 
-    // PRIVATE METHODS
+    // PRIVATE ATTRIBUTES
     /*
      * code example of Encapsulation
      * treasureCount is private and
