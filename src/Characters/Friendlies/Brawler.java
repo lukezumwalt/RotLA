@@ -42,7 +42,7 @@ public class Brawler extends Adventurer implements Entity {
             return false;
         } else {
             // Loss
-            takeDamage();
+            this.takeDamage();
         }
         return false;
     }
