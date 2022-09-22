@@ -15,6 +15,8 @@ public class Engine {
     // CONSTRUCTORS
     Engine() {
         Facility = new HashMap<>();
+        Adventurers = new ArrayList<>();
+        Creatures = new ArrayList<>();
     }
 
     // PUBLIC ATTRIBUTES
@@ -23,8 +25,8 @@ public class Engine {
 
     // PRIVATE ATTRIBUTES
     // Characters
-    private static ArrayList<Entity> Adventurers = new ArrayList<Entity>();
-    private static ArrayList<Entity> Creatures = new ArrayList<Entity>();
+    private static ArrayList<Entity> Adventurers;
+    private static ArrayList<Entity> Creatures;
 
     // PUBLIC METHODS
     public static ArrayList<Entity> getAdventurers() {
