@@ -28,13 +28,14 @@ public class Orbiter extends Creature implements Entity {
 
         // Randomly choose clockwise/counter-clockwise
         Random r = new Random();
-        if(r.nextBoolean()){
+        if (r.nextBoolean()) {
             clockwiseFlag = true;
-        }
-        else{
+        } else {
             clockwiseFlag = false;
         }
     }
+
+    // PROTECTED ATTRIBUTES
     protected boolean clockwiseFlag;
 
     // PUBLIC METHODS
@@ -65,42 +66,41 @@ public class Orbiter extends Creature implements Entity {
         int y = checkRoom().getCoordinates()[2];
 
         // Conduct circular arithmetic to rotate around room.
-        if(this.clockwiseFlag){
+        if (this.clockwiseFlag) {
             // Clockwise rotation scheme
-            if( x > 0 && y == 0 ){
+            if (x > 0 && y == 0) {
                 // west wall condition
                 x--;
-            } else if ( x == 0 && y < 2 ) {
+            } else if (x == 0 && y < 2) {
                 // north wall condition
                 y++;
-            } else if ( x < 2 && y == 2 ) {
+            } else if (x < 2 && y == 2) {
                 // east wall condition
                 x++;
-            } else if ( x == 2 && y > 0 ) {
+            } else if (x == 2 && y > 0) {
                 // south wall condition
                 y--;
             }
-        }
-        else{
+        } else {
             // Counter-clockwise rotation scheme
-            if( x < 0 && y == 0 ){
+            if (x < 0 && y == 0) {
                 // west wall condition
                 x++;
-            } else if ( x == 0 && y > 0 ) {
+            } else if (x == 0 && y > 0) {
                 // north wall condition
                 y--;
-            } else if ( x > 0 && y == 2 ) {
+            } else if (x > 0 && y == 2) {
                 // east wall condition
                 x--;
-            } else if ( x == 2 && y < 2 ) {
+            } else if (x == 2 && y < 2) {
                 // south wall condition
                 y++;
             }
 
         }
         this.currentRoom.leaveRoom(this);
-        this.setCurrentRoom(Facility.get(coordinateToKey(floor,x,y)));
-        Facility.get(coordinateToKey(floor,x,y)).occupyCreature(this);
+        this.setCurrentRoom(Facility.get(coordinateToKey(floor, x, y)));
+        Facility.get(coordinateToKey(floor, x, y)).occupyCreature(this);
     }
 
     @Override

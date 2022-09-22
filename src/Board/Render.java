@@ -92,7 +92,6 @@ public class Render {
                     + " Damage");
         }
         for (Entity c0 : getCreatures()) {
-            Creature c = (Creature) c0;
             String cSign = c0.getSign();
             if (cSign == "O") {
                 oCount++;
