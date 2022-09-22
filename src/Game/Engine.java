@@ -6,7 +6,6 @@ import Board.Room;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
-import Utilities.CircularLinkedList;
 
 import static Board.Room.mapNeighborhood;
 
@@ -187,7 +186,6 @@ public class Engine {
                     x = r.nextInt(2);
                     y = r.nextInt(2);
                 }
-                ((Orbiter)c).setCurrentRoomNode(new CircularLinkedList.Node(coordinateToKey(floor, x, y)));
             }
 
             // Place creature in room.
@@ -203,62 +201,11 @@ public class Engine {
         Adventurers.add(new Thief());
     }
 
-    // A lot of overhead for our selection of an orbiter movement scheme.
-    //! @TODO: In future refactor, visit more concise ways to capture orbiter movement...
-    CircularLinkedList F1 = new CircularLinkedList();
-    CircularLinkedList F2 = new CircularLinkedList();
-    CircularLinkedList F3 = new CircularLinkedList();
-    CircularLinkedList F4 = new CircularLinkedList();
-
-    public static ArrayList<CircularLinkedList> OrbiterDungeonMap = new ArrayList<>();
-
     private void initializeCreatures() {
         for (int i = 0; i < 4; ++i) {
             Creatures.add(new Orbiter());
             Creatures.add(new Seeker());
             Creatures.add(new Blinker());
         }
-
-        // Build out orbiter movement options..
-        F1.add(coordinateToKey(1, 0, 0));
-        F1.add(coordinateToKey(1, 0, 1));
-        F1.add(coordinateToKey(1, 0, 2));
-        F1.add(coordinateToKey(1, 1, 0));
-        F1.add(coordinateToKey(1, 1, 2));
-        F1.add(coordinateToKey(1, 2, 0));
-        F1.add(coordinateToKey(1, 2, 1));
-        F1.add(coordinateToKey(1, 2, 2));
-
-        F2.add(coordinateToKey(2, 0, 0));
-        F2.add(coordinateToKey(2, 0, 1));
-        F2.add(coordinateToKey(2, 0, 2));
-        F2.add(coordinateToKey(2, 1, 0));
-        F2.add(coordinateToKey(2, 1, 2));
-        F2.add(coordinateToKey(2, 2, 0));
-        F2.add(coordinateToKey(2, 2, 1));
-        F2.add(coordinateToKey(2, 2, 2));
-
-        F3.add(coordinateToKey(3, 0, 0));
-        F3.add(coordinateToKey(3, 0, 1));
-        F3.add(coordinateToKey(3, 0, 2));
-        F3.add(coordinateToKey(3, 1, 0));
-        F3.add(coordinateToKey(3, 1, 2));
-        F3.add(coordinateToKey(3, 2, 0));
-        F3.add(coordinateToKey(3, 2, 1));
-        F3.add(coordinateToKey(3, 2, 2));
-
-        F4.add(coordinateToKey(4, 0, 0));
-        F4.add(coordinateToKey(4, 0, 1));
-        F4.add(coordinateToKey(4, 0, 2));
-        F4.add(coordinateToKey(4, 1, 0));
-        F4.add(coordinateToKey(4, 1, 2));
-        F4.add(coordinateToKey(4, 2, 0));
-        F4.add(coordinateToKey(4, 2, 1));
-        F4.add(coordinateToKey(4, 2, 2));
-
-        OrbiterDungeonMap.add(F1);
-        OrbiterDungeonMap.add(F2);
-        OrbiterDungeonMap.add(F3);
-        OrbiterDungeonMap.add(F4);
     }
 }

@@ -2,10 +2,10 @@ package Characters.Enemies;
 
 import Board.Room;
 import Characters.Entity;
-import Utilities.CircularLinkedList;
 
-import static Game.Engine.Facility;
-import static Game.Engine.OrbiterDungeonMap;
+import java.util.Random;
+
+import static Game.Engine.*;
 import static Utilities.Dice.rollD6;
 
 /*
@@ -25,18 +25,17 @@ public class Orbiter extends Creature implements Entity {
         sign = "O";
         name = "orbiter";
         alive = true;
-        currentRoomNode = null;
-    }
 
-    private CircularLinkedList.Node currentRoomNode;
-
-    public CircularLinkedList.Node getCurrentRoomNode(){
-        return this.currentRoomNode;
+        // Randomly choose clockwise/counter-clockwise
+        Random r = new Random();
+        if(r.nextInt(2)+1 == 1){
+            clockwiseFlag = true;
+        }
+        else{
+            clockwiseFlag = false;
+        }
     }
-
-    public void setCurrentRoomNode(CircularLinkedList.Node currentRoomNode) {
-        this.currentRoomNode = currentRoomNode;
-    }
+    boolean clockwiseFlag;
 
     // PUBLIC METHODS
     @Override
@@ -63,20 +62,49 @@ public class Orbiter extends Creature implements Entity {
         // ! @TODO: Orbiter moves to any random room on outer
         // edge a.k.a. not the center room of given level.
 
-        // Get floor index from first coordinate of current room.
-        int floorIndex = checkRoom().getCoordinates()[0] - 1;
+        // Get indices from current room
+        int floor = checkRoom().getCoordinates()[0];
+        int x = checkRoom().getCoordinates()[1];
+        int y = checkRoom().getCoordinates()[2];
 
-        // Use floor index to check orbiter map for appropriate circular list.
-        CircularLinkedList floorList = OrbiterDungeonMap.get(floorIndex);
+        // Conduct circular arithmetic to rotate around room.
+        if(this.clockwiseFlag){
+            // Clockwise rotation scheme
+            if( x > 0 && y == 0 ){
+                // west wall condition
+                x--;
+            } else if ( x == 0 && y < 2 ) {
+                // north wall condition
+                y++;
+            } else if ( x < 2 && y == 2 ) {
+                // east wall condition
+                x++;
+            } else if ( x == 2 && y > 0 ) {
+                // south wall condition
+                y--;
+            }
+        }
+        else{
+            // Counter-clockwise rotation scheme
+            if( x < 0 && y == 0 ){
+                // west wall condition
+                x++;
+            } else if ( x == 0 && y > 0 ) {
+                // north wall condition
+                y--;
+            } else if ( x > 0 && y == 2 ) {
+                // east wall condition
+                x--;
+            } else if ( x == 2 && y < 2 ) {
+                // south wall condition
+                y++;
+            }
 
-        // Find next room node based on current room node within appropriate floor list.
-        CircularLinkedList.Node nextRoom = floorList.getNext(this.currentRoomNode);
+        }
 
-        // Finally, leave current room and enter new room, while updating current room node.
         this.currentRoom.leaveRoom(this);
-        this.setCurrentRoom(Facility.get(nextRoom.getCoordinateKey()));
-        this.setCurrentRoomNode(nextRoom);
-        Facility.get(nextRoom.getCoordinateKey()).occupyCreature(this);
+        this.setCurrentRoom(Facility.get(coordinateToKey(floor,x,y)));
+        Facility.get(coordinateToKey(floor,x,y)).occupyCreature(this);
     }
 
     @Override

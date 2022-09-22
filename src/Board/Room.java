@@ -3,11 +3,8 @@ package Board;
 import Characters.Enemies.Creature;
 import Characters.Entity;
 import Characters.Friendlies.Adventurer;
-import Game.Engine;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +59,7 @@ public class Room {
     }
 
     // The following methods grabs the occupant
-    // entities signs (BRSTO) for rendering
+    // entities signs (BRST:OSB) for rendering
     public String renderOccupantAdventurers() {
         String retVal = "";
         for (Adventurer a : this.occupantAdventurers) {
@@ -106,7 +103,7 @@ public class Room {
     // for each key (string) to match for movement
 
     // inspectNeighbors will grab coordinates to get the key
-    // that will be crossferenced to neighborhood to get
+    // that will be cross-referenced to neighborhood to get
     // neighbors
     public static String[] inspectNeighbors(Room current) {
         int[] position = current.getCoordinates();
