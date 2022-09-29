@@ -11,13 +11,6 @@ public class Treasure {
     protected Room currentRoom;
 
     // PUBLIC METHODS
-
-    public static Treasure randomTreasure(ArrayList<Treasure> treasureList) {
-        int index = new Random().nextInt(treasureList.size());
-        Treasure randomTreasure = treasureList.get(index);
-        return randomTreasure;
-    }
-
     public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
     }

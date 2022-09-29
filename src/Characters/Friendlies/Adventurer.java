@@ -1,6 +1,9 @@
 package Characters.Friendlies;
 
+import java.util.ArrayList;
+
 import Board.Room;
+import Treasure.*;
 
 public class Adventurer {
 
@@ -19,7 +22,7 @@ public class Adventurer {
      * can only be accessed via getter
      * method
      */
-    private int treasureCount;
+    private ArrayList<Treasure> inventory;
 
     // PUBLIC METHODS
     public void takeDamage() {
@@ -27,8 +30,7 @@ public class Adventurer {
     }
 
     public void collectTreasure(Room r) {
-        r.takeTreasure();
-        treasureCount++;
+        inventory.add(r.takeTreasure());
     }
 
     public void setCurrentRoom(Room newRoom) {
@@ -48,9 +50,6 @@ public class Adventurer {
      * code example of Encapsulation
      * getter method for private attribute
      */
-    public int getTreasureCount() {
-        return treasureCount;
-    }
 
     public boolean getAlive() {
         return alive;

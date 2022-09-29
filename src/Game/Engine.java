@@ -262,8 +262,7 @@ public class Engine {
 
             // Place all Treasures in random rooms.
             Random randomTreasure = new Random();
-            for (Treasure t0 : Treasures) {
-                Treasure t = (Treasure) t0;
+            for (Treasure t : Treasures) {
                 int a, b, level;
 
                 // Selecting floor and position for a creature to spawn, excluding adventurer

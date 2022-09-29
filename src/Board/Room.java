@@ -17,21 +17,21 @@ public class Room {
     public Room() {
         occupantAdventurers = new ArrayList<Adventurer>();
         occupantCreatures = new ArrayList<Creature>();
-        occupantTreasures = new ArrayList<Treasure>();
+        occupantTreasure = new Treasure();
     }
 
     public Room(int level, int x, int y) {
         coordinates = new int[] { level, x, y };
         occupantAdventurers = new ArrayList<Adventurer>();
         occupantCreatures = new ArrayList<Creature>();
-        occupantTreasures = new ArrayList<Treasure>();
+        occupantTreasure = new Treasure();
     }
 
     // PROTECTED ATTRIBUTES
     protected int[] coordinates;
     protected ArrayList<Adventurer> occupantAdventurers;
     protected ArrayList<Creature> occupantCreatures;
-    protected ArrayList<Treasure> occupantTreasures;
+    protected Treasure occupantTreasure;
     // PRIVATE ATTRIBUTES
     private boolean treasureAvailable = true;
 
@@ -44,8 +44,9 @@ public class Room {
         return treasureAvailable;
     }
 
-    public void takeTreasure() {
+    public Treasure takeTreasure() {
         treasureAvailable = false;
+        return occupantTreasure;
     }
 
     public ArrayList<Adventurer> getOccupantAdventurers() {
@@ -60,13 +61,6 @@ public class Room {
             return null;
         }
         return occupantCreatures;
-    }
-
-    public ArrayList<Treasure> getTreasures() {
-        if (occupantTreasures == null) {
-            return null;
-        }
-        return occupantTreasures;
     }
 
     // The following methods grabs the occupant
@@ -108,7 +102,7 @@ public class Room {
     }
 
     public void occupyTreasure(Treasure item) {
-        this.occupantTreasures.add(item);
+        this.occupantTreasure = item;
     }
 
     // NEIGHBORHOOD
