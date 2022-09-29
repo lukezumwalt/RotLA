@@ -7,6 +7,7 @@ import Board.Room;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
+import Treasure.*;
 
 import static Board.Room.mapNeighborhood;
 
@@ -17,6 +18,7 @@ public class Engine {
         Facility = new HashMap<>();
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
+        Treasures = new ArrayList<>();
     }
 
     // PUBLIC ATTRIBUTES
@@ -27,6 +29,7 @@ public class Engine {
     // Characters
     private static ArrayList<Entity> Adventurers;
     private static ArrayList<Entity> Creatures;
+    private static ArrayList<Treasure> Treasures;
 
     // PUBLIC METHODS
     public static ArrayList<Entity> getAdventurers() {
@@ -42,6 +45,8 @@ public class Engine {
         initializeAdventurers();
         // Instantiate Creatures
         initializeCreatures();
+        // Instantiate Treasures
+        initializeTreasures();
         // Instantiate Game Board
         createBlankBoard();
         initializeBoard();
@@ -64,13 +69,13 @@ public class Engine {
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if(player.fight((Entity) target)){
+                            if (player.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
                                 Creatures.remove(target);
                                 mobsToKill.add((Entity) target);
                             }
                         }
-                        for(Entity k: mobsToKill){
+                        for (Entity k : mobsToKill) {
                             k.checkRoom().leaveRoom(k);
                         }
                         // Combat consumes the turn.
@@ -90,13 +95,13 @@ public class Engine {
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if(player.fight((Entity) target)){
+                            if (player.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
                                 Creatures.remove(target);
                                 mobsToKill.add((Entity) target);
                             }
                         }
-                        for(Entity k: mobsToKill){
+                        for (Entity k : mobsToKill) {
                             k.checkRoom().leaveRoom(k);
                         }
                     }
@@ -104,23 +109,23 @@ public class Engine {
                 continue;
             }
 
-            //! Everyone else only gets once chance for the song and dance.
+            // ! Everyone else only gets once chance for the song and dance.
 
             // Combat check, must be done before treasure check.
             if (thisRoom.getOccupantCreatures().size() > 0) {
                 ArrayList<Entity> mobsToKill = new ArrayList<>();
                 for (Creature target : thisRoom.getOccupantCreatures()) {
-                    if(player.fight((Entity) target)){
+                    if (player.fight((Entity) target)) {
                         // kill target creature on player victory (i.e. remove from list)
                         Creatures.remove(target);
                         mobsToKill.add((Entity) target);
                     }
                 }
-                for(Entity k: mobsToKill){
+                for (Entity k : mobsToKill) {
                     k.checkRoom().leaveRoom(k);
                 }
                 // Combat consumes the turn.
-                 continue;
+                continue;
             }
 
             // Treasure check.
@@ -138,13 +143,13 @@ public class Engine {
             if (thisRoom.getOccupantCreatures().size() > 0) {
                 ArrayList<Entity> mobsToKill = new ArrayList<>();
                 for (Creature target : thisRoom.getOccupantCreatures()) {
-                    if(player.fight((Entity) target)){
+                    if (player.fight((Entity) target)) {
                         // kill target creature on player victory (i.e. remove from list)
                         Engine.Creatures.remove(target);
                         mobsToKill.add((Entity) target);
                     }
                 }
-                for(Entity k: mobsToKill){
+                for (Entity k : mobsToKill) {
                     k.checkRoom().leaveRoom(k);
                 }
             }
@@ -163,12 +168,12 @@ public class Engine {
 
             // After either moving or not, fight any Adventurers in the room.
             for (Adventurer target : thisRoom.getOccupantAdventurers()) {
-                if(!monster.fight((Entity) target)){
+                if (!monster.fight((Entity) target)) {
                     mobsToDie.add(monster);
                 }
             }
         }
-        for(Entity m: mobsToDie){
+        for (Entity m : mobsToDie) {
             Creatures.remove(m);
             m.checkRoom().leaveRoom(m);
         }
@@ -194,8 +199,8 @@ public class Engine {
 
         // Dead Adventurers Victory Check
         int totalHealth = 0;
-        for( Entity a: Adventurers){
-            totalHealth += ((Adventurer)a).getHealth();
+        for (Entity a : Adventurers) {
+            totalHealth += ((Adventurer) a).getHealth();
         }
         if (totalHealth == 0) {
             System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
@@ -254,6 +259,23 @@ public class Engine {
             // Place creature in room.
             Facility.get(coordinateToKey(floor, x, y)).occupyCreature(c);
             c.setCurrentRoom(Facility.get(coordinateToKey(floor, x, y)));
+
+            // Place all Treasures in random rooms.
+            Random randomTreasure = new Random();
+            for (Treasure t0 : Treasures) {
+                Treasure t = (Treasure) t0;
+                int a, b, level;
+
+                // Selecting floor and position for a creature to spawn, excluding adventurer
+                // spawn room.
+                a = randomTreasure.nextInt(2);
+                b = randomTreasure.nextInt(2);
+                level = randomTreasure.nextInt(4 - 1) + 1;
+
+                // Place creature in room.
+                Facility.get(coordinateToKey(level, a, b)).occupyTreasure(t);
+                t.setCurrentRoom(Facility.get(coordinateToKey(level, a, b)));
+            }
         }
     }
 
@@ -269,6 +291,17 @@ public class Engine {
             Creatures.add(new Orbiter());
             Creatures.add(new Seeker());
             Creatures.add(new Blinker());
+        }
+    }
+
+    private void initializeTreasures() {
+        for (int i = 0; i < 4; ++i) {
+            Treasures.add(new Armor());
+            Treasures.add(new Gem());
+            Treasures.add(new Portal());
+            Treasures.add(new Potion());
+            Treasures.add(new Sword());
+            Treasures.add(new Trap());
         }
     }
 }
