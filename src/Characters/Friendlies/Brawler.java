@@ -30,25 +30,26 @@ public class Brawler extends Adventurer implements Entity {
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        if( health <= 0 ) {
-            // do nothing
-        }
-        else {
-            int myRoll = rollD6(2) + combatBonus;
-            int targetRoll = rollD6(2);
-
-            if (myRoll > targetRoll) {
-                // Victory
-                return true;
-            } else if (myRoll == targetRoll) {
-                // Tie
-                return false;
-            } else {
-                // Loss
-                this.takeDamage();
-            }
-        }
-        return false;
+        expertCompat()
+//        if( health <= 0 ) {
+//            // do nothing
+//        }
+//        else {
+//            int myRoll = rollD6(2) + combatBonus;
+//            int targetRoll = rollD6(2);
+//
+//            if (myRoll > targetRoll) {
+//                // Victory
+//                return true;
+//            } else if (myRoll == targetRoll) {
+//                // Tie
+//                return false;
+//            } else {
+//                // Loss
+//                this.takeDamage();
+//            }
+//        }
+//        return false;
     }
 
     @Override
