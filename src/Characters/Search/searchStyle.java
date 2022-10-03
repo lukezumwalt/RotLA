@@ -1,2 +1,4 @@
-package Characters.Search;public class searchStyle {
+package Characters.Search;
+
+public abstract class searchStyle {
 }

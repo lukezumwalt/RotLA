@@ -1,2 +1,4 @@
-package Characters.Search;public class quick {
+package Characters.Search;
+
+public class quick extends searchStyle{
 }

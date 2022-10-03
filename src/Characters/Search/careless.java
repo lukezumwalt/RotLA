@@ -1,2 +1,4 @@
-package Characters.Search;public class careless {
+package Characters.Search;
+
+public class careless extends searchStyle{
 }
