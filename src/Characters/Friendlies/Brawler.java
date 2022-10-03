@@ -1,6 +1,8 @@
 package Characters.Friendlies;
 
 import Board.Room;
+import Characters.Combat.combatStyle;
+import Characters.Combat.expert;
 import Characters.Entity;
 
 import java.util.Random;
@@ -22,15 +24,17 @@ public class Brawler extends Adventurer implements Entity {
         name = "Brawler";
         health = 3;
         alive = true;
+        combatBonus = 2;
+        defenseBonus = 0;
+        combatStyle = new expert();
     }
 
-    // PRIVATE ATTRIBUTES
-    private static final int combatBonus = 2;
+    protected int health;
+    protected final String entityType = "adventurer";
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        expertCompat()
 //        if( health <= 0 ) {
 //            // do nothing
 //        }
@@ -50,6 +54,18 @@ public class Brawler extends Adventurer implements Entity {
 //            }
 //        }
 //        return false;
+        int fightVal = combatStyle.fight(this, target);
+        if( fightVal > 0 ){
+            return true;
+        }
+        else if( fightVal < 0 ){
+            this.takeDamage();
+        }
+        return false;
+    }
+
+    public void takeDamage() {
+        health--;
     }
 
     @Override
@@ -90,11 +106,26 @@ public class Brawler extends Adventurer implements Entity {
         return false;
     }
 
+    public int getHealth() {
+        return health;
+    }
     public String getEntityType() {
         return entityType;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public int getCombatBonus(){return combatBonus; }
+    public int getDefenseBonus(){ return defenseBonus; }
+
+    @Override
+    public int getTreasureCount() {
+        return 0;
     }
 }

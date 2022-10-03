@@ -1,6 +1,7 @@
 package Characters.Friendlies;
 
 import Board.Room;
+import Characters.Combat.untrained;
 import Characters.Entity;
 
 import java.util.Random;
@@ -22,31 +23,48 @@ public class Runner extends Adventurer implements Entity {
         name = "Runner";
         health = 3;
         alive = true;
+        combatStyle = new untrained();
     }
+
+    protected int health;
+    protected final String entityType = "adventurer";
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        if(health <= 0){
-            // do nothing
+//        if(health <= 0){
+//            // do nothing
+//        }
+//        else {
+//            int myRoll = rollD6(2);
+//            int targetRoll = rollD6(2);
+//
+//            if (myRoll > targetRoll) {
+//                // Victory
+//                return true;
+//                // target.die();
+//            } else if (myRoll == targetRoll) {
+//                // Tie
+//                return false;
+//            } else {
+//                // Loss
+//                this.takeDamage();
+//            }
+//        }
+//        return false;
+        int fightVal = combatStyle.fight(this, target);
+        if( fightVal > 0 ){
+            return true;
         }
-        else {
-            int myRoll = rollD6(2);
-            int targetRoll = rollD6(2);
-
-            if (myRoll > targetRoll) {
-                // Victory
-                return true;
-                // target.die();
-            } else if (myRoll == targetRoll) {
-                // Tie
-                return false;
-            } else {
-                // Loss
-                this.takeDamage();
-            }
+        else if( fightVal < 0 ){
+            this.takeDamage();
         }
         return false;
+
+    }
+
+    public void takeDamage() {
+        health--;
     }
 
     @Override
@@ -88,11 +106,27 @@ public class Runner extends Adventurer implements Entity {
         return false;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public String getEntityType() {
         return entityType;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public int getCombatBonus(){return combatBonus; }
+    public int getDefenseBonus(){ return defenseBonus; }
+
+    @Override
+    public int getTreasureCount() {
+        return 0;
     }
 }

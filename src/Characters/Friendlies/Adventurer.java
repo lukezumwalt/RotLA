@@ -3,17 +3,19 @@ package Characters.Friendlies;
 import java.util.ArrayList;
 
 import Board.Room;
+import Characters.Combat.combatStyle;
 import Treasure.*;
 
-public class Adventurer {
+public abstract class Adventurer {
 
     // PROTECTED ATTRIBUTES
     protected Room currentRoom;
-    protected final String entityType = "adventurer";
     protected String sign;
     protected String name;
-    protected int health;
     protected static boolean alive;
+    protected combatStyle combatStyle;
+    protected int combatBonus;      // bias added to roll on attack
+    protected int defenseBonus;     // bias added to roll on defense
 
     // PRIVATE ATTRIBUTES
     /*
@@ -25,9 +27,7 @@ public class Adventurer {
     private ArrayList<Treasure> inventory;
 
     // PUBLIC METHODS
-    public void takeDamage() {
-        health--;
-    }
+    public abstract void takeDamage();
 
     public void collectTreasure(Room r) {
         inventory.add(r.takeTreasure());
@@ -38,13 +38,7 @@ public class Adventurer {
     }
 
     // ! Getter Suite
-    public String getSign() {
-        return sign;
-    }
-
-    public int getHealth() {
-        return health;
-    }
+    public abstract String getSign();
 
     /*
      * code example of Encapsulation
@@ -54,4 +48,16 @@ public class Adventurer {
     public boolean getAlive() {
         return alive;
     }
+
+    public void setCombatStyle(combatStyle cs){
+        combatStyle = cs;
+    }
+
+    public abstract int getHealth();
+
+    public abstract int getCombatBonus();
+
+    public abstract int getDefenseBonus();
+
+    public abstract int getTreasureCount();
 }
