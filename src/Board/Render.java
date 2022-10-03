@@ -88,8 +88,8 @@ public class Render {
         int bCount = 0;
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
-            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
-                    + " Damage");
+//            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
+//                    + " Damage");
         }
         for (Entity c0 : getCreatures()) {
             String cSign = c0.getSign();

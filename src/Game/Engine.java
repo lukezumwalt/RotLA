@@ -62,9 +62,9 @@ public class Engine {
         for (Entity player : Adventurers) {
             Room thisRoom = player.checkRoom();
 
-            // Runner gets 3 "actions" per turn.
+            // Runner gets 2 "actions" per turn.
             if ("runner".equals(player.getName())) {
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 2; i++) {
                     // Combat check, must be done before treasure check.
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
