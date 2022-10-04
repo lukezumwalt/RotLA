@@ -3,6 +3,8 @@ package Treasure;
 import java.util.ArrayList;
 import java.util.Random;
 import Board.*;
+import Characters.Entity;
+import Characters.Friendlies.Adventurer;
 import Game.Engine;
 
 public class Treasure {
@@ -14,4 +16,5 @@ public class Treasure {
     public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
     }
+
 }

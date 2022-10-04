@@ -14,8 +14,8 @@ public abstract class Adventurer {
     protected String name;
     protected static boolean alive;
     protected combatStyle combatStyle;
-    protected int combatBonus;      // bias added to roll on attack
-    protected int defenseBonus;     // bias added to roll on defense
+    protected int combatBonus; // bias added to roll on attack
+    protected int defenseBonus; // bias added to roll on defense
 
     // PRIVATE ATTRIBUTES
     /*
@@ -49,8 +49,12 @@ public abstract class Adventurer {
         return alive;
     }
 
-    public void setCombatStyle(combatStyle cs){
+    public void setCombatStyle(combatStyle cs) {
         combatStyle = cs;
+    }
+
+    public void setCombatBonus(int bonus) {
+        combatBonus = bonus;
     }
 
     public abstract int getHealth();

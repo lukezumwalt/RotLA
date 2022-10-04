@@ -12,10 +12,19 @@ public class Creature {
     protected String sign;
     protected String name;
     protected static boolean alive;
+    protected int combatBonus;
 
     // PUBLIC METHODS
     public String getSign() {
         return sign;
+    }
+
+    public int getCombatBonus() {
+        return combatBonus;
+    }
+
+    public void setCombatBonus(int bonus) {
+        combatBonus = bonus;
     }
 
     public void setCurrentRoom(Room newRoom) {
