@@ -4,7 +4,10 @@ import Board.Room;
 import Characters.Combat.combatStyle;
 import Characters.Combat.expert;
 import Characters.Entity;
+import Characters.Search.careless;
+import Treasure.Treasure;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
@@ -24,9 +27,11 @@ public class Brawler extends Adventurer implements Entity {
         name = "Brawler";
         health = 3;
         alive = true;
+        combatStyle = new expert();
+        searchStyle = new careless();
         offenseBonus = 2;
         defenseBonus = 0;
-        combatStyle = new expert();
+        inventory = new ArrayList<>();
     }
 
     protected int health;
@@ -41,6 +46,20 @@ public class Brawler extends Adventurer implements Entity {
         }
         else if( fightVal < 0 ){
             this.takeDamage();
+        }
+        return false;
+    }
+
+    public boolean search(){
+        Treasure obtained = searchStyle.search(this,this.currentRoom);
+        if(obtained!=null){
+            if( obtained.getClass().getSimpleName().equals("Trap") ){
+                this.takeDamage();
+            }
+            else{
+                this.inventory.add(obtained);
+            }
+            return true;
         }
         return false;
     }
@@ -110,6 +129,10 @@ public class Brawler extends Adventurer implements Entity {
     @Override
     public int getTreasureCount() {
         return 0;
+    }
+
+    public ArrayList<Treasure> getInventory(){
+        return inventory;
     }
 
     public boolean getAlive() {

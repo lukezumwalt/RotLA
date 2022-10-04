@@ -62,6 +62,7 @@ public class Engine {
         for (Entity player : Adventurers) {
             Room thisRoom = player.checkRoom();
 
+            //! @TODO: clean this up!!
             // Runner gets 2 "actions" per turn.
             if ("runner".equals(player.getName())) {
                 for (int i = 0; i < 2; i++) {
@@ -128,17 +129,24 @@ public class Engine {
                 continue;
             }
 
+            //! @TODO: Add checks to confirm adventurer is still alive after each action
+
             // Treasure check.
             if (thisRoom.checkIfTreasure()) {
-                if (player.rollForTreasure()) {
-                    ((Adventurer) player).collectTreasure(thisRoom);
+                if (((Adventurer) player).search()) {
                     // Collection consumes the turn.
                     continue;
                 }
             }
 
+            //! @TODO:  In the current structure of treasure, if an adv discovers a treasure they already own, they will
+            //! @TODO:  not retrieve the item.  This leaves it a static item belonging to the room, so there is a
+            //! @TODO:  potential of an infinite loop of an adventurer trying to recover a treasure they can't obtain.
+            //! @TODO:  This can be resolved by forcing the adv to ALWAYS move FIRST before SEARCHING!
+
             // No treasure and no creatures, move on!
             player.move();
+
             // Final creature-combat check after final movement.
             if (thisRoom.getOccupantCreatures().size() > 0) {
                 ArrayList<Entity> mobsToKill = new ArrayList<>();
@@ -245,7 +253,7 @@ public class Engine {
             // spawn room.
             x = r.nextInt(2);
             y = r.nextInt(2);
-            floor = r.nextInt(4 - 1) + 1;
+            floor = r.nextInt(3) + 1;
 
             // Condition for which an orbiter can legally spawn, as they must avoid center
             // rooms.
@@ -269,7 +277,7 @@ public class Engine {
                 // spawn room.
                 a = randomTreasure.nextInt(2);
                 b = randomTreasure.nextInt(2);
-                level = randomTreasure.nextInt(4 - 1) + 1;
+                level = randomTreasure.nextInt(3) + 1;
 
                 // Place creature in room.
                 Facility.get(coordinateToKey(level, a, b)).occupyTreasure(t);

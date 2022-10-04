@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Board.Room;
 import Characters.Combat.combatStyle;
+import Characters.Search.searchStyle;
 import Treasure.*;
 
 public abstract class Adventurer {
@@ -14,6 +15,7 @@ public abstract class Adventurer {
     protected String name;
     protected static boolean alive;
     protected combatStyle combatStyle;
+    protected searchStyle searchStyle;
     protected int offenseBonus; // bias added to roll on attack
     protected int defenseBonus; // bias added to roll on defense
     protected ArrayList<Treasure> inventory;
@@ -39,4 +41,8 @@ public abstract class Adventurer {
     public abstract int getDefenseBonus();
 
     public abstract int getTreasureCount();
+
+    public abstract ArrayList<Treasure> getInventory();
+
+    public abstract boolean search();
 }

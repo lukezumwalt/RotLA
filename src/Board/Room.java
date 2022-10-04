@@ -49,6 +49,10 @@ public class Room {
         return occupantTreasure;
     }
 
+    public Treasure peekTreasure(){
+        return occupantTreasure;
+    }
+
     public ArrayList<Adventurer> getOccupantAdventurers() {
         if (occupantAdventurers == null) {
             return null;

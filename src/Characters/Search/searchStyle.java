@@ -7,5 +7,5 @@ import Treasure.Treasure;
 public abstract class searchStyle {
 
     // PUBLIC METHODS
-    public abstract Treasure Search(Adventurer self, Room currentRoom);
+    public abstract Treasure search(Adventurer self, Room currentRoom);
 }

@@ -3,7 +3,10 @@ package Characters.Friendlies;
 import Board.Room;
 import Characters.Combat.trained;
 import Characters.Entity;
+import Characters.Search.careful;
+import Treasure.Treasure;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
@@ -24,8 +27,10 @@ public class Thief extends Adventurer implements Entity {
         health = 3;
         alive = true;
         combatStyle = new trained();
+        searchStyle = new careful();
         offenseBonus = 1;
         defenseBonus = 0;
+        inventory = new ArrayList<>();
     }
 
     // PROTECTED ATTRIBUTES
@@ -42,6 +47,20 @@ public class Thief extends Adventurer implements Entity {
         }
         else if( fightVal < 0 ){
             this.takeDamage();
+        }
+        return false;
+    }
+
+    public boolean search(){
+        Treasure obtained = searchStyle.search(this,this.currentRoom);
+        if(obtained!=null){
+            if( obtained.getClass().getSimpleName().equals("Trap") ){
+                this.takeDamage();
+            }
+            else{
+                this.inventory.add(obtained);
+            }
+            return true;
         }
         return false;
     }
@@ -114,6 +133,10 @@ public class Thief extends Adventurer implements Entity {
     @Override
     public int getTreasureCount() {
         return 0;
+    }
+
+    public ArrayList<Treasure> getInventory(){
+        return inventory;
     }
 
     public boolean getAlive() {

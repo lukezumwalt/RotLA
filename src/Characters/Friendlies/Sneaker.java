@@ -3,7 +3,10 @@ package Characters.Friendlies;
 import Board.Room;
 import Characters.Combat.stealth;
 import Characters.Entity;
+import Characters.Search.quick;
+import Treasure.Treasure;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
@@ -24,15 +27,16 @@ public class Sneaker extends Adventurer implements Entity {
         health = 3;
         alive = true;
         combatStyle = new stealth();
+        searchStyle = new quick();
         offenseBonus = 0;
         defenseBonus = 0;
+        inventory = new ArrayList<>();
     }
 
     protected int health;
     protected final String entityType = "adventurer";
 
     // PUBLIC METHODS
-    @Override
     public boolean fight(Entity target) {
         int fightVal = combatStyle.fight(this, target);
         if( fightVal > 0 ){
@@ -44,16 +48,27 @@ public class Sneaker extends Adventurer implements Entity {
         return false;
     }
 
+    public boolean search(){
+        Treasure obtained = searchStyle.search(this,this.currentRoom);
+        if(obtained!=null){
+            if( obtained.getClass().getSimpleName().equals("Trap") ){
+                this.takeDamage();
+            }
+            else{
+                this.inventory.add(obtained);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public void takeDamage() {
         health--;
     }
 
     @Override
     public void move() {
-        if(health <= 0){
-            // do nothing
-        }
-        else {
+        if(this.getAlive()) {
             // check room to return valid moves
             String[] addresses = inspectNeighbors(this.currentRoom);
             // randomly select a valid move from that list
@@ -110,6 +125,10 @@ public class Sneaker extends Adventurer implements Entity {
     @Override
     public int getTreasureCount() {
         return 0;
+    }
+
+    public ArrayList<Treasure> getInventory(){
+        return inventory;
     }
 
     public boolean getAlive() {
