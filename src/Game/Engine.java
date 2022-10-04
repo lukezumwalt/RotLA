@@ -281,7 +281,6 @@ public class Engine {
 
                 // Place creature in room.
                 Facility.get(coordinateToKey(level, a, b)).occupyTreasure(t);
-                t.setCurrentRoom(Facility.get(coordinateToKey(level, a, b)));
             }
         }
     }
