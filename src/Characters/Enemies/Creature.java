@@ -1,9 +1,6 @@
 package Characters.Enemies;
 
 import Board.Room;
-import Characters.Combat.combatStyle;
-import Characters.Entity;
-import Game.Engine;
 
 public abstract class Creature {
 
@@ -12,7 +9,7 @@ public abstract class Creature {
     protected String sign;
     protected String name;
     protected static boolean alive;
-    protected Characters.Combat.combatStyle combatStyle;
+    protected Characters.Action.Combat.combatStyle combatStyle;
 
     // PUBLIC METHODS
     public abstract String getSign();

@@ -1,13 +1,12 @@
 package Characters.Enemies;
 
 import Board.Room;
-import Characters.Combat.monstrous;
+import Characters.Action.Combat.monstrous;
 import Characters.Entity;
 
 import java.util.Random;
 
 import static Game.Engine.*;
-import static Utilities.Dice.rollD6;
 
 /*
  * code example of Polymorphism
