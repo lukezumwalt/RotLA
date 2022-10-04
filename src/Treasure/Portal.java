@@ -8,12 +8,17 @@ import java.util.Random;
 
 import static Game.Engine.Facility;
 import static Game.Engine.coordinateToKey;
-import static Utilities.Dice.rollD6;
 
 public class Portal extends Treasure {
 
-    public static void teleport(Entity Adventurer) {
-        // Blinker moves to any random room in the Facility.
+    //! @TODO: current solution, teleport immediately upon pickup...
+    @Override
+    public void activate(Adventurer self){
+        teleport(self);
+    }
+    public static void teleport(Adventurer self) {
+
+        // Select a random room configuration, excluding spawn.
         Random r = new Random();
         int floor = r.nextInt(3) + 1;
         int x = r.nextInt(2);
@@ -21,8 +26,8 @@ public class Portal extends Treasure {
         Room newRoom = Facility.get(coordinateToKey(floor, x, y));
 
         // Update knowledge of position.
-        Adventurer.checkRoom().leaveRoom(Adventurer);
-        ((Characters.Friendlies.Adventurer) Adventurer).setCurrentRoom(newRoom);
-        newRoom.occupyAdventurer((Characters.Friendlies.Adventurer) Adventurer);
+        self.checkRoom().leaveRoom((Entity) self);
+        self.setCurrentRoom(newRoom);
+        newRoom.occupyAdventurer(self);
     }
 }

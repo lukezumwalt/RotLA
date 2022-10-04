@@ -1,14 +1,13 @@
 package Treasure;
 
-import Characters.Enemies.Creature;
+import Characters.Friendlies.Adventurer;
 
 public class Armor extends Treasure {
 
     // PUBLIC METHODS
-    public int takeCombatBonus(Creature monster) {
-//        int lowerCombat = monster.getCombatBonus();
-//        lowerCombat--;
-//        return lowerCombat;
-        return 0;
+    @Override
+    public void activate(Adventurer self) {
+        // Causes self to resist higher opponent rolls.
+        self.updateDefenseBonus(1);
     }
 }

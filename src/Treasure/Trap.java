@@ -4,19 +4,9 @@ import Characters.Friendlies.Adventurer;
 
 public class Trap extends Treasure {
 
-    public Trap() {
-    }
-
-    private boolean set;
-
-    // PUBLIC METHODS
-    public void adventurerDamage(Adventurer me) {
-        me.takeDamage();
-    }
-
-    public void acquire(Adventurer self){
-        if(set){
-            self.takeDamage();
-        }
+    @Override
+    public void activate(Adventurer self){
+        // Trap causes adventurer to take damage.
+        self.takeDamage(1);
     }
 }

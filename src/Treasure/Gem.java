@@ -1,17 +1,13 @@
 package Treasure;
 
-import java.util.ArrayList;
-
-import Characters.Enemies.Creature;
 import Characters.Friendlies.Adventurer;
 
 public class Gem extends Treasure {
 
     // PUBLIC METHODS
-    public int addCreatureCombatBonus(Creature monster) {
-//        int combatBonus = monster.getCombatBonus();
-//        combatBonus++;
-//        return combatBonus;
-        return 0;
+    @Override
+    public void activate(Adventurer self) {
+        // Causes opponents to roll relatively higher attacks.
+        self.updateDefenseBonus(-1);
     }
 }
