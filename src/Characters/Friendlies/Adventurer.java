@@ -3,8 +3,8 @@ package Characters.Friendlies;
 import java.util.ArrayList;
 
 import Board.Room;
-import Characters.Combat.combatStyle;
-import Characters.Search.searchStyle;
+import Characters.Action.Combat.combatStyle;
+import Characters.Action.Search.searchStyle;
 import Treasure.*;
 
 public abstract class Adventurer {
@@ -21,7 +21,7 @@ public abstract class Adventurer {
     protected ArrayList<Treasure> inventory;
 
     // PUBLIC METHODS
-    public abstract void takeDamage();
+    public abstract void takeDamage(int amount);
 
     public abstract void collectTreasure(Room r);
 
@@ -40,9 +40,18 @@ public abstract class Adventurer {
 
     public abstract int getDefenseBonus();
 
+    public abstract void updateOffenseBonus(int amount);
+
+    public abstract void updateDefenseBonus(int amount);
+
     public abstract int getTreasureCount();
 
     public abstract ArrayList<Treasure> getInventory();
 
     public abstract boolean search();
+
+    public abstract void heal(int amount);
+
+    public abstract Room checkRoom();
 }
+

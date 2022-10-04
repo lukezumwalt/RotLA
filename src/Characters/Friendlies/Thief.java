@@ -1,9 +1,9 @@
 package Characters.Friendlies;
 
 import Board.Room;
-import Characters.Combat.trained;
+import Characters.Action.Combat.trained;
 import Characters.Entity;
-import Characters.Search.careful;
+import Characters.Action.Search.careful;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class Thief extends Adventurer implements Entity {
             return true;
         }
         else if( fightVal < 0 ){
-            this.takeDamage();
+            this.takeDamage(1);
         }
         return false;
     }
@@ -55,7 +55,7 @@ public class Thief extends Adventurer implements Entity {
         Treasure obtained = searchStyle.search(this,this.currentRoom);
         if(obtained!=null){
             if( obtained.getClass().getSimpleName().equals("Trap") ){
-                this.takeDamage();
+                this.takeDamage(1);
             }
             else{
                 this.inventory.add(obtained);
@@ -65,8 +65,8 @@ public class Thief extends Adventurer implements Entity {
         return false;
     }
 
-    public void takeDamage() {
-        health--;
+    public void takeDamage(int amount) {
+        this.health -= amount;
     }
 
     @Override
@@ -143,7 +143,7 @@ public class Thief extends Adventurer implements Entity {
         return alive;
     }
 
-    public void setCombatStyle(Characters.Combat.combatStyle cs) {
+    public void setCombatStyle(Characters.Action.Combat.combatStyle cs) {
         combatStyle = cs;
     }
 
@@ -153,5 +153,17 @@ public class Thief extends Adventurer implements Entity {
 
     public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
+    }
+
+    public void updateOffenseBonus(int scalar){
+        this.offenseBonus += scalar;
+    }
+
+    public void updateDefenseBonus(int scalar){
+        this.defenseBonus += scalar;
+    }
+
+    public void heal(int amount){
+        this.health += amount;
     }
 }

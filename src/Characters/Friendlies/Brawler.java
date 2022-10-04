@@ -1,10 +1,9 @@
 package Characters.Friendlies;
 
 import Board.Room;
-import Characters.Combat.combatStyle;
-import Characters.Combat.expert;
+import Characters.Action.Combat.expert;
 import Characters.Entity;
-import Characters.Search.careless;
+import Characters.Action.Search.careless;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class Brawler extends Adventurer implements Entity {
             return true;
         }
         else if( fightVal < 0 ){
-            this.takeDamage();
+            this.takeDamage(1);
         }
         return false;
     }
@@ -54,9 +53,10 @@ public class Brawler extends Adventurer implements Entity {
         Treasure obtained = searchStyle.search(this,this.currentRoom);
         if(obtained!=null){
             if( obtained.getClass().getSimpleName().equals("Trap") ){
-                this.takeDamage();
+                this.takeDamage(1);
             }
             else{
+                obtained.activate(this);
                 this.inventory.add(obtained);
             }
             return true;
@@ -64,8 +64,8 @@ public class Brawler extends Adventurer implements Entity {
         return false;
     }
 
-    public void takeDamage() {
-        health--;
+    public void takeDamage(int amount) {
+        this.health -= amount;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Brawler extends Adventurer implements Entity {
         return alive;
     }
 
-    public void setCombatStyle(Characters.Combat.combatStyle cs) {
+    public void setCombatStyle(Characters.Action.Combat.combatStyle cs) {
         combatStyle = cs;
     }
 
@@ -149,5 +149,17 @@ public class Brawler extends Adventurer implements Entity {
 
     public void setCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
+    }
+
+    public void updateOffenseBonus(int amount){
+        this.offenseBonus += amount;
+    }
+
+    public void updateDefenseBonus(int amount){
+        this.defenseBonus += amount;
+    }
+
+    public void heal(int amount){
+        this.health += amount;
     }
 }
