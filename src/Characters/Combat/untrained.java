@@ -11,12 +11,13 @@ public class untrained extends combatStyle {
     // If > 0, self won
     // If == 0, self win or tie
     @Override
-    public int fight(Adventurer self, Entity target) {
+    public int fight(Entity subject, Entity target) {
+        Adventurer self = (Adventurer)subject;
         if (self.getHealth() <= 0) {
             // do nothing
             return 0;
         } else {
-            int myRoll = rollD6(2) + self.getCombatBonus();
+            int myRoll = rollD6(2) + self.getOffenseBonus();
             int targetRoll = rollD6(2) - self.getDefenseBonus();
 
             if (myRoll > targetRoll) {

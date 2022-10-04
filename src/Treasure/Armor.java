@@ -6,8 +6,9 @@ public class Armor extends Treasure {
 
     // PUBLIC METHODS
     public int takeCombatBonus(Creature monster) {
-        int lowerCombat = monster.getCombatBonus();
-        lowerCombat--;
-        return lowerCombat;
+//        int lowerCombat = monster.getCombatBonus();
+//        lowerCombat--;
+//        return lowerCombat;
+        return 0;
     }
 }

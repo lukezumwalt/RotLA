@@ -24,6 +24,8 @@ public class Thief extends Adventurer implements Entity {
         health = 3;
         alive = true;
         combatStyle = new trained();
+        offenseBonus = 1;
+        defenseBonus = 0;
     }
 
     // PROTECTED ATTRIBUTES
@@ -34,26 +36,6 @@ public class Thief extends Adventurer implements Entity {
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-//        if(health <= 0){
-//            // do nothing
-//        }
-//        else {
-//            int myRoll = rollD6(2);
-//            int targetRoll = rollD6(2);
-//
-//            if (myRoll > targetRoll) {
-//                // Victory
-//                return true;
-//                // target.die();
-//            } else if (myRoll == targetRoll) {
-//                // Tie
-//                return false;
-//            } else {
-//                // Loss
-//                this.takeDamage();
-//            }
-//        }
-//        return false;
         int fightVal = combatStyle.fight(this, target);
         if( fightVal > 0 ){
             return true;
@@ -124,11 +106,29 @@ public class Thief extends Adventurer implements Entity {
         return sign;
     }
 
-    public int getCombatBonus(){return combatBonus; }
+    public int getOffenseBonus(){
+        return offenseBonus;
+    }
     public int getDefenseBonus(){ return defenseBonus; }
 
     @Override
     public int getTreasureCount() {
         return 0;
+    }
+
+    public boolean getAlive() {
+        return alive;
+    }
+
+    public void setCombatStyle(Characters.Combat.combatStyle cs) {
+        combatStyle = cs;
+    }
+
+    public void collectTreasure(Room r) {
+        inventory.add(r.takeTreasure());
+    }
+
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
     }
 }

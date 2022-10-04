@@ -14,52 +14,27 @@ public abstract class Adventurer {
     protected String name;
     protected static boolean alive;
     protected combatStyle combatStyle;
-    protected int combatBonus; // bias added to roll on attack
+    protected int offenseBonus; // bias added to roll on attack
     protected int defenseBonus; // bias added to roll on defense
-
-    // PRIVATE ATTRIBUTES
-    /*
-     * code example of Encapsulation
-     * treasureCount is private and
-     * can only be accessed via getter
-     * method
-     */
-    private ArrayList<Treasure> inventory;
+    protected ArrayList<Treasure> inventory;
 
     // PUBLIC METHODS
     public abstract void takeDamage();
 
-    public void collectTreasure(Room r) {
-        inventory.add(r.takeTreasure());
-    }
+    public abstract void collectTreasure(Room r);
 
-    public void setCurrentRoom(Room newRoom) {
-        currentRoom = newRoom;
-    }
+    public abstract void setCurrentRoom(Room newRoom);
 
-    // ! Getter Suite
+    // Getter Suite
     public abstract String getSign();
 
-    /*
-     * code example of Encapsulation
-     * getter method for private attribute
-     */
+    public abstract boolean getAlive();
 
-    public boolean getAlive() {
-        return alive;
-    }
-
-    public void setCombatStyle(combatStyle cs) {
-        combatStyle = cs;
-    }
-
-    public void setCombatBonus(int bonus) {
-        combatBonus = bonus;
-    }
+    public abstract void setCombatStyle(combatStyle cs);
 
     public abstract int getHealth();
 
-    public abstract int getCombatBonus();
+    public abstract int getOffenseBonus();
 
     public abstract int getDefenseBonus();
 

@@ -1,37 +1,23 @@
 package Characters.Enemies;
 
 import Board.Room;
+import Characters.Combat.combatStyle;
 import Characters.Entity;
 import Game.Engine;
 
-public class Creature {
+public abstract class Creature {
 
     // PROTECTED ATTRIBUTES
     protected Room currentRoom;
-    protected final String entityType = "creature";
     protected String sign;
     protected String name;
     protected static boolean alive;
-    protected int combatBonus;
+    protected Characters.Combat.combatStyle combatStyle;
 
     // PUBLIC METHODS
-    public String getSign() {
-        return sign;
-    }
+    public abstract String getSign();
 
-    public int getCombatBonus() {
-        return combatBonus;
-    }
+    public abstract void setCurrentRoom(Room newRoom);
 
-    public void setCombatBonus(int bonus) {
-        combatBonus = bonus;
-    }
-
-    public void setCurrentRoom(Room newRoom) {
-        currentRoom = newRoom;
-    }
-
-    public boolean getAlive() {
-        return alive;
-    }
+    public abstract boolean getAlive();
 }

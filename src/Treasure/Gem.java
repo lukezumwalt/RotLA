@@ -9,8 +9,9 @@ public class Gem extends Treasure {
 
     // PUBLIC METHODS
     public int addCreatureCombatBonus(Creature monster) {
-        int combatBonus = monster.getCombatBonus();
-        combatBonus++;
-        return combatBonus;
+//        int combatBonus = monster.getCombatBonus();
+//        combatBonus++;
+//        return combatBonus;
+        return 0;
     }
 }

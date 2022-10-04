@@ -1,6 +1,7 @@
 package Characters.Enemies;
 
 import Board.Room;
+import Characters.Combat.monstrous;
 import Characters.Entity;
 
 import java.util.Random;
@@ -25,6 +26,7 @@ public class Orbiter extends Creature implements Entity {
         sign = "O";
         name = "orbiter";
         alive = true;
+        combatStyle = new monstrous();
 
         // Randomly choose clockwise/counter-clockwise
         Random r = new Random();
@@ -37,18 +39,18 @@ public class Orbiter extends Creature implements Entity {
 
     // PROTECTED ATTRIBUTES
     protected boolean clockwiseFlag;
+    protected final String entityType = "creature";
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        int myRoll = rollD6(2);
-        int targetRoll = rollD6(2);
 
-        if (myRoll > targetRoll) {
+        int fightVal = combatStyle.fight(this,target);
+
+        if (fightVal > 0) {
             // Victory
             return true;
-            // target.die();
-        } else if (myRoll == targetRoll) {
+        } else if (fightVal < 0) {
             // Tie
             return false;
         } else {
@@ -121,5 +123,17 @@ public class Orbiter extends Creature implements Entity {
 
     public String getName() {
         return name;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
+    }
+
+    public boolean getAlive() {
+        return alive;
     }
 }
