@@ -5,14 +5,14 @@ import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;
 
-public class monstrous extends combatStyle{
+public class monstrous implements combatStyle {
 
     // Returns damage dealt to self
     // If > 0, self won
     // If == 0, self win or tie
     @Override
     public int fight(Entity self, Entity target) {
-        Adventurer opponent = (Adventurer)target;
+        Adventurer opponent = (Adventurer) target;
 
         int myRoll = rollD6(2) - opponent.getDefenseBonus();
         int targetRoll = rollD6(2) + opponent.getOffenseBonus();

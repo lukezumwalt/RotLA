@@ -5,14 +5,14 @@ import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;
 
-public class untrained extends combatStyle {
+public class untrained implements combatStyle {
 
     // Returns damage dealt to self
     // If > 0, self won
     // If == 0, self win or tie
     @Override
     public int fight(Entity subject, Entity target) {
-        Adventurer self = (Adventurer)subject;
+        Adventurer self = (Adventurer) subject;
         if (self.getHealth() <= 0) {
             // do nothing
             return 0;
