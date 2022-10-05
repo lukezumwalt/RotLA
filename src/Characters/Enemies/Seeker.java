@@ -75,12 +75,6 @@ public class Seeker extends Creature implements Entity {
     }
 
     @Override
-    public boolean rollForTreasure() {
-        // creatures do not get treasure so always return false
-        return false;
-    }
-
-    @Override
     public String getEntityType() {
         return entityType;
     }

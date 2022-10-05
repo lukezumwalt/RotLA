@@ -84,7 +84,7 @@ public class Engine {
                     }
                     // Treasure check.
                     if (thisRoom.checkIfTreasure()) {
-                        if (player.rollForTreasure()) {
+                        if (((Adventurer) player).search()) {
                             ((Adventurer) player).collectTreasure(thisRoom);
                             // Collection consumes the turn.
                             continue;
@@ -139,10 +139,10 @@ public class Engine {
                 }
             }
 
-            //! @TODO:  In the current structure of treasure, if an adv discovers a treasure they already own, they will
-            //! @TODO:  not retrieve the item.  This leaves it a static item belonging to the room, so there is a
-            //! @TODO:  potential of an infinite loop of an adventurer trying to recover a treasure they can't obtain.
-            //! @TODO:  This can be resolved by forcing the adv to ALWAYS move FIRST before SEARCHING!
+            // TODO:  In the current structure of treasure, if an adv discovers a treasure they already own, they will
+            // TODO:  not retrieve the item.  This leaves it a static item belonging to the room, so there is a
+            // TODO:  potential of an infinite loop of an adventurer trying to recover a treasure they can't obtain.
+            // TODO:  This can be resolved by forcing the adv to ALWAYS move FIRST before SEARCHING!
 
             // No treasure and no creatures, move on!
             player.move();

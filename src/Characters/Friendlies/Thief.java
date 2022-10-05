@@ -11,7 +11,6 @@ import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
-import static Utilities.Dice.rollD6;
 
 /*
  * code example of Inheritance
@@ -98,14 +97,6 @@ public class Thief extends Adventurer implements Entity {
     @Override
     public Room checkRoom() {
         return currentRoom;
-    }
-
-    @Override
-    public boolean rollForTreasure() {
-        if ((rollD6(2) + treasureRollMod) >= 10) {
-            return true;
-        }
-        return false;
     }
 
     public int getHealth() {
