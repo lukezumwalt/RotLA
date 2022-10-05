@@ -84,18 +84,18 @@ public class Orbiter extends Creature implements Entity {
             }
         } else {
             // Counter-clockwise rotation scheme
-            if (x < 0 && y == 0) {
+            if (x < 2 && y == 0) {
                 // west wall condition
                 x++;
-            } else if (x == 0 && y > 0) {
-                // north wall condition
-                y--;
-            } else if (x > 0 && y == 2) {
-                // east wall condition
-                x--;
             } else if (x == 2 && y < 2) {
                 // south wall condition
                 y++;
+            } else if (x > 0 && y == 2) {
+                // east wall condition
+                x--;
+            } else if (x == 0 && y > 0) {
+                // north wall condition
+                y--;
             }
 
         }
