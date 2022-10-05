@@ -10,6 +10,8 @@ import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;
 
+import java.util.Random;
+
 public class expert implements combatStyle {
 
     // Returns damage dealt to self
@@ -27,10 +29,14 @@ public class expert implements combatStyle {
 
             if (myRoll > targetRoll) {
                 // Victory
-                jump.setCelebrate(subject);
-                shout.setCelebrate();
-                dance.setCelebrate();
-                spin.setCelebrate();
+                // 25% chance Adventurer will celebrate upon victory
+                Random r = new Random();
+                if (0 == r.nextInt(3)) {
+                    jump.setCelebrate(subject);
+                    shout.setCelebrate();
+                    dance.setCelebrate();
+                    spin.setCelebrate();
+                }
                 return 1;
             } else if (myRoll == targetRoll) {
                 // Tie
