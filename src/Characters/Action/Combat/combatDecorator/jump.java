@@ -25,9 +25,9 @@ public class jump extends celebrateDecorator {
     public static void setCelebrate(Entity self) {
         Random celebrateRandom = new Random();
         int numActions = celebrateRandom.nextInt(2);
-        System.out.print(self + " celebrates: ");
+        System.out.print(self.getName() + " celebrates: ");
         for (int i = 0; i < numActions; i++) {
-            System.out.print("jump");
+            System.out.print(" jump");
         }
 
     }

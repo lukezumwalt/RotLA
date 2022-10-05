@@ -25,7 +25,7 @@ public class shout extends celebrateDecorator {
         Random celebrateRandom = new Random();
         int numActions = celebrateRandom.nextInt(2);
         for (int i = 0; i < numActions; i++) {
-            System.out.print("shout");
+            System.out.print(" shout");
         }
     }
 }
