@@ -5,6 +5,8 @@ import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;
 
+import Board.Observer;
+
 public class monstrous implements combatStyle {
 
     // Returns damage dealt to self
@@ -27,6 +29,24 @@ public class monstrous implements combatStyle {
             // Loss
             return -1;
         }
+
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void notifyObservers(Adventurer subject, String eventID) {
+        // TODO Auto-generated method stub
 
     }
 }

@@ -65,6 +65,7 @@ public class Engine {
         for (Entity player : Adventurers) {
 
             // Top of turn, BAE
+            System.out.println("Instaniating logger.");
             Logger recorder = new Logger((Subject) player);
 
             // Get current room
@@ -144,17 +145,20 @@ public class Engine {
                 if (((Adventurer) player).search()) {
                     // Treasure found.
                     continue;
-                }
-                else{
+                } else {
                     // Treasure not found.
-                    //tracker.publishTreasureFound(Treasure);
+                    // tracker.publishTreasureFound(Treasure);
                 }
             }
 
-            // TODO:  In the current structure of treasure, if an adv discovers a treasure they already own, they will
-            // TODO:  not retrieve the item.  This leaves it a static item belonging to the room, so there is a
-            // TODO:  potential of an infinite loop of an adventurer trying to recover a treasure they can't obtain.
-            // TODO:  This can be resolved by forcing the adv to ALWAYS move FIRST before SEARCHING!
+            // TODO: In the current structure of treasure, if an adv discovers a treasure
+            // they already own, they will
+            // TODO: not retrieve the item. This leaves it a static item belonging to the
+            // room, so there is a
+            // TODO: potential of an infinite loop of an adventurer trying to recover a
+            // treasure they can't obtain.
+            // TODO: This can be resolved by forcing the adv to ALWAYS move FIRST before
+            // SEARCHING!
 
             // No treasure and no creatures, move on!
             player.move();
@@ -197,9 +201,8 @@ public class Engine {
             // After either moving or not, fight any Adventurers in the room.
             for (Adventurer target : thisRoom.getOccupantAdventurers()) {
                 if (monster.fight((Entity) target)) {
-                    // Monster wins!  Report event
-                }
-                else {
+                    // Monster wins! Report event
+                } else {
                     // Monster lost, marked for death
                     mobsToDie.add(monster);
                 }

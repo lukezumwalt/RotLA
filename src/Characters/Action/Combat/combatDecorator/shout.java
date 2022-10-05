@@ -2,6 +2,7 @@ package Characters.Action.Combat.combatDecorator;
 
 import java.util.Random;
 
+import Board.Observer;
 import Characters.Entity;
 import Characters.Action.Combat.combatStyle;
 import Characters.Friendlies.Adventurer;
@@ -27,5 +28,23 @@ public class shout extends celebrateDecorator {
         for (int i = 0; i < numActions; i++) {
             System.out.print(" shout");
         }
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void notifyObservers(Adventurer subject, String eventID) {
+        // TODO Auto-generated method stub
+
     }
 }

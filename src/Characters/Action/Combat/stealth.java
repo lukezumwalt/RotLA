@@ -11,6 +11,8 @@ import static Utilities.Dice.rollD6;
 
 import java.util.Random;
 
+import Board.Observer;
+
 public class stealth implements combatStyle {
 
     // Returns damage dealt to self
@@ -45,5 +47,23 @@ public class stealth implements combatStyle {
                 return -1;
             }
         }
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void notifyObservers(Adventurer subject, String eventID) {
+        // TODO Auto-generated method stub
+
     }
 }

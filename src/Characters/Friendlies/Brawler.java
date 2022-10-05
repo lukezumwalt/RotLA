@@ -40,24 +40,23 @@ public class Brawler extends Adventurer implements Entity, Subject {
     @Override
     public boolean fight(Entity target) {
         int fightVal = combatStyle.fight(this, target);
-        if( fightVal > 0 ){
+        if (fightVal > 0) {
             return true;
-        }
-        else if( fightVal < 0 ){
+        } else if (fightVal < 0) {
             this.takeDamage(1);
         }
         return false;
     }
 
-    public boolean search(){
-        Treasure obtained = searchStyle.search(this,this.currentRoom);
-        if(obtained!=null){
-            if( obtained.getClass().getSimpleName().equals("Trap") ){
+    public boolean search() {
+        Treasure obtained = searchStyle.search(this, this.currentRoom);
+        if (obtained != null) {
+            if (obtained.getClass().getSimpleName().equals("Trap")) {
                 this.takeDamage(1);
-            }
-            else{
+            } else {
                 obtained.activate(this);
                 this.inventory.add(obtained);
+                notifyObservers("treasureFound");
             }
             return true;
         }
@@ -71,11 +70,10 @@ public class Brawler extends Adventurer implements Entity, Subject {
 
     @Override
     public void move() {
-        if( health <= 0 ){
+        if (health <= 0) {
             // do nothing, ya dead
             return;
-        }
-        else {
+        } else {
             // check room to return valid moves
             String[] addresses = inspectNeighbors(this.currentRoom);
             // randomly select a valid move from that list
@@ -94,7 +92,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
             newRoom.occupyAdventurer(this);
 
             // Report Adventurer entered new room:
-
+            notifyObservers("roomEntered");
         }
     }
 
@@ -106,6 +104,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
     public int getHealth() {
         return health;
     }
+
     public String getEntityType() {
         return entityType;
     }
@@ -118,17 +117,20 @@ public class Brawler extends Adventurer implements Entity, Subject {
         return sign;
     }
 
-    public int getOffenseBonus(){
+    public int getOffenseBonus() {
         return offenseBonus;
     }
-    public int getDefenseBonus(){ return defenseBonus; }
+
+    public int getDefenseBonus() {
+        return defenseBonus;
+    }
 
     @Override
     public int getTreasureCount() {
         return 0;
     }
 
-    public ArrayList<Treasure> getInventory(){
+    public ArrayList<Treasure> getInventory() {
         return inventory;
     }
 
@@ -148,15 +150,15 @@ public class Brawler extends Adventurer implements Entity, Subject {
         currentRoom = newRoom;
     }
 
-    public void updateOffenseBonus(int amount){
+    public void updateOffenseBonus(int amount) {
         this.offenseBonus += amount;
     }
 
-    public void updateDefenseBonus(int amount){
+    public void updateDefenseBonus(int amount) {
         this.defenseBonus += amount;
     }
 
-    public void heal(int amount){
+    public void heal(int amount) {
         this.health += amount;
     }
 
