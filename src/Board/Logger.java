@@ -1,7 +1,10 @@
 package Board;
 
+import Characters.Enemies.Creature;
 import Characters.Friendlies.Adventurer;
 import Characters.Subject;
+
+import java.util.Arrays;
 
 public class Logger extends Observer{
     // instantiated at beginning of each full Adv and Creature turn
@@ -27,6 +30,7 @@ public class Logger extends Observer{
 
         switch(eventID){
             case "roomEntered":
+                System.out.println( self.getClass().getSimpleName() + " entered room " + Arrays.toString(self.checkRoom().getCoordinates()));
                 break;
 
             case "wonCombat":
@@ -51,7 +55,22 @@ public class Logger extends Observer{
     }
 
     @Override
-    public void updateCreatureStatus(String name, Room local) {
+    public void updateCreatureStatus(Creature self, String eventID) {
+        switch(eventID){
+            case "roomEntered":
+                break;
 
+            case "wonCombat":
+                break;
+
+            case "lostCombat":
+                break;
+
+            case "died":
+                break;
+        }
     }
+
+    // store all events and log to file at end of turn
+    // Destructor?
 }

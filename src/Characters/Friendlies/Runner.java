@@ -9,7 +9,6 @@ import Characters.Subject;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
