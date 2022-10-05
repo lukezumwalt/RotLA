@@ -1,8 +1,10 @@
 package Characters.Enemies;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.monstrous;
 import Characters.Entity;
+import Characters.Subject;
 
 import java.util.Random;
 
@@ -14,7 +16,7 @@ import static Game.Engine.coordinateToKey;
  * Orbiter, Seeker, and
  * Blinker are all extensions of Creature
  */
-public class Blinker extends Creature implements Entity {
+public class Blinker extends Creature implements Entity, Subject {
 
     // CONSTRUCTORS
     public Blinker() {
@@ -83,5 +85,20 @@ public class Blinker extends Creature implements Entity {
 
     public boolean getAlive() {
         return alive;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers(String eventID) {
+
     }
 }

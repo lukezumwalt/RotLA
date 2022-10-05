@@ -1,8 +1,10 @@
 package Characters.Enemies;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.monstrous;
 import Characters.Entity;
+import Characters.Subject;
 
 import java.util.Random;
 
@@ -18,7 +20,7 @@ import static Game.Engine.*;
  * Abstraction occurring through all entity classes(creatures
  * and adventurers) extend superclasses (Creature or Adventurer)
  */
-public class Orbiter extends Creature implements Entity {
+public class Orbiter extends Creature implements Entity, Subject {
 
     // CONSTRUCTORS
     public Orbiter() {
@@ -128,5 +130,20 @@ public class Orbiter extends Creature implements Entity {
 
     public boolean getAlive() {
         return alive;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers(String eventID) {
+
     }
 }

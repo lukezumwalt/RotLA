@@ -1,8 +1,10 @@
 package Characters.Enemies;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.monstrous;
 import Characters.Entity;
+import Characters.Subject;
 
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
@@ -12,7 +14,7 @@ import static Game.Engine.Facility;
  * Orbiter, Seeker, and
  * Blinker are all extensions of Creature
  */
-public class Seeker extends Creature implements Entity {
+public class Seeker extends Creature implements Entity, Subject {
 
     // CONSTRUCTORS
     public Seeker() {
@@ -91,5 +93,20 @@ public class Seeker extends Creature implements Entity {
 
     public boolean getAlive() {
         return alive;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers(String eventID) {
+
     }
 }

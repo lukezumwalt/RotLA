@@ -3,10 +3,13 @@ package Game;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import Board.Logger;
 import Board.Room;
+import Board.Tracker;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
+import Characters.Subject;
 import Treasure.*;
 
 import static Board.Room.mapNeighborhood;
@@ -19,6 +22,7 @@ public class Engine {
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
         Treasures = new ArrayList<>();
+        Tracker T = new Tracker();
     }
 
     // PUBLIC ATTRIBUTES
@@ -58,11 +62,15 @@ public class Engine {
     }
 
     public void processAdventurers() {
-        ArrayList<Entity> targets = new ArrayList<>();
         for (Entity player : Adventurers) {
+
+            // Top of turn, BAE
+            Logger recorder = new Logger((Subject) player);
+
+            // Get current room
             Room thisRoom = player.checkRoom();
 
-            //! @TODO: clean this up!!
+            // TODO: clean this up!!
             // Runner gets 2 "actions" per turn.
             if ("runner".equals(player.getName())) {
                 for (int i = 0; i < 2; i++) {
@@ -129,13 +137,17 @@ public class Engine {
                 continue;
             }
 
-            //! @TODO: Add checks to confirm adventurer is still alive after each action
+            // TODO: Add checks to confirm adventurer is still alive after each action
 
             // Treasure check.
             if (thisRoom.checkIfTreasure()) {
                 if (((Adventurer) player).search()) {
-                    // Collection consumes the turn.
+                    // Treasure found.
                     continue;
+                }
+                else{
+                    // Treasure not found.
+                    //tracker.publishTreasureFound(Treasure);
                 }
             }
 
@@ -161,12 +173,20 @@ public class Engine {
                     k.checkRoom().leaveRoom(k);
                 }
             }
+
+            // End of turn, finally..
+            recorder.deactivate();
         }
     }
 
     public void processCreatures() {
         ArrayList<Entity> mobsToDie = new ArrayList<>();
         for (Entity monster : Creatures) {
+
+            // Top of turn, BAE
+            Logger recorder = new Logger((Subject) monster);
+
+            // Get current room.
             Room thisRoom = monster.checkRoom();
 
             // If no Adventurers to fight, move on.
@@ -176,10 +196,17 @@ public class Engine {
 
             // After either moving or not, fight any Adventurers in the room.
             for (Adventurer target : thisRoom.getOccupantAdventurers()) {
-                if (!monster.fight((Entity) target)) {
+                if (monster.fight((Entity) target)) {
+                    // Monster wins!  Report event
+                }
+                else {
+                    // Monster lost, marked for death
                     mobsToDie.add(monster);
                 }
             }
+
+            // End of turn, finally
+            recorder.deactivate();
         }
         for (Entity m : mobsToDie) {
             Creatures.remove(m);

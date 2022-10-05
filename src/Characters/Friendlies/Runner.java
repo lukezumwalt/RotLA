@@ -167,10 +167,9 @@ public class Runner extends Adventurer implements Entity, Subject {
     }
 
     @Override
-    public void notifyObservers() {
-        for(Iterator<Observer> it = observerList.iterator(); it.hasNext(); ){
-            Observer o = it.next();
-            o.updateStatus();
+    public void notifyObservers(String eventID) {
+        for (Observer o : observerList) {
+            o.updateAdventurerStatus(this, eventID);
         }
     }
 }

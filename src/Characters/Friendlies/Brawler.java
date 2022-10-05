@@ -67,6 +67,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
 
     public void takeDamage(int amount) {
         this.health -= amount;
+        notifyObservers("tookDamage");
     }
 
     @Override
@@ -92,6 +93,9 @@ public class Brawler extends Adventurer implements Entity, Subject {
             this.currentRoom.leaveRoom(this);
             this.setCurrentRoom(newRoom);
             newRoom.occupyAdventurer(this);
+
+            // Report Adventurer entered new room:
+
         }
     }
 
@@ -168,10 +172,9 @@ public class Brawler extends Adventurer implements Entity, Subject {
     }
 
     @Override
-    public void notifyObservers() {
-        for(Iterator<Observer> it = observerList.iterator(); it.hasNext(); ){
-            Observer o = it.next();
-            o.updateStatus();
+    public void notifyObservers(String eventID) {
+        for (Observer o : observerList) {
+            o.updateAdventurerStatus(this, eventID);
         }
     }
 }
