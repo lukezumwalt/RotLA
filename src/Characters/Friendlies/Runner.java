@@ -1,12 +1,15 @@
 package Characters.Friendlies;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.untrained;
 import Characters.Entity;
 import Characters.Action.Search.quick;
+import Characters.Subject;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
@@ -17,10 +20,11 @@ import static Game.Engine.Facility;
  * all of the adventurer subclasses
  * inherit the superclass Adventurer
  */
-public class Runner extends Adventurer implements Entity {
+public class Runner extends Adventurer implements Entity, Subject {
 
     // CONSTRUCTORS
     public Runner() {
+        entityType = "adventurer";
         sign = "R";
         name = "Runner";
         health = 3;
@@ -30,10 +34,8 @@ public class Runner extends Adventurer implements Entity {
         offenseBonus = 0;
         defenseBonus = 0;
         inventory = new ArrayList<>();
+        observerList = new ArrayList<>();
     }
-
-    protected int health;
-    protected final String entityType = "adventurer";
 
     // PUBLIC METHODS
     public boolean fight(Entity target) {
@@ -152,5 +154,23 @@ public class Runner extends Adventurer implements Entity {
 
     public void heal(int amount){
         this.health += amount;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observerList.add(o);
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        observerList.remove(observerList.indexOf(o));
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Iterator<Observer> it = observerList.iterator(); it.hasNext(); ){
+            Observer o = it.next();
+            o.updateStatus();
+        }
     }
 }

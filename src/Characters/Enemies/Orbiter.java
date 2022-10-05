@@ -22,6 +22,7 @@ public class Orbiter extends Creature implements Entity {
 
     // CONSTRUCTORS
     public Orbiter() {
+        entityType = "creature";
         sign = "O";
         name = "orbiter";
         alive = true;
@@ -38,7 +39,6 @@ public class Orbiter extends Creature implements Entity {
 
     // PROTECTED ATTRIBUTES
     protected boolean clockwiseFlag;
-    protected final String entityType = "creature";
 
     // PUBLIC METHODS
     @Override

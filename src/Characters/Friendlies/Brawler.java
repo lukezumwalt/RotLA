@@ -1,12 +1,15 @@
 package Characters.Friendlies;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.expert;
 import Characters.Entity;
+import Characters.Subject;
 import Characters.Action.Search.careless;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import static Board.Room.inspectNeighbors;
@@ -17,10 +20,11 @@ import static Game.Engine.Facility;
  * all of the adventurer subclasses
  * inherit the superclass Adventurer
  */
-public class Brawler extends Adventurer implements Entity {
+public class Brawler extends Adventurer implements Entity, Subject {
 
     // CONSTRUCTORS
     public Brawler() {
+        entityType = "adventurer";
         sign = "B";
         name = "Brawler";
         health = 3;
@@ -30,10 +34,8 @@ public class Brawler extends Adventurer implements Entity {
         offenseBonus = 2;
         defenseBonus = 0;
         inventory = new ArrayList<>();
+        observerList = new ArrayList<>();
     }
-
-    protected int health;
-    protected final String entityType = "adventurer";
 
     // PUBLIC METHODS
     @Override
@@ -153,5 +155,23 @@ public class Brawler extends Adventurer implements Entity {
 
     public void heal(int amount){
         this.health += amount;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observerList.add(o);
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        observerList.remove(observerList.indexOf(o));
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Iterator<Observer> it = observerList.iterator(); it.hasNext(); ){
+            Observer o = it.next();
+            o.updateStatus();
+        }
     }
 }

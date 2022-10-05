@@ -16,14 +16,12 @@ public class Seeker extends Creature implements Entity {
 
     // CONSTRUCTORS
     public Seeker() {
+        entityType = "creature";
         sign = "S";
         name = "seeker";
         alive = true;
         combatStyle = new monstrous();
     }
-
-    // PROTECTED ATTRIBUTES
-    protected final String entityType = "creature";
 
     // PUBLIC METHODS
     @Override

@@ -18,14 +18,12 @@ public class Blinker extends Creature implements Entity {
 
     // CONSTRUCTORS
     public Blinker() {
+        entityType = "creature";
         sign = "B";
         name = "blinker";
         alive = true;
         combatStyle = new monstrous();
     }
-
-    // PROTECTED ATTRIBUTES
-    protected final String entityType = "creature";
 
     // PUBLIC METHODS
     @Override

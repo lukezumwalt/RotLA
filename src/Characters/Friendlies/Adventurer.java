@@ -2,6 +2,7 @@ package Characters.Friendlies;
 
 import java.util.ArrayList;
 
+import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.combatStyle;
 import Characters.Action.Search.searchStyle;
@@ -10,15 +11,18 @@ import Treasure.*;
 public abstract class Adventurer {
 
     // PROTECTED ATTRIBUTES
+    protected String entityType;
     protected Room currentRoom;
     protected String sign;
     protected String name;
+    protected int health;
     protected static boolean alive;
     protected combatStyle combatStyle;
     protected searchStyle searchStyle;
     protected int offenseBonus; // bias added to roll on attack
     protected int defenseBonus; // bias added to roll on defense
     protected ArrayList<Treasure> inventory;
+    protected ArrayList<Observer> observerList;
 
     // PUBLIC METHODS
     public abstract void takeDamage(int amount);
