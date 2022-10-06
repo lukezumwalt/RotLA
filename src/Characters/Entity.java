@@ -4,19 +4,17 @@ import Board.Room;
 
 public interface Entity {
     // PUBLIC METHODS
-    public boolean fight(Entity target);
+    boolean fight(Entity target);
 
-    public void move();
+    void move();
 
-    public Room checkRoom();
+    Room checkRoom();
 
-    public boolean getAlive();
+    boolean getAlive();
 
-    public boolean rollForTreasure();
+    String getEntityType();
 
-    public String getEntityType();
+    String getName();
 
-    public String getName();
-
-    public String getSign();
+    String getSign();
 }

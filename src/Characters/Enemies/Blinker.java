@@ -1,45 +1,51 @@
 package Characters.Enemies;
 
+import Board.Observer;
 import Board.Room;
-import Characters.Enemies.Creature;
+import Characters.Action.Combat.monstrous;
 import Characters.Entity;
+import Characters.Subject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
 import static Game.Engine.coordinateToKey;
-import static Utilities.Dice.rollD6;
 
 /*
  * code example of Polymorphism
  * Orbiter, Seeker, and
  * Blinker are all extensions of Creature
  */
-public class Blinker extends Creature implements Entity {
+public class Blinker extends Creature implements Entity, Subject {
 
     // CONSTRUCTORS
     public Blinker() {
+        entityType = "creature";
         sign = "B";
         name = "blinker";
         alive = true;
+        combatStyle = new monstrous();
+        observerList = new ArrayList<>();
     }
 
     // PUBLIC METHODS
     @Override
     public boolean fight(Entity target) {
-        int myRoll = rollD6(2);
-        int targetRoll = rollD6(2);
 
-        if (myRoll > targetRoll) {
+        int fightVal = combatStyle.fight(this,target);
+
+        if (fightVal > 0) {
             // Victory
+            notifyObservers("wonCombat");
             return true;
-            // target.die();
-        } else if (myRoll == targetRoll) {
+        } else if (fightVal < 0) {
             // Tie
             return false;
         } else {
             // Loss
+            notifyObservers("lostCombat");
+            notifyObservers("died");
             alive = false;
         }
         return false;
@@ -58,17 +64,13 @@ public class Blinker extends Creature implements Entity {
         this.currentRoom.leaveRoom(this);
         this.setCurrentRoom(newRoom);
         newRoom.occupyCreature(this);
+
+        notifyObservers("roomEntered");
     }
 
     @Override
     public Room checkRoom() {
         return currentRoom;
-    }
-
-    @Override
-    public boolean rollForTreasure() {
-        // creatures do not get treasure so always return false
-        return false;
     }
 
     @Override
@@ -78,5 +80,34 @@ public class Blinker extends Creature implements Entity {
 
     public String getName() {
         return name;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setCurrentRoom(Room newRoom) {
+        currentRoom = newRoom;
+    }
+
+    public boolean getAlive() {
+        return alive;
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observerList.add(o);
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        observerList.remove(o);
+    }
+
+    @Override
+    public void notifyObservers(String eventID) {
+        for (Observer o : observerList) {
+            o.updateCreatureStatus(this, eventID);
+        }
     }
 }

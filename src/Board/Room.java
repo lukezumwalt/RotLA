@@ -3,6 +3,7 @@ package Board;
 import Characters.Enemies.Creature;
 import Characters.Entity;
 import Characters.Friendlies.Adventurer;
+import Treasure.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,48 +15,56 @@ public class Room {
 
     // CONSTRUCTORS
     public Room() {
-        occupantAdventurers = new ArrayList<Adventurer>();
-        occupantCreatures = new ArrayList<Creature>();
+        this.occupantAdventurers = new ArrayList<Adventurer>();
+        this.occupantCreatures = new ArrayList<Creature>();
+        this.treasureAvailable = false;
     }
 
     public Room(int level, int x, int y) {
-        coordinates = new int[] { level, x, y };
-        occupantAdventurers = new ArrayList<Adventurer>();
-        occupantCreatures = new ArrayList<Creature>();
+        this.coordinates = new int[] { level, x, y };
+        this.occupantAdventurers = new ArrayList<Adventurer>();
+        this.occupantCreatures = new ArrayList<Creature>();
+        this.treasureAvailable = false;
     }
 
     // PROTECTED ATTRIBUTES
     protected int[] coordinates;
     protected ArrayList<Adventurer> occupantAdventurers;
     protected ArrayList<Creature> occupantCreatures;
+    protected Treasure occupantTreasure;
     // PRIVATE ATTRIBUTES
-    private boolean treasureAvailable = true;
+    private boolean treasureAvailable;
 
     // PUBLIC METHODS
     public int[] getCoordinates() {
-        return coordinates;
+        return this.coordinates;
     }
 
     public boolean checkIfTreasure() {
-        return treasureAvailable;
+        return this.treasureAvailable;
     }
 
-    public void takeTreasure() {
-        treasureAvailable = false;
+    public Treasure takeTreasure() {
+        this.treasureAvailable = false;
+        return this.occupantTreasure;
+    }
+
+    public Treasure peekTreasure(){
+        return this.occupantTreasure;
     }
 
     public ArrayList<Adventurer> getOccupantAdventurers() {
-        if (occupantAdventurers == null) {
+        if (this.occupantAdventurers == null) {
             return null;
         }
-        return occupantAdventurers;
+        return this.occupantAdventurers;
     }
 
     public ArrayList<Creature> getOccupantCreatures() {
-        if (occupantCreatures == null) {
+        if (this.occupantCreatures == null) {
             return null;
         }
-        return occupantCreatures;
+        return this.occupantCreatures;
     }
 
     // The following methods grabs the occupant
@@ -94,6 +103,11 @@ public class Room {
 
     public void occupyCreature(Creature me) {
         this.occupantCreatures.add(me);
+    }
+
+    public void occupyTreasure(Treasure item) {
+        this.treasureAvailable = true;
+        this.occupantTreasure = item;
     }
 
     // NEIGHBORHOOD

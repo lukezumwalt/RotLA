@@ -4,6 +4,9 @@ import Characters.Entity;
 import Characters.Enemies.Creature;
 import Characters.Friendlies.Adventurer;
 import Game.Engine;
+import Treasure.Treasure;
+
+import java.util.Arrays;
 
 import static Game.Engine.coordinateToKey;
 import static Game.Engine.getAdventurers;
@@ -35,8 +38,8 @@ public class Render {
     // PRIVATE METHODS
     // prints turn number
     private void printTurn() {
-        System.out.println("RotLA Turn: " + turn);
         turn++;
+        System.out.println("\nRotLA Turn: " + turn);
     }
 
     // printBoard access the Map via get methods that
@@ -83,26 +86,31 @@ public class Render {
      * status
      */
     private void printStatus() {
-        int oCount = 0;
-        int sCount = 0;
-        int bCount = 0;
+        System.out.println("Adventurers\t\tRoom\t\tHealth\t\tTreasure");
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
-            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
-                    + " Damage");
-        }
-        for (Entity c0 : getCreatures()) {
-            String cSign = c0.getSign();
-            if (cSign == "O") {
-                oCount++;
-            } else if (cSign == "S") {
-                sCount++;
-            } else if (cSign == "B") {
-                bCount++;
+            StringBuilder treasurePrint = new StringBuilder();
+            for(Treasure t : a.getInventory()){
+                treasurePrint.append(t.getClass().getSimpleName()).append(" ");
             }
+            System.out.println(a.getClass().getSimpleName() + "\t\t\t" +
+                    Arrays.toString(a.checkRoom().getCoordinates()) + "\t" +
+                    a.getHealth() + "\t\t\t" +
+                    treasurePrint);
         }
-        System.out.println("Orbiters:\t" + oCount + " Remaining");
-        System.out.println("Seekers:\t" + sCount + " Remaining");
-        System.out.println("Blinkers:\t" + bCount + " Remaining");
+
+        System.out.println("\nTotal Active Creatures: " + getCreatures().size());
+        System.out.println("\nCreatures\t\tRoom");
+        for (Entity c0 : getCreatures()) {
+            Creature c = (Creature)c0;
+            System.out.println(c.getClass().getSimpleName() + "\t\t\t" +
+                    Arrays.toString(c.checkRoom().getCoordinates()));
+        }
+        System.out.print("\n\n");
+    }
+
+    // PUBLIC METHODS
+    public int getTurn(){
+        return turn;
     }
 }

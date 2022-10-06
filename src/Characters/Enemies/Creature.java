@@ -1,28 +1,28 @@
 package Characters.Enemies;
 
+import Board.Observer;
 import Board.Room;
-import Characters.Entity;
-import Game.Engine;
+import Characters.Subject;
 
-public class Creature {
+import java.util.ArrayList;
+
+public abstract class Creature implements Subject {
 
     // PROTECTED ATTRIBUTES
     protected Room currentRoom;
-    protected final String entityType = "creature";
+    protected String entityType;
     protected String sign;
     protected String name;
     protected static boolean alive;
+    protected Characters.Action.Combat.combatStyle combatStyle;
+    protected ArrayList<Observer> observerList;
 
     // PUBLIC METHODS
-    public String getSign() {
-        return sign;
-    }
+    public abstract String getSign();
 
-    public void setCurrentRoom(Room newRoom) {
-        currentRoom = newRoom;
-    }
+    public abstract void setCurrentRoom(Room newRoom);
 
-    public boolean getAlive() {
-        return alive;
-    }
+    public abstract boolean getAlive();
+
+    public abstract Room checkRoom();
 }

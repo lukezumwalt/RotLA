@@ -1,58 +1,61 @@
 package Characters.Friendlies;
 
-import Board.Room;
+import java.util.ArrayList;
 
-public class Adventurer {
+import Board.Observer;
+import Board.Room;
+import Characters.Subject;
+import Characters.Action.Combat.combatStyle;
+import Characters.Action.Search.searchStyle;
+import Treasure.*;
+
+public abstract class Adventurer implements Subject {
 
     // PROTECTED ATTRIBUTES
+    protected String entityType;
     protected Room currentRoom;
-    protected final String entityType = "adventurer";
     protected String sign;
     protected String name;
     protected int health;
-    protected static boolean alive;
-
-    // PRIVATE ATTRIBUTES
-    /*
-     * code example of Encapsulation
-     * treasureCount is private and
-     * can only be accessed via getter
-     * method
-     */
-    private int treasureCount;
+    protected boolean alive;
+    protected combatStyle combatStyle;
+    protected searchStyle searchStyle;
+    protected int offenseBonus; // bias added to roll on attack
+    protected int defenseBonus; // bias added to roll on defense
+    protected ArrayList<Treasure> inventory;
+    public static ArrayList<Observer> observerList;
 
     // PUBLIC METHODS
-    public void takeDamage() {
-        health--;
-    }
+    public abstract void takeDamage(int amount);
 
-    public void collectTreasure(Room r) {
-        r.takeTreasure();
-        treasureCount++;
-    }
+    public abstract void collectTreasure(Room r);
 
-    public void setCurrentRoom(Room newRoom) {
-        currentRoom = newRoom;
-    }
+    public abstract void setCurrentRoom(Room newRoom);
 
-    // ! Getter Suite
-    public String getSign() {
-        return sign;
-    }
+    // Getter Suite
+    public abstract String getSign();
 
-    public int getHealth() {
-        return health;
-    }
+    public abstract boolean getAlive();
 
-    /*
-     * code example of Encapsulation
-     * getter method for private attribute
-     */
-    public int getTreasureCount() {
-        return treasureCount;
-    }
+    public abstract void setCombatStyle(combatStyle cs);
 
-    public boolean getAlive() {
-        return alive;
-    }
+    public abstract int getHealth();
+
+    public abstract int getOffenseBonus();
+
+    public abstract int getDefenseBonus();
+
+    public abstract void updateOffenseBonus(int amount);
+
+    public abstract void updateDefenseBonus(int amount);
+
+    public abstract int getTreasureCount();
+
+    public abstract ArrayList<Treasure> getInventory();
+
+    public abstract boolean search();
+
+    public abstract void heal(int amount);
+
+    public abstract Room checkRoom();
 }

@@ -1,22 +1,28 @@
 package Game;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
+import Board.Logger;
+import Board.Render;
 import Board.Room;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
+import Characters.Subject;
+import Treasure.*;
 
 import static Board.Room.mapNeighborhood;
 
 public class Engine {
+
 
     // CONSTRUCTORS
     Engine() {
         Facility = new HashMap<>();
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
+        Treasures = new ArrayList<>();
+        view = new Render();
     }
 
     // PUBLIC ATTRIBUTES
@@ -27,6 +33,8 @@ public class Engine {
     // Characters
     private static ArrayList<Entity> Adventurers;
     private static ArrayList<Entity> Creatures;
+    private static ArrayList<Treasure> Treasures;
+    private Render view;
 
     // PUBLIC METHODS
     public static ArrayList<Entity> getAdventurers() {
@@ -42,6 +50,8 @@ public class Engine {
         initializeAdventurers();
         // Instantiate Creatures
         initializeCreatures();
+        // Instantiate Treasures
+        initializeTreasures();
         // Instantiate Game Board
         createBlankBoard();
         initializeBoard();
@@ -52,108 +62,159 @@ public class Engine {
         return String.valueOf(floor) + String.valueOf(x) + String.valueOf(y);
     }
 
-    public void processAdventurers() {
-        ArrayList<Entity> targets = new ArrayList<>();
+    public void processAdventurers(Logger recorder) {
         for (Entity player : Adventurers) {
-            Room thisRoom = player.checkRoom();
 
-            // Runner gets 3 "actions" per turn.
-            if ("runner".equals(player.getName())) {
-                for (int i = 0; i < 4; i++) {
+            // First and foremost, alive check
+            if (((Adventurer) player).getAlive()) {
+                // TODO: clean this up!!
+                // Runner gets 2 "actions" per turn.
+                if ("runner".equals(player.getName())) {
+                    // Get current room
+                    Room thisRoom = player.checkRoom();
+                    for (int i = 0; i < 2; i++) {
+                        recorder.activate((Subject) player);
+                        // Combat check, must be done before treasure check.
+                        if (thisRoom.getOccupantCreatures().size() > 0) {
+                            ArrayList<Entity> mobsToKill = new ArrayList<>();
+                            for (Creature target : thisRoom.getOccupantCreatures()) {
+                                if (player.fight((Entity) target)) {
+                                    if (player.fight((Entity) target)) {
+                                        // kill target creature on player victory (i.e. remove from list)
+                                        mobsToKill.add((Entity) target);
+                                        target.notifyObservers("died");
+                                    }
+                                }
+                            }
+                            for (Entity k : mobsToKill) {
+                                k.checkRoom().leaveRoom(k);
+                                Creatures.remove(k);
+                            }
+                            // Combat consumes the turn.
+                            recorder.deactivate((Subject) player);
+                            continue;
+                        }
+                        // Treasure check.
+                        if (thisRoom.checkIfTreasure()) {
+                            if (((Adventurer) player).search()) {
+                                ((Adventurer) player).collectTreasure(thisRoom);
+                                // Collection consumes the turn.
+                                recorder.deactivate((Subject) player);
+                                continue;
+                            }
+                        }
+                        // No treasure and no creatures, move on!
+                        player.move();
+                        // Final creature-combat check after final movement.
+                        if (thisRoom.getOccupantCreatures().size() > 0) {
+                            ArrayList<Entity> mobsToKill = new ArrayList<>();
+                            for (Creature target : thisRoom.getOccupantCreatures()) {
+                                if (player.fight((Entity) target)) {
+                                    // kill target creature on player victory (i.e. remove from list)
+                                    mobsToKill.add((Entity) target);
+                                    target.notifyObservers("died");
+                                }
+                            }
+                            for (Entity k : mobsToKill) {
+                                k.checkRoom().leaveRoom(k);
+                                Creatures.remove(k);
+                            }
+
+                            // Combat consumes the turn.
+                            recorder.deactivate((Subject) player);
+                        }
+                        // End of turn, finally..
+                        recorder.deactivate((Subject) player);
+                    }
+                } else {
+                    // Everyone else only gets once chance for the song and dance.
+                    recorder.activate((Subject) player);
+
+                    // Get current room
+                    Room thisRoom = player.checkRoom();
+
                     // Combat check, must be done before treasure check.
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if(player.fight((Entity) target)){
+                            if (player.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
-                                Creatures.remove(target);
                                 mobsToKill.add((Entity) target);
+                                target.notifyObservers("died");
                             }
                         }
-                        for(Entity k: mobsToKill){
+                        for (Entity k : mobsToKill) {
                             k.checkRoom().leaveRoom(k);
+                            Creatures.remove(k);
                         }
+
                         // Combat consumes the turn.
+                        recorder.deactivate((Subject) player);
                         continue;
                     }
+
+                    // TODO: Add checks to confirm adventurer is still alive after each action
+
                     // Treasure check.
                     if (thisRoom.checkIfTreasure()) {
-                        if (player.rollForTreasure()) {
-                            ((Adventurer) player).collectTreasure(thisRoom);
-                            // Collection consumes the turn.
+//                    ((Adventurer) player).search();
+                        if (((Adventurer) player).search()) {
+                            // Treasure found consumes the turn.
+                            recorder.deactivate((Subject) player);
                             continue;
+                        } else {
+                            // Treasure not found.
+                            // tracker.publishTreasureFound(Treasure);
                         }
                     }
+
                     // No treasure and no creatures, move on!
                     player.move();
+
+                    // TODO: In the current structure of treasure, if an adv discovers a treasure
+                    // they already own, they will
+                    // TODO: not retrieve the item. This leaves it a static item belonging to the
+                    // room, so there is a
+                    // TODO: potential of an infinite loop of an adventurer trying to recover a
+                    // treasure they can't obtain.
+                    // TODO: This can be resolved by forcing the adv to ALWAYS move FIRST before
+                    // SEARCHING!
+
                     // Final creature-combat check after final movement.
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if(player.fight((Entity) target)){
+                            if (player.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
-                                Creatures.remove(target);
                                 mobsToKill.add((Entity) target);
+                                target.notifyObservers("died");
                             }
                         }
-                        for(Entity k: mobsToKill){
+                        for (Entity k : mobsToKill) {
                             k.checkRoom().leaveRoom(k);
+                            Creatures.remove(k);
                         }
+
+                        // Combat consumes the turn.
+                        recorder.deactivate((Subject) player);
+                        continue;
                     }
-                }
-                continue;
-            }
 
-            //! Everyone else only gets once chance for the song and dance.
-
-            // Combat check, must be done before treasure check.
-            if (thisRoom.getOccupantCreatures().size() > 0) {
-                ArrayList<Entity> mobsToKill = new ArrayList<>();
-                for (Creature target : thisRoom.getOccupantCreatures()) {
-                    if(player.fight((Entity) target)){
-                        // kill target creature on player victory (i.e. remove from list)
-                        Creatures.remove(target);
-                        mobsToKill.add((Entity) target);
-                    }
-                }
-                for(Entity k: mobsToKill){
-                    k.checkRoom().leaveRoom(k);
-                }
-                // Combat consumes the turn.
-                 continue;
-            }
-
-            // Treasure check.
-            if (thisRoom.checkIfTreasure()) {
-                if (player.rollForTreasure()) {
-                    ((Adventurer) player).collectTreasure(thisRoom);
-                    // Collection consumes the turn.
-                    continue;
-                }
-            }
-
-            // No treasure and no creatures, move on!
-            player.move();
-            // Final creature-combat check after final movement.
-            if (thisRoom.getOccupantCreatures().size() > 0) {
-                ArrayList<Entity> mobsToKill = new ArrayList<>();
-                for (Creature target : thisRoom.getOccupantCreatures()) {
-                    if(player.fight((Entity) target)){
-                        // kill target creature on player victory (i.e. remove from list)
-                        Engine.Creatures.remove(target);
-                        mobsToKill.add((Entity) target);
-                    }
-                }
-                for(Entity k: mobsToKill){
-                    k.checkRoom().leaveRoom(k);
+                    // End of turn, finally..
+                    recorder.deactivate((Subject) player);
                 }
             }
         }
     }
 
-    public void processCreatures() {
+    public void processCreatures(Logger recorder) {
         ArrayList<Entity> mobsToDie = new ArrayList<>();
         for (Entity monster : Creatures) {
+
+            // Top of turn, BAE
+            recorder.activate((Subject) monster);
+
+            // Get current room.
             Room thisRoom = monster.checkRoom();
 
             // If no Adventurers to fight, move on.
@@ -163,14 +224,20 @@ public class Engine {
 
             // After either moving or not, fight any Adventurers in the room.
             for (Adventurer target : thisRoom.getOccupantAdventurers()) {
-                if(!monster.fight((Entity) target)){
+                if (monster.fight((Entity) target)) {
+                    // Monster wins! Report event
+                } else {
+                    // Monster lost, marked for death
                     mobsToDie.add(monster);
                 }
             }
+
+            // End of turn, finally
+            recorder.deactivate((Subject) monster);
         }
-        for(Entity m: mobsToDie){
-            Creatures.remove(m);
+        for (Entity m : mobsToDie) {
             m.checkRoom().leaveRoom(m);
+            Creatures.remove(m);
         }
     }
 
@@ -194,8 +261,8 @@ public class Engine {
 
         // Dead Adventurers Victory Check
         int totalHealth = 0;
-        for( Entity a: Adventurers){
-            totalHealth += ((Adventurer)a).getHealth();
+        for (Entity a : Adventurers) {
+            totalHealth += ((Adventurer) a).getHealth();
         }
         if (totalHealth == 0) {
             System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
@@ -240,7 +307,7 @@ public class Engine {
             // spawn room.
             x = r.nextInt(2);
             y = r.nextInt(2);
-            floor = r.nextInt(4 - 1) + 1;
+            floor = r.nextInt(3) + 1;
 
             // Condition for which an orbiter can legally spawn, as they must avoid center
             // rooms.
@@ -254,6 +321,26 @@ public class Engine {
             // Place creature in room.
             Facility.get(coordinateToKey(floor, x, y)).occupyCreature(c);
             c.setCurrentRoom(Facility.get(coordinateToKey(floor, x, y)));
+        }
+
+        // Place all Treasures in random rooms.
+        Random randomTreasure = new Random();
+        for (Treasure t : Treasures) {
+            int a, b, level;
+
+            // Selecting floor and position for a creature to spawn, excluding adventurer
+            // spawn room.
+            //while(totalTreasuresPlaced < 24)
+            do {
+                level = randomTreasure.nextInt(4) + 1;
+                a = randomTreasure.nextInt(3);
+                b = randomTreasure.nextInt(3);
+                if( !Facility.get(coordinateToKey(level, a, b)).checkIfTreasure() ){
+                    Facility.get(coordinateToKey(level, a, b)).occupyTreasure(t);
+                    break;
+                }
+            } while(true);
+            // Place creature in room.
         }
     }
 
@@ -270,5 +357,24 @@ public class Engine {
             Creatures.add(new Seeker());
             Creatures.add(new Blinker());
         }
+    }
+
+    private void initializeTreasures() {
+        for (int i = 0; i < 4; ++i) {
+            Treasures.add(new Armor());
+            Treasures.add(new Gem());
+            Treasures.add(new Portal());
+            Treasures.add(new Potion());
+            Treasures.add(new Sword());
+            Treasures.add(new Trap());
+        }
+    }
+
+    public void runOneTurn() {
+        Logger recorder = new Logger();
+        processAdventurers(recorder);
+        processCreatures(recorder);
+        view.printFrame();
+        recorder.closeFrame(view.getTurn());
     }
 }

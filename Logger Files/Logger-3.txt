@@ -1,0 +1,14 @@
+Brawler took damage.
+Brawler lost a fight.
+Sneaker celebrated.
+Sneaker won a fight.
+Runner won a fight.
+Runner took damage.
+Runner lost a fight.
+Thief won a fight.
+Blinker entered room [1, 1, 1]
+Orbiter entered room [3, 2, 2]
+Orbiter entered room [3, 2, 2]
+Blinker entered room [2, 0, 0]
+Orbiter entered room [2, 2, 0]
+Blinker entered room [3, 1, 0]
