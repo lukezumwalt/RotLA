@@ -22,7 +22,6 @@ public class Engine {
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
         Treasures = new ArrayList<>();
-        Tracker T = new Tracker();
         view = new Render();
     }
 
@@ -373,7 +372,6 @@ public class Engine {
 
     public void runOneTurn() {
         Logger recorder = new Logger();
-        Tracker printer = new Tracker();
         processAdventurers(recorder);
         processCreatures(recorder);
         view.printFrame();
