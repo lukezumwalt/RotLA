@@ -55,39 +55,39 @@ public class Logger extends Observer {
                 temp = subject.getClass().getSimpleName() + " entered room "
                         + Arrays.toString(((Adventurer) subject).checkRoom().getCoordinates());
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "wonCombat" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " won a fight.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "lostCombat" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " lost a fight.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "celebration" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " celebrated.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println();
+//                System.out.println();
             }
             case "tookDamage" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " took damage.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "died" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " died.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "treasureFound" -> {
                 ArrayList<Treasure> inv = ((Adventurer)subject).getInventory();
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " found " +
                         (inv.get(inv.size() - 1)).getClass().getSimpleName() + ".";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
         }
     }
@@ -100,22 +100,22 @@ public class Logger extends Observer {
                 temp = subject.getClass().getSimpleName() + " entered room "
                         + Arrays.toString(((Creature) subject).checkRoom().getCoordinates());
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "wonCombat" -> {
                 temp = ((Creature) subject).getClass().getSimpleName() + " won a fight.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "lostCombat" -> {
                 temp = ((Creature) subject).getClass().getSimpleName() + " lost a fight.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
             case "died" -> {
                 temp = ((Creature) subject).getClass().getSimpleName() + " died.";
                 this.logFileEntry += (temp + "\n");
-                System.out.println(temp);
+//                System.out.println(temp);
             }
         }
     }
