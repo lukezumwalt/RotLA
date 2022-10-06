@@ -30,19 +30,17 @@ COMMENTS
 ***********
 The Raiders of Lost Arctangent program is a fully simulated game adaptation of Temple of the Beastmen, made by Lester Smith of Game Designer’s Workshop. By running this program, the game will autonomously run until the game is won, either by all treasure being found, all adventurers being killed, or all creatures being killed. In this repository, you will find the code to run the game autonomously, as well as, the terminal output of one completed game and another output of 30 completed games within corresponding text files. Users must press enter to transition between turns.<br>
 <br>
-An example of inheritance can be found in the Brawler.java file at line 12. Runner.java at line 13, Sneaker.java at line 13, and Thief.java at line 13.
-All of the Adventurer subclasses inherit from the Adventurer superclass.<br>
+An Observer pattern was implemented via the Subject, Observer, and Logger classes. The Subject class is implemented by Adventurer and Creature abstract classes. This updates the status of Adventurers and Creatures every turn. This will also notify the Observer class for the Logger summary output. Logged events are only reported from the perspective of the actor after the event, i.e. targets in combat do not report a loss if the attacker wins. This goes for both Adventurers and Creatures.<br>
+It should also be noted that we combined the functionality of Logger and Tracker in the write-up to one, cohesive class called Logger. Logger is capable of meeting requirements for both Logger and Tracker. <br>
 <br>
-An example of encapsulation can be found in the Adventurer.java file at line 15. The example of the get function for the encapsulation can be found at line 47. This shows encapsulation by encapsulating the member data, which is private, and making it accessible via a getter method.<br>
+A Strategy pattern was implemented with the combatStyle and searchStyle classes. This allows for unique subclasses such as expert, trained, untrained, and stealth combat subclasses. This also allows for the unique subclasses of careful, careless, and quick search subclasses.<br>
 <br>
-An example of abstraction can be found in the Orbiter.java at line 13. All of the entity classes, creatures and adventurers extend their corresponding superclasses. For example, Orbiter extends Creature that implements Entity.<br>
+A Decorator pattern was implemented with the celebrateDecorator class that implements the combatStyle. There are four subclasses, shout, dance, spin, and jump that have a 1 in 3 chance of occurring after an adventurer wins combat. Each celebration will be performed 0 to 2 times, also determined randomly. <br>
 <br>
-An example of polymorphism can be found in Orbiter.java, Blinker.java, and Seeker.java as they all are extensions of the Creature superclass. The associated code lines are Orbiter.java at line 9, Blinker.java at line 14, and Seeker.java at line 13. They all carry the same methods and attributes as a result with minor variance.<br>
-An example of cohesion can be found in Render.java at line 22. This is a good example because Render.java holds all the print statements and methods for the game simulation. This is considered high cohesion since they are highly related to the class they are within.<br>
+Therer is also a new Treasure package that contains the new Treasure objects. 24 objects are placed randomly in the Facility and provide adventurers with different events that occur upon the Treasure objects discovery. Adventueres also have an inventory to track their treasure objects. Adventurers may not carry duplicates.<br>
 <br>
-An example of identity can be found in Render.java in line 78. We can see how the Adventurer a is set equal to Adventurer a0. <br>
 
 *********
 UML UPDATE
 *********
-The main structure stayed relatively the same. The biggest change that was made was that the subclasses of Adventurer and Creature are now also inherited from the Entity class. The Entity class acts as an entry way for all of our characters which was true in version 1.0 of our UML and true for this current version. The current version, however, has more access. We also removed TurnOrchestrator and encapsulated those methods in the Engine class. We also set up an explicit file structure using cohesive java packages, which is captured in the UML. This supports comprehensive inheritance and readability. Outside of these changes, we instantiated a more robust design of attributes and methods in each of the classes.<br>
+The main structure stayed relatively the same. The biggest change was adding an additional Action package to refactor our combatStyle and searchStyle correctly. Also, our Treasure package and object required far less methods than expected. Additionally, the Observer pattern refactored quite a bit of our UML to include Subject, Observer, and Logger properly.<br>
