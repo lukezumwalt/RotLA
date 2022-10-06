@@ -4,6 +4,7 @@ import Board.Room;
 import Characters.Friendlies.Adventurer;
 import Treasure.Treasure;
 
+// Strategy pattern for implementing unique search algorithm objects.
 public abstract class searchStyle {
 
     // PUBLIC METHODS
