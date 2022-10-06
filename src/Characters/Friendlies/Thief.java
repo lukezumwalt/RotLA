@@ -41,10 +41,11 @@ public class Thief extends Adventurer implements Entity, Subject {
     public boolean fight(Entity target) {
         int fightVal = combatStyle.fight(this, target);
         if( fightVal > 0 ){
+            notifyObservers("wonCombat");
             return true;
-        }
-        else if( fightVal < 0 ){
+        } else if (fightVal < 0) {
             this.takeDamage(1);
+            notifyObservers("lostCombat");
         }
         return false;
     }
@@ -58,6 +59,7 @@ public class Thief extends Adventurer implements Entity, Subject {
             else{
                 this.inventory.add(obtained);
             }
+            notifyObservers("treasureFound");
             return true;
         }
         return false;
@@ -65,6 +67,7 @@ public class Thief extends Adventurer implements Entity, Subject {
 
     public void takeDamage(int amount) {
         this.health -= amount;
+        notifyObservers("tookDamage");
     }
 
     @Override
@@ -90,6 +93,9 @@ public class Thief extends Adventurer implements Entity, Subject {
             this.currentRoom.leaveRoom(this);
             this.setCurrentRoom(newRoom);
             newRoom.occupyAdventurer(this);
+
+            // Report Adventurer entered new room:
+            notifyObservers("roomEntered");
         }
     }
 
@@ -164,7 +170,7 @@ public class Thief extends Adventurer implements Entity, Subject {
 
     @Override
     public void unregisterObserver(Observer o) {
-        observerList.remove(observerList.indexOf(o));
+        observerList.remove(o);
     }
 
     @Override

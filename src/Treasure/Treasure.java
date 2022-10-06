@@ -2,9 +2,7 @@ package Treasure;
 
 import Characters.Friendlies.Adventurer;
 
-public class Treasure {
+public abstract class Treasure {
 
-    public void activate(Adventurer self) {
-
-    }
+    public abstract void activate(Adventurer self);
 }

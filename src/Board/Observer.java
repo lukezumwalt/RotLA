@@ -1,7 +1,6 @@
 package Board;
 
 import Characters.Enemies.Creature;
-import Characters.Friendlies.Adventurer;
 import Characters.Subject;
 
 public abstract class Observer {

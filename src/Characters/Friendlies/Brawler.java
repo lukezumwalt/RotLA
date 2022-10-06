@@ -41,9 +41,11 @@ public class Brawler extends Adventurer implements Entity, Subject {
     public boolean fight(Entity target) {
         int fightVal = combatStyle.fight(this, target);
         if (fightVal > 0) {
+            notifyObservers("wonCombat");
             return true;
         } else if (fightVal < 0) {
             this.takeDamage(1);
+            notifyObservers("lostCombat");
         }
         return false;
     }
@@ -56,8 +58,8 @@ public class Brawler extends Adventurer implements Entity, Subject {
             } else {
                 obtained.activate(this);
                 this.inventory.add(obtained);
-                notifyObservers("treasureFound");
             }
+            notifyObservers("treasureFound");
             return true;
         }
         return false;
@@ -169,7 +171,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
 
     @Override
     public void unregisterObserver(Observer o) {
-        observerList.remove(observerList.indexOf(o));
+        observerList.remove(o);
     }
 
     @Override

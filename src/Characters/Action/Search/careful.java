@@ -17,7 +17,7 @@ public class careful extends searchStyle{
             // Check to confirm adventurer doesn't already own one
             // of the discovered item.
             for( Treasure select : self.getInventory() ){
-                if( select == currentRoom.peekTreasure() ){
+                if( select.getClass().getSimpleName().equals(currentRoom.peekTreasure().getClass().getSimpleName()) ){
                     // Too bad!  You already have this item
                     return null;
                 }

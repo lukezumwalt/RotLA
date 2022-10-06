@@ -1,5 +1,6 @@
 package Game;
 
+import Board.Logger;
 import Board.Render;
 
 import java.util.Objects;
@@ -9,7 +10,6 @@ public class Run {
     public static void main(String[] args) {
 
         // instantiate objects
-        Render view = new Render();
         Scanner input = new Scanner(System.in);
         Engine game = new Engine();
 
@@ -28,9 +28,8 @@ public class Run {
                 break;
             }
 
-            view.printFrame();
-            game.processAdventurers();
-            game.processCreatures();
+            // Execute one turn
+            game.runOneTurn();
         }
         input.close();
     }
