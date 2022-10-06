@@ -2,7 +2,6 @@ package Characters.Action.Combat;
 
 import Board.Observer;
 import Characters.Entity;
-import Characters.Action.Combat.combatDecorator.celebrateDecorator;
 import Characters.Action.Combat.combatDecorator.dance;
 import Characters.Action.Combat.combatDecorator.jump;
 import Characters.Action.Combat.combatDecorator.shout;
@@ -30,7 +29,6 @@ public class expert implements combatStyle {
 
             if (myRoll > targetRoll) {
                 // Victory
-                notifyObservers(self, "wonCombat");
                 // 25% chance Adventurer will celebrate upon victory
                 Random r = new Random();
                 if (0 == r.nextInt(3)) {
@@ -38,7 +36,8 @@ public class expert implements combatStyle {
                     shout.setCelebrate();
                     dance.setCelebrate();
                     spin.setCelebrate();
-                    notifyObservers(self, "celebration");
+                    System.out.print("\n");
+                    ((Adventurer)subject).notifyObservers("celebration");
                 }
                 return 1;
             } else if (myRoll == targetRoll) {
@@ -46,29 +45,8 @@ public class expert implements combatStyle {
                 return 0;
             } else {
                 // Loss
-                notifyObservers(self, "lostCombat");
                 return -1;
             }
         }
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        Adventurer.observerList.add(o);
-    }
-
-    @Override
-    public void unregisterObserver(Observer o) {
-        Adventurer.observerList.remove(Adventurer.observerList.indexOf(o));
-    }
-
-    @Override
-    public void notifyObservers(Adventurer subject, String eventID) {
-        // TODO Auto-generated method stub
-        Adventurer self = (Adventurer) subject;
-        for (Observer o : Adventurer.observerList) {
-            o.updateAdventurerStatus(self, eventID);
-        }
-
     }
 }

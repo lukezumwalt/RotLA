@@ -2,10 +2,11 @@ package Characters.Enemies;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Subject;
 
 import java.util.ArrayList;
 
-public abstract class Creature {
+public abstract class Creature implements Subject {
 
     // PROTECTED ATTRIBUTES
     protected Room currentRoom;
@@ -22,4 +23,6 @@ public abstract class Creature {
     public abstract void setCurrentRoom(Room newRoom);
 
     public abstract boolean getAlive();
+
+    public abstract Room checkRoom();
 }

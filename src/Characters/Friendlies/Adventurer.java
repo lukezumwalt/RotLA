@@ -17,7 +17,7 @@ public abstract class Adventurer implements Subject {
     protected String sign;
     protected String name;
     protected int health;
-    protected static boolean alive;
+    protected boolean alive;
     protected combatStyle combatStyle;
     protected searchStyle searchStyle;
     protected int offenseBonus; // bias added to roll on attack

@@ -30,25 +30,5 @@ public class jump extends celebrateDecorator {
         for (int i = 0; i < numActions; i++) {
             System.out.print(" jump");
         }
-
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        Adventurer.observerList.add(o);
-    }
-
-    @Override
-    public void unregisterObserver(Observer o) {
-        Adventurer.observerList.remove(Adventurer.observerList.indexOf(o));
-    }
-
-    @Override
-    public void notifyObservers(Adventurer subject, String eventID) {
-        // TODO Auto-generated method stub
-        Adventurer self = (Adventurer) subject;
-        for (Observer o : Adventurer.observerList) {
-            o.updateAdventurerStatus(self, eventID);
-        }
     }
 }

@@ -25,25 +25,7 @@ public class spin extends celebrateDecorator {
         Random celebrateRandom = new Random();
         int numActions = celebrateRandom.nextInt(2);
         for (int i = 0; i < numActions; i++) {
-            System.out.println(" spin");
+            System.out.print(" spin");
         }
-    }
-
-    @Override
-    public void unregisterObserver(Observer o) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void notifyObservers(Adventurer subject, String eventID) {
-        // TODO Auto-generated method stub
-
     }
 }

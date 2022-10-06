@@ -29,24 +29,5 @@ public class monstrous implements combatStyle {
             // Loss
             return -1;
         }
-
-    }
-
-    @Override
-    public void unregisterObserver(Observer o) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void notifyObservers(Adventurer subject, String eventID) {
-        // TODO Auto-generated method stub
-
     }
 }

@@ -57,9 +57,10 @@ public class Thief extends Adventurer implements Entity, Subject {
                 this.takeDamage(1);
             }
             else{
+                obtained.activate(this);
                 this.inventory.add(obtained);
+                notifyObservers("treasureFound");
             }
-            notifyObservers("treasureFound");
             return true;
         }
         return false;
@@ -68,6 +69,10 @@ public class Thief extends Adventurer implements Entity, Subject {
     public void takeDamage(int amount) {
         this.health -= amount;
         notifyObservers("tookDamage");
+        if(this.health <= 0){
+            notifyObservers("died");
+            this.alive = false;
+        }
     }
 
     @Override

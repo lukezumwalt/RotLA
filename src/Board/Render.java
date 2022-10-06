@@ -86,14 +86,9 @@ public class Render {
      * status
      */
     private void printStatus() {
-        int oCount = 0;
-        int sCount = 0;
-        int bCount = 0;
         System.out.println("Adventurers\t\tRoom\t\tHealth\t\tTreasure");
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
-//            System.out.println(a0.getName() + ":   \t" + a.getTreasureCount() + " Treasure(s) / " + (3 - a.getHealth())
-//                    + " Damage");
             StringBuilder treasurePrint = new StringBuilder();
             for(Treasure t : a.getInventory()){
                 treasurePrint.append(t.getClass().getSimpleName()).append(" ");
@@ -103,19 +98,15 @@ public class Render {
                     a.getHealth() + "\t\t\t" +
                     treasurePrint);
         }
+
+        System.out.println("\nTotal Active Creatures: " + getCreatures().size());
+        System.out.println("\nCreatures\t\tRoom");
         for (Entity c0 : getCreatures()) {
-            String cSign = c0.getSign();
-            if (cSign == "O") {
-                oCount++;
-            } else if (cSign == "S") {
-                sCount++;
-            } else if (cSign == "B") {
-                bCount++;
-            }
+            Creature c = (Creature)c0;
+            System.out.println(c.getClass().getSimpleName() + "\t\t\t" +
+                    Arrays.toString(c.checkRoom().getCoordinates()));
         }
-        System.out.println("Orbiters:\t" + oCount + " Remaining");
-        System.out.println("Seekers:\t" + sCount + " Remaining");
-        System.out.println("Blinkers:\t" + bCount + " Remaining");
+        System.out.print("\n\n");
     }
 
     // PUBLIC METHODS

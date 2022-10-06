@@ -3,9 +3,11 @@ package Board;
 import Characters.Enemies.Creature;
 import Characters.Friendlies.Adventurer;
 import Characters.Subject;
+import Treasure.Treasure;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Logger extends Observer {
@@ -14,9 +16,6 @@ public class Logger extends Observer {
     // subscribe for published events occurring during a turn
     // write each event to a txt file
     // Logger-n.txt, n = turn number
-
-    private Room loggedRoom;
-    private int loggedHealth;
     private String logFileEntry;
 
     public Logger() {
@@ -24,13 +23,11 @@ public class Logger extends Observer {
     }
 
     public void activate(Subject s){
-        //System.out.println("Entered Logger.");
         this.subject = s;
         this.subject.registerObserver(this);
     }
 
     public void deactivate(Subject s) {
-        //System.out.println("Exiting Logger.");
         this.subject.unregisterObserver(this);
         this.subject = null;
     }
@@ -42,6 +39,8 @@ public class Logger extends Observer {
         try{
             FileWriter writeTo = new FileWriter(fileName);
             writeTo.write(this.logFileEntry);
+            writeTo.flush();
+            writeTo.close();
         }catch(IOException e){
             System.out.println("File error!");
             e.printStackTrace();
@@ -50,74 +49,74 @@ public class Logger extends Observer {
 
     @Override
     public void updateAdventurerStatus(Subject subject, String eventID) {
-//        System.out.println("Entered Update.");
-//        System.out.println(eventID);
         String temp = "";
         switch (eventID) {
-            case "roomEntered":
+            case "roomEntered" -> {
                 temp = subject.getClass().getSimpleName() + " entered room "
                         + Arrays.toString(((Adventurer) subject).checkRoom().getCoordinates());
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                break;
-
-            case "wonCombat":
+            }
+            case "wonCombat" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " won a fight.";
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                break;
-
-            case "lostCombat":
+            }
+            case "lostCombat" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " lost a fight.";
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                break;
-
-            case "celebration":
+            }
+            case "celebration" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " celebrated.";
                 this.logFileEntry += (temp + "\n");
                 System.out.println();
-                break;
-
-            case "tookDamage":
+            }
+            case "tookDamage" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " took damage.";
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                break;
-
-            case "died":
+            }
+            case "died" -> {
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " died.";
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                System.out.println(((Adventurer) subject).getAlive());
-                break;
-
-            case "treasureFound":
+            }
+            case "treasureFound" -> {
+                ArrayList<Treasure> inv = ((Adventurer)subject).getInventory();
                 temp = ((Adventurer) subject).getClass().getSimpleName() + " found " +
-                        Arrays.toString(((Adventurer) subject).getInventory().toArray()) + ".";
+                        (inv.get(inv.size() - 1)).getClass().getSimpleName() + ".";
                 this.logFileEntry += (temp + "\n");
                 System.out.println(temp);
-                break;
+            }
         }
     }
 
     @Override
     public void updateCreatureStatus(Creature self, String eventID) {
+        String temp = "";
         switch (eventID) {
-            case "roomEntered":
-                break;
-
-            case "wonCombat":
-                break;
-
-            case "lostCombat":
-                break;
-
-            case "died":
-                break;
+            case "roomEntered" -> {
+                temp = subject.getClass().getSimpleName() + " entered room "
+                        + Arrays.toString(((Creature) subject).checkRoom().getCoordinates());
+                this.logFileEntry += (temp + "\n");
+                System.out.println(temp);
+            }
+            case "wonCombat" -> {
+                temp = ((Creature) subject).getClass().getSimpleName() + " won a fight.";
+                this.logFileEntry += (temp + "\n");
+                System.out.println(temp);
+            }
+            case "lostCombat" -> {
+                temp = ((Creature) subject).getClass().getSimpleName() + " lost a fight.";
+                this.logFileEntry += (temp + "\n");
+                System.out.println(temp);
+            }
+            case "died" -> {
+                temp = ((Creature) subject).getClass().getSimpleName() + " died.";
+                this.logFileEntry += (temp + "\n");
+                System.out.println(temp);
+            }
         }
     }
-
-    // store all events and log to file at end of turn
-    // Destructor?
 }

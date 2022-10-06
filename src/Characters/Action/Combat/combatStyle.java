@@ -12,12 +12,5 @@ public interface combatStyle {
     // Returns damage dealt to self
     // If > 0, self won
     // If == 0, self win or tie
-    public abstract int fight(Entity self, Entity target);
-
-    public abstract void unregisterObserver(Observer o);
-
-    public abstract void registerObserver(Observer o);
-
-    public abstract void notifyObservers(Adventurer subject, String eventID);
-
+    int fight(Entity self, Entity target);
 }

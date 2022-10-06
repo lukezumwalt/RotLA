@@ -6,6 +6,7 @@ import Characters.Action.Combat.monstrous;
 import Characters.Entity;
 import Characters.Subject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static Game.Engine.Facility;
@@ -25,6 +26,7 @@ public class Blinker extends Creature implements Entity, Subject {
         name = "blinker";
         alive = true;
         combatStyle = new monstrous();
+        observerList = new ArrayList<>();
     }
 
     // PUBLIC METHODS
@@ -35,12 +37,15 @@ public class Blinker extends Creature implements Entity, Subject {
 
         if (fightVal > 0) {
             // Victory
+            notifyObservers("wonCombat");
             return true;
         } else if (fightVal < 0) {
             // Tie
             return false;
         } else {
             // Loss
+            notifyObservers("lostCombat");
+            notifyObservers("died");
             alive = false;
         }
         return false;
@@ -59,6 +64,8 @@ public class Blinker extends Creature implements Entity, Subject {
         this.currentRoom.leaveRoom(this);
         this.setCurrentRoom(newRoom);
         newRoom.occupyCreature(this);
+
+        notifyObservers("roomEntered");
     }
 
     @Override
@@ -89,16 +96,18 @@ public class Blinker extends Creature implements Entity, Subject {
 
     @Override
     public void registerObserver(Observer o) {
-
+        observerList.add(o);
     }
 
     @Override
     public void unregisterObserver(Observer o) {
-
+        observerList.remove(o);
     }
 
     @Override
     public void notifyObservers(String eventID) {
-
+        for (Observer o : observerList) {
+            o.updateCreatureStatus(this, eventID);
+        }
     }
 }
