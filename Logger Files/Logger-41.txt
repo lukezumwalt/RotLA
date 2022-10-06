@@ -1,0 +1,4 @@
+Brawler entered room [2, 0, 1]
+Sneaker entered room [2, 2, 2]
+Runner entered room [4, 2, 1]
+Thief won a fight.
