@@ -1,9 +1,5 @@
 package Game;
 
-import Board.Logger;
-import Board.Render;
-
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Run {
