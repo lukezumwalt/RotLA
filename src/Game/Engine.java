@@ -5,7 +5,6 @@ import java.util.*;
 import Board.Logger;
 import Board.Render;
 import Board.Room;
-import Board.Tracker;
 import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
