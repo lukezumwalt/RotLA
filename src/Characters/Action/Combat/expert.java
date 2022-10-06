@@ -1,6 +1,5 @@
 package Characters.Action.Combat;
 
-import Board.Observer;
 import Characters.Entity;
 import Characters.Action.Combat.combatDecorator.dance;
 import Characters.Action.Combat.combatDecorator.jump;
@@ -14,9 +13,6 @@ import java.util.Random;
 
 public class expert implements combatStyle {
 
-    // Returns damage dealt to self
-    // If > 0, self won
-    // If == 0, self win or tie
     @Override
     public int fight(Entity subject, Entity target) {
         Adventurer self = (Adventurer) subject;

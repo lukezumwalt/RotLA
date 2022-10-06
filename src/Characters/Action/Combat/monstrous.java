@@ -5,13 +5,8 @@ import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;
 
-import Board.Observer;
-
 public class monstrous implements combatStyle {
 
-    // Returns damage dealt to self
-    // If > 0, self won
-    // If == 0, self win or tie
     @Override
     public int fight(Entity self, Entity target) {
         Adventurer opponent = (Adventurer) target;

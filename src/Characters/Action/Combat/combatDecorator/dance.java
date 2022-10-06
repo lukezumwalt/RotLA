@@ -2,10 +2,8 @@ package Characters.Action.Combat.combatDecorator;
 
 import java.util.Random;
 
-import Board.Observer;
 import Characters.Entity;
 import Characters.Action.Combat.combatStyle;
-import Characters.Friendlies.Adventurer;
 
 // Concrete class extending abstract class
 public class dance extends celebrateDecorator {
