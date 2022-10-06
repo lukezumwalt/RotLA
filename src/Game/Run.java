@@ -18,18 +18,18 @@ public class Run {
         System.out.println("Press [Enter] to begin...");
         // Primary Game.Run Loop
         while (true) {
+//            // Debugging condition
+//            if (Objects.equals(input.nextLine(), "gg")) {
+//                break;
+//            }
+
+            // Execute one turn
+            game.runOneTurn();
 
             // Exit Conditions
             if (game.endConditionMet()) {
                 break;
             }
-            // Debugging condition
-            if (Objects.equals(input.nextLine(), "gg")) {
-                break;
-            }
-
-            // Execute one turn
-            game.runOneTurn();
         }
         input.close();
     }
