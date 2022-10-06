@@ -1,0 +1,216 @@
+Game: 1
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 2
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 3
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 4
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 5
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 6
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 7
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 8
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 9
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 10
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 11
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 12
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 13
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 14
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 15
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 16
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 17
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 18
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 19
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 20
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 21
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 22
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 23
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 24
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 25
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 26
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 27
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 28
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 29
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+Game: 30
+
+
+ADVENTURERS WIN!
+	They defeated every creature!
+
+	GG!
+
+Adventurer combat victories: 30
+Adventurer treasure victories: 0
+Creature combat victories: 0
+
+Process finished with exit code
