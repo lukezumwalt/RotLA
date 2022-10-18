@@ -30,4 +30,4 @@ hs_err_pid*
 Logger-*
 
 # VS code w settings.json
-.vscode/*
+.vscode/settings.json
