@@ -46,15 +46,15 @@ public class Render {
     // PRIVATE METHODS
     // prints turn number
     private void printTurn() {
-        turn++;
         System.out.println("\nRotLA Turn: " + turn);
+        turn++;
     }
 
     // printBoard access the Map via get methods that
     // reference a string called a key.
     // then it calls render for adventurers or creatures found
     // in the room based on if the key matches the room key.
-    private void printBoard() {
+    public void printBoard() {
         System.out.println("+-----------------------------------------------------------------------------------+");
         System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " ]");
         for (int i = 1; i < 5; i++) {

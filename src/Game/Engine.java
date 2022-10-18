@@ -25,6 +25,58 @@ public class Engine {
 
         // Eager Singleton
         view = Render.getInstance();
+
+        // Initialize Game Properties
+        this.initialize();
+    }
+
+    private void characterCreator() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(
+                """
+                Welcome to Raiders of the Lost Arc-tangent!
+                Please select a character from the following list of options:
+                
+                [1] BRAWLER
+                [2] RUNNER
+                [3] SNEAKER
+                [4] THIEF
+                """
+        );
+        int choice = input.nextInt();
+        String type = "";
+        System.out.print("You chose... ");
+        switch (choice) {
+            case 1 -> {
+                type = "Brawler";
+                this.Player = new Brawler();
+            }
+            case 2 -> {
+                type = "Runner";
+                this.Player = new Runner();
+            }
+            case 3 -> {
+                type = "Sneaker";
+                this.Player = new Sneaker();
+            }
+            case 4 -> {
+                type = "Thief";
+                this.Player = new Thief();
+            }
+        }
+        System.out.println(type + "!");
+        System.out.print("\nPlease enter a name for your " + type + ": ");
+        String playerName = input.nextLine();
+        this.Player.setPlayerName(playerName);
+
+        // Object Creation
+        /* this is where we would call a factory to generate an adventurer */
+        /* in fact, we may have to do this regardless... */
+        Adventurers.add((Entity) Player);
+
+        // Place Player in the Facility spawn room
+        Facility.get("011").occupyAdventurer(Player);
+        this.Player.setCurrentRoom(Facility.get("011"));
     }
 
     // PUBLIC ATTRIBUTES
@@ -36,7 +88,8 @@ public class Engine {
     private static ArrayList<Entity> Adventurers;
     private static ArrayList<Entity> Creatures;
     private static ArrayList<Treasure> Treasures;
-    private Render view;
+    private Adventurer Player;
+    private final Render view;
 
     // PUBLIC METHODS
     public static ArrayList<Entity> getAdventurers() {
@@ -47,41 +100,28 @@ public class Engine {
         return Creatures;
     }
 
-    public void initialize() {
-        // Instantiate Adventurers
-        initializeAdventurers();
-        // Instantiate Creatures
-        initializeCreatures();
-        // Instantiate Treasures
-        initializeTreasures();
-        // Instantiate Game Board
-        createBlankBoard();
-        initializeBoard();
-        mapNeighborhood();
-    }
-
     public static String coordinateToKey(int floor, int x, int y) {
         return String.valueOf(floor) + String.valueOf(x) + String.valueOf(y);
     }
 
     public void processAdventurers(Logger recorder) {
-        for (Entity player : Adventurers) {
+        for (Entity p : Adventurers) {
 
             // First and foremost, alive check
-            if (((Adventurer) player).getAlive()) {
+            if (((Adventurer) p).getAlive()) {
                 // TODO: clean this up!!
                 // Runner gets 2 "actions" per turn.
-                if ("runner".equals(player.getName())) {
+                if ("Runner".equals(p.getName())) {
                     // Get current room
-                    Room thisRoom = player.checkRoom();
+                    Room thisRoom = p.checkRoom();
                     for (int i = 0; i < 2; i++) {
-                        recorder.activate((Subject) player);
+                        recorder.activate((Subject) p);
                         // Combat check, must be done before treasure check.
                         if (thisRoom.getOccupantCreatures().size() > 0) {
                             ArrayList<Entity> mobsToKill = new ArrayList<>();
                             for (Creature target : thisRoom.getOccupantCreatures()) {
-                                if (player.fight((Entity) target)) {
-                                    if (player.fight((Entity) target)) {
+                                if (p.fight((Entity) target)) {
+                                    if (p.fight((Entity) target)) {
                                         // kill target creature on player victory (i.e. remove from list)
                                         mobsToKill.add((Entity) target);
                                         target.notifyObservers("died");
@@ -93,25 +133,25 @@ public class Engine {
                                 Creatures.remove(k);
                             }
                             // Combat consumes the turn.
-                            recorder.deactivate((Subject) player);
+                            recorder.deactivate((Subject) p);
                             continue;
                         }
                         // Treasure check.
                         if (thisRoom.checkIfTreasure()) {
-                            if (((Adventurer) player).search()) {
-                                ((Adventurer) player).collectTreasure(thisRoom);
+                            if (((Adventurer) p).search()) {
+                                ((Adventurer) p).collectTreasure(thisRoom);
                                 // Collection consumes the turn.
-                                recorder.deactivate((Subject) player);
+                                recorder.deactivate((Subject) p);
                                 continue;
                             }
                         }
                         // No treasure and no creatures, move on!
-                        player.move();
+                        p.move();
                         // Final creature-combat check after final movement.
                         if (thisRoom.getOccupantCreatures().size() > 0) {
                             ArrayList<Entity> mobsToKill = new ArrayList<>();
                             for (Creature target : thisRoom.getOccupantCreatures()) {
-                                if (player.fight((Entity) target)) {
+                                if (p.fight((Entity) target)) {
                                     // kill target creature on player victory (i.e. remove from list)
                                     mobsToKill.add((Entity) target);
                                     target.notifyObservers("died");
@@ -123,23 +163,23 @@ public class Engine {
                             }
 
                             // Combat consumes the turn.
-                            recorder.deactivate((Subject) player);
+                            recorder.deactivate((Subject) p);
                         }
                         // End of turn, finally..
-                        recorder.deactivate((Subject) player);
+                        recorder.deactivate((Subject) p);
                     }
                 } else {
                     // Everyone else only gets once chance for the song and dance.
-                    recorder.activate((Subject) player);
+                    recorder.activate((Subject) p);
 
                     // Get current room
-                    Room thisRoom = player.checkRoom();
+                    Room thisRoom = p.checkRoom();
 
                     // Combat check, must be done before treasure check.
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if (player.fight((Entity) target)) {
+                            if (p.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
                                 mobsToKill.add((Entity) target);
                                 target.notifyObservers("died");
@@ -151,7 +191,7 @@ public class Engine {
                         }
 
                         // Combat consumes the turn.
-                        recorder.deactivate((Subject) player);
+                        recorder.deactivate((Subject) p);
                         continue;
                     }
 
@@ -159,10 +199,10 @@ public class Engine {
 
                     // Treasure check.
                     if (thisRoom.checkIfTreasure()) {
-//                    ((Adventurer) player).search();
-                        if (((Adventurer) player).search()) {
+//                    ((Adventurer) p).search();
+                        if (((Adventurer) p).search()) {
                             // Treasure found consumes the turn.
-                            recorder.deactivate((Subject) player);
+                            recorder.deactivate((Subject) p);
                             continue;
                         } else {
                             // Treasure not found.
@@ -171,7 +211,7 @@ public class Engine {
                     }
 
                     // No treasure and no creatures, move on!
-                    player.move();
+                    p.move();
 
                     // TODO: In the current structure of treasure, if an adv discovers a treasure
                     // they already own, they will
@@ -186,7 +226,7 @@ public class Engine {
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
                         for (Creature target : thisRoom.getOccupantCreatures()) {
-                            if (player.fight((Entity) target)) {
+                            if (p.fight((Entity) target)) {
                                 // kill target creature on player victory (i.e. remove from list)
                                 mobsToKill.add((Entity) target);
                                 target.notifyObservers("died");
@@ -198,12 +238,12 @@ public class Engine {
                         }
 
                         // Combat consumes the turn.
-                        recorder.deactivate((Subject) player);
+                        recorder.deactivate((Subject) p);
                         continue;
                     }
 
                     // End of turn, finally..
-                    recorder.deactivate((Subject) player);
+                    recorder.deactivate((Subject) p);
                 }
             }
         }
@@ -290,14 +330,12 @@ public class Engine {
     }
 
     private void initializeBoard() {
-        Characters.Enemies.Orbiter O = new Orbiter();
-
-        // Place all adventurers in the adventurer spawn room.
-        for (Entity a0 : Adventurers) {
-            Adventurer a = (Adventurer) a0;
-            Facility.get("011").occupyAdventurer(a);
-            a.setCurrentRoom(Facility.get("011"));
-        }
+//        // Place all adventurers in the adventurer spawn room.
+//        for (Entity a0 : Adventurers) {
+//            Adventurer a = (Adventurer) a0;
+//            Facility.get("011").occupyAdventurer(a);
+//            a.setCurrentRoom(Facility.get("011"));
+//        }
 
         // Place all creatures in random rooms.
         Random r = new Random();
@@ -346,11 +384,28 @@ public class Engine {
         }
     }
 
+    public void initialize() {
+        // Instantiate Adventurers
+//        initializeAdventurers();
+        // Instantiate Creatures
+        initializeCreatures();
+        // Instantiate Treasures
+        initializeTreasures();
+        // Instantiate Game Board
+        createBlankBoard();
+        initializeBoard();
+        mapNeighborhood();
+
+        // User Interface
+        view.printBoard();
+        characterCreator();
+    }
+
     private void initializeAdventurers() {
-        Adventurers.add(new Brawler());
-        Adventurers.add(new Sneaker());
-        Adventurers.add(new Runner());
-        Adventurers.add(new Thief());
+//        Adventurers.add(new Brawler());
+//        Adventurers.add(new Sneaker());
+//        Adventurers.add(new Runner());
+//        Adventurers.add(new Thief());
     }
 
     private void initializeCreatures() {

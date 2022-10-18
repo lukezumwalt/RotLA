@@ -1,5 +1,6 @@
 package Game;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Run {
@@ -9,15 +10,19 @@ public class Run {
         Scanner input = new Scanner(System.in);
         Engine game = new Engine();
 
-        game.initialize();
+        // Character Creation
+//        game.view.printFrame();
+//        game.characterCreation();
 
-        System.out.println("Press [Enter] to begin...");
+//        game.initialize();
+
+//        System.out.println("Press [Enter] to begin...");
         // Primary Game.Run Loop
         while (true) {
-//            // Debugging condition
-//            if (Objects.equals(input.nextLine(), "gg")) {
-//                break;
-//            }
+            // Debugging condition
+            if (Objects.equals(input.nextLine(), "gg")) {
+                break;
+            }
 
             // Execute one turn
             game.runOneTurn();

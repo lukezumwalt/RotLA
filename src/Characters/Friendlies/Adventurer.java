@@ -16,6 +16,7 @@ public abstract class Adventurer implements Subject {
     protected Room currentRoom;
     protected String sign;
     protected String name;
+    protected String playerName;
     protected int health;
     protected boolean alive;
     protected combatStyle combatStyle;
@@ -31,6 +32,9 @@ public abstract class Adventurer implements Subject {
     public abstract void collectTreasure(Room r);
 
     public abstract void setCurrentRoom(Room newRoom);
+
+    public abstract void setPlayerName(String name);
+    public abstract String getPlayerName();
 
     // Getter Suite
     public abstract String getSign();
