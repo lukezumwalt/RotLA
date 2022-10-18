@@ -114,7 +114,7 @@ public class Sneaker extends Adventurer implements Entity, Subject {
 
     @Override
     public int getTreasureCount() {
-        return 0;
+        return inventory.size();
     }
 
     public ArrayList<Treasure> getInventory(){
