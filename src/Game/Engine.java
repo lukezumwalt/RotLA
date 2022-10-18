@@ -15,9 +15,8 @@ import static Board.Room.mapNeighborhood;
 
 public class Engine {
 
-
     // CONSTRUCTORS
-    Engine() {
+    public Engine() {
         Facility = new HashMap<>();
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
@@ -34,15 +33,14 @@ public class Engine {
         Scanner input = new Scanner(System.in);
         System.out.println(
                 """
-                Welcome to Raiders of the Lost Arc-tangent!
-                Please select a character from the following list of options:
-                
-                [1] BRAWLER
-                [2] RUNNER
-                [3] SNEAKER
-                [4] THIEF
-                """
-        );
+                        Welcome to Raiders of the Lost Arc-tangent!
+                        Please select a character from the following list of options:
+
+                        [1] BRAWLER
+                        [2] RUNNER
+                        [3] SNEAKER
+                        [4] THIEF
+                        """);
         int choice = input.nextInt();
         String type = "";
         System.out.print("You chose... ");
@@ -199,8 +197,8 @@ public class Engine {
 
                     // Treasure check.
                     if (thisRoom.checkIfTreasure()) {
-//                    ((Adventurer) p).search();
-                        if (((Adventurer) p).search()) {
+                        // ((Adventurer) player).search();
+                        if (((Adventurer) Player).search()) {
                             // Treasure found consumes the turn.
                             recorder.deactivate((Subject) p);
                             continue;
@@ -330,12 +328,12 @@ public class Engine {
     }
 
     private void initializeBoard() {
-//        // Place all adventurers in the adventurer spawn room.
-//        for (Entity a0 : Adventurers) {
-//            Adventurer a = (Adventurer) a0;
-//            Facility.get("011").occupyAdventurer(a);
-//            a.setCurrentRoom(Facility.get("011"));
-//        }
+        // // Place all adventurers in the adventurer spawn room.
+        // for (Entity a0 : Adventurers) {
+        // Adventurer a = (Adventurer) a0;
+        // Facility.get("011").occupyAdventurer(a);
+        // a.setCurrentRoom(Facility.get("011"));
+        // }
 
         // Place all creatures in random rooms.
         Random r = new Random();
@@ -370,23 +368,23 @@ public class Engine {
 
             // Selecting floor and position for a creature to spawn, excluding adventurer
             // spawn room.
-            //while(totalTreasuresPlaced < 24)
+            // while(totalTreasuresPlaced < 24)
             do {
                 level = randomTreasure.nextInt(4) + 1;
                 a = randomTreasure.nextInt(3);
                 b = randomTreasure.nextInt(3);
-                if( !Facility.get(coordinateToKey(level, a, b)).checkIfTreasure() ){
+                if (!Facility.get(coordinateToKey(level, a, b)).checkIfTreasure()) {
                     Facility.get(coordinateToKey(level, a, b)).occupyTreasure(t);
                     break;
                 }
-            } while(true);
+            } while (true);
             // Place creature in room.
         }
     }
 
     public void initialize() {
         // Instantiate Adventurers
-//        initializeAdventurers();
+        // initializeAdventurers();
         // Instantiate Creatures
         initializeCreatures();
         // Instantiate Treasures
@@ -402,10 +400,10 @@ public class Engine {
     }
 
     private void initializeAdventurers() {
-//        Adventurers.add(new Brawler());
-//        Adventurers.add(new Sneaker());
-//        Adventurers.add(new Runner());
-//        Adventurers.add(new Thief());
+        // Adventurers.add(new Brawler());
+        // Adventurers.add(new Sneaker());
+        // Adventurers.add(new Runner());
+        // Adventurers.add(new Thief());
     }
 
     private void initializeCreatures() {
@@ -428,12 +426,12 @@ public class Engine {
     }
 
     public void runOneTurn() {
-//        Logger recorder = new Logger();
+        // Logger recorder = new Logger();
         Logger recorder = Logger.getInstance();
         processAdventurers(recorder);
         processCreatures(recorder);
         view.printFrame();
-//        recorder.closeFrame(view.getTurn());
+        // recorder.closeFrame(view.getTurn());
         recorder.terminate(view.getTurn());
     }
 }
