@@ -3,6 +3,7 @@ package Characters.Friendlies;
 import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.trained;
+import Characters.Action.Move.movement;
 import Characters.Entity;
 import Characters.Action.Search.careful;
 import Characters.Subject;
@@ -30,6 +31,7 @@ public class Thief extends Adventurer implements Entity, Subject {
         alive = true;
         combatStyle = new trained();
         searchStyle = new careful();
+        moveStyle = new movement();
         offenseBonus = 1;
         defenseBonus = 0;
         inventory = new ArrayList<>();
@@ -77,30 +79,8 @@ public class Thief extends Adventurer implements Entity, Subject {
 
     @Override
     public void move() {
-        if(health <= 0){
-            // do nothing
-            return;
-        }
-        else {
-            // check room to return valid moves
-            String[] addresses = inspectNeighbors(this.currentRoom);
-            // randomly select a valid move from that list
-            int choice;
-            if (addresses.length <= 1) {
-                choice = 0;
-            } else {
-                Random r = new Random();
-                choice = r.nextInt(0, addresses.length);
-            }
-            Room newRoom = Facility.get(addresses[choice]);
-
-            // finally:
-            this.currentRoom.leaveRoom(this);
-            this.setCurrentRoom(newRoom);
-            newRoom.occupyAdventurer(this);
-
-            // Report Adventurer entered new room:
-            notifyObservers("roomEntered");
+        if(this.getAlive()){
+            moveStyle.move(this);
         }
     }
 

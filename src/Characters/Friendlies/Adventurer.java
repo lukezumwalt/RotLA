@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Move.movement;
 import Characters.Subject;
 import Characters.Action.Combat.combatStyle;
 import Characters.Action.Search.searchStyle;
@@ -21,6 +22,7 @@ public abstract class Adventurer implements Subject {
     protected boolean alive;
     protected combatStyle combatStyle;
     protected searchStyle searchStyle;
+    protected movement moveStyle;
     protected int offenseBonus; // bias added to roll on attack
     protected int defenseBonus; // bias added to roll on defense
     protected ArrayList<Treasure> inventory;
