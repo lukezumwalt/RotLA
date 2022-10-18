@@ -10,10 +10,6 @@ import Characters.Action.Search.careless;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import static Board.Room.inspectNeighbors;
-import static Game.Engine.Facility;
 
 /*
  * code example of Inheritance
