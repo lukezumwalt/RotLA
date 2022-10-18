@@ -18,8 +18,24 @@ public class Logger extends Observer {
     // Logger-n.txt, n = turn number
     private String logFileEntry;
 
-    public Logger() {
+
+    private Logger() {
         logFileEntry = "";
+    }
+    private static Logger uniqueInstance;
+
+    public static Logger getInstance(){
+        if(uniqueInstance == null){
+            return new Logger();
+        }
+        else{
+            return uniqueInstance;
+        }
+    }
+
+    public void terminate(int turn){
+        closeFrame(turn);
+        uniqueInstance = null;
     }
 
     public void activate(Subject s){

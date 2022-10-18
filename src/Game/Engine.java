@@ -373,10 +373,12 @@ public class Engine {
     }
 
     public void runOneTurn() {
-        Logger recorder = new Logger();
+//        Logger recorder = new Logger();
+        Logger recorder = Logger.getInstance();
         processAdventurers(recorder);
         processCreatures(recorder);
         view.printFrame();
-        recorder.closeFrame(view.getTurn());
+//        recorder.closeFrame(view.getTurn());
+        recorder.terminate(view.getTurn());
     }
 }
