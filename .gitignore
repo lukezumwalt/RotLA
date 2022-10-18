@@ -28,6 +28,3 @@ hs_err_pid*
 
 # conditional test files
 Logger-*
-
-# VS code w settings.json
-.vscode/settings.json
