@@ -22,7 +22,9 @@ public class Engine {
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
         Treasures = new ArrayList<>();
-        view = new Render();
+
+        // Eager Singleton
+        view = Render.getInstance();
     }
 
     // PUBLIC ATTRIBUTES

@@ -15,14 +15,22 @@ import static Game.Engine.getCreatures;
 public class Render {
 
     // CONSTRUCTORS
-    public Render() {
+    private Render() {
         turn = 0;
     }
 
     // PRIVATE ATTRIBUTES
     private int turn;
 
+    /* Unique Instance for Eager Singleton of sole instance */
+    private static final Render uniqueInstance = new Render();
+
     // PUBLIC METHODS
+    /* Unique Singleton call method for accessing private CTOR */
+    public static Render getInstance(){
+        return uniqueInstance;
+    }
+
     /*
      * Code example of Cohesion
      * All methods are relevant to Render class
