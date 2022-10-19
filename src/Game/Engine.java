@@ -331,20 +331,27 @@ public class Engine {
 
     public boolean endConditionMet() {
 
-        // Treasure Victory Check
-        int totalTreasure = 0;
-        for (Entity a : Adventurers) {
-            totalTreasure += ((Adventurer) a).getTreasureCount();
-        }
-        if (totalTreasure >= 10) {
-            System.out.println("\n\nADVENTURERS WIN!\n\tThey collected: " + totalTreasure + " treasure!\n\n\tGG!");
-            return true;
-        }
-
-        // Dead Creatures Victory Check
-        if (Creatures.size() == 0) {
-            System.out.println("\n\nADVENTURERS WIN!\n\tThey defeated every creature!\n\n\tGG!");
-            return true;
+        // First, check if adventurer returned to spawn room
+        if(Player.checkRoom() == Facility.get("011")){
+            // Treasure Victory Check
+            int totalTreasure = 0;
+            for (Entity a : Adventurers) {
+                totalTreasure += ((Adventurer) a).getTreasureCount();
+            }
+            if (totalTreasure >= 5) {
+                System.out.println("\n\nADVENTURER(S) WIN!\n\tThey collected: " + totalTreasure + " treasure!\n\n\tGG!");
+                return true;
+            }
+            // Dead Creatures Victory Check
+            else if (Creatures.size() == 0) {
+                System.out.println("\n\nADVENTURER(S) WIN!\n\tThey defeated every creature!\n\n\tGG!");
+                return true;
+            }
+            else{
+                // Condition where hero returned to spawn without one of each treasure nor defeating all creatures
+                System.out.println("\n\nADVENTURER(S) LOSE!\n\tThey left the dungeon before meeting a victory condition!\n\n\tTry again!");
+                return true;
+            }
         }
 
         // Dead Adventurers Victory Check
@@ -353,7 +360,7 @@ public class Engine {
             totalHealth += ((Adventurer) a).getHealth();
         }
         if (totalHealth <= 0) {
-            System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
+            System.out.println("\n\nCREATURE(S) WIN!\n\tThey defeated every adventurer!\n\n\tTry again!");
             return true;
         }
 

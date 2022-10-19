@@ -1,18 +1,10 @@
 package Game;
 
-import java.util.Objects;
-import java.util.Scanner;
-
 public class Run {
     public static void main(String[] args) {
 
-        // instantiate objects
 //        Scanner input = new Scanner(System.in);
         Engine game = new Engine();
-
-        // Character Creation
-//        game.view.printFrame();
-//        game.characterCreation();
 
         // Initialize Game Properties
         game.initialize();
