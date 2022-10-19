@@ -24,7 +24,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "B";
         name = "Brawler";
-        health = 3;
+        health = 12;
         alive = true;
         combatStyle = new expert();
         searchStyle = new careless();

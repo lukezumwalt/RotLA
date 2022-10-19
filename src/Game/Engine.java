@@ -283,9 +283,7 @@ public class Engine {
                             player.move();
                         }
                         case "search" ->{
-                            if(((Adventurer)player).search()){
-                                ((Adventurer) player).notifyObservers("treasureFound");
-                            }
+                            ((Adventurer)player).search();
                         }
                         case "celebrate" ->{
                             // figure this out

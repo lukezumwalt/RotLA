@@ -24,7 +24,7 @@ public class Runner extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "R";
         name = "Runner";
-        health = 3;
+        health = 10;
         alive = true;
         combatStyle = new untrained();
         searchStyle = new quick();

@@ -24,7 +24,7 @@ public class Thief extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "T";
         name = "Thief";
-        health = 3;
+        health = 10;
         alive = true;
         combatStyle = new trained();
         searchStyle = new careful();

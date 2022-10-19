@@ -24,7 +24,7 @@ public class Sneaker extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "S";
         name = "Sneaker";
-        health = 3;
+        health = 8;
         alive = true;
         combatStyle = new stealth();
         searchStyle = new quick();
