@@ -28,6 +28,7 @@ public class UserInterface {
                 // Provide user with options:
                 System.out.println(
                     """
+                    ------------------------------
                     The room appears unoccupied...
                     What would you like to do?
                     
@@ -61,6 +62,7 @@ public class UserInterface {
                 // Provide user with options:
                 System.out.println(
                     """
+                    ------------------------------
                     You've run into some monsters!
                     What would you like to do?
                     

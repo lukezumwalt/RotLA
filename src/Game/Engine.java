@@ -286,7 +286,7 @@ public class Engine {
                             ((Adventurer)player).search();
                         }
                         case "celebrate" ->{
-                            // figure this out
+                            ((Adventurer)player).celebrate();
                         }
                     }
                 }

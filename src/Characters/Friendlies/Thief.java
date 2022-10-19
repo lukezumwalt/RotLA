@@ -2,6 +2,10 @@ package Characters.Friendlies;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Celebrate.dance;
+import Characters.Action.Celebrate.jump;
+import Characters.Action.Celebrate.shout;
+import Characters.Action.Celebrate.spin;
 import Characters.Action.Combat.trained;
 import Characters.Action.Move.npcMovement;
 import Characters.Action.Move.playerMovement;
@@ -87,6 +91,16 @@ public class Thief extends Adventurer implements Entity, Subject {
     }
     public String getPlayerName(){
         return this.playerName;
+    }
+
+    @Override
+    public void celebrate() {
+        jump.setCelebrate(this);
+        shout.setCelebrate();
+        dance.setCelebrate();
+        spin.setCelebrate();
+        System.out.print("\n");
+        notifyObservers("celebration");
     }
 
     @Override
