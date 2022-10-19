@@ -99,6 +99,10 @@ public class Engine {
         return Creatures;
     }
 
+    public static ArrayList<Treasure> getTreasures() {
+        return Treasures;
+    }
+
     public static String coordinateToKey(int floor, int x, int y) {
         return String.valueOf(floor) + String.valueOf(x) + String.valueOf(y);
     }

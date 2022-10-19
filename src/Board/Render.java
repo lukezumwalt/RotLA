@@ -27,7 +27,7 @@ public class Render {
 
     // PUBLIC METHODS
     /* Unique Singleton call method for accessing private CTOR */
-    public static Render getInstance(){
+    public static Render getInstance() {
         return uniqueInstance;
     }
 
@@ -98,7 +98,7 @@ public class Render {
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
             StringBuilder treasurePrint = new StringBuilder();
-            for(Treasure t : a.getInventory()){
+            for (Treasure t : a.getInventory()) {
                 treasurePrint.append(t.getClass().getSimpleName()).append(" ");
             }
             System.out.println(a.getClass().getSimpleName() + "\t\t\t" +
@@ -110,7 +110,7 @@ public class Render {
         System.out.println("\nTotal Active Creatures: " + getCreatures().size());
         System.out.println("\nCreatures\t\tRoom");
         for (Entity c0 : getCreatures()) {
-            Creature c = (Creature)c0;
+            Creature c = (Creature) c0;
             System.out.println(c.getClass().getSimpleName() + "\t\t\t" +
                     Arrays.toString(c.checkRoom().getCoordinates()));
         }
@@ -118,7 +118,7 @@ public class Render {
     }
 
     // PUBLIC METHODS
-    public int getTurn(){
+    public int getTurn() {
         return turn;
     }
 }
