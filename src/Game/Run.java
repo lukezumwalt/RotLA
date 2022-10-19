@@ -7,7 +7,7 @@ public class Run {
     public static void main(String[] args) {
 
         // instantiate objects
-        Scanner input = new Scanner(System.in);
+//        Scanner input = new Scanner(System.in);
         Engine game = new Engine();
 
         // Character Creation
@@ -22,9 +22,9 @@ public class Run {
         // Primary Game.Run Loop
         while (true) {
             // Debugging condition
-            if (Objects.equals(input.nextLine(), "gg")) {
-                break;
-            }
+//            if (Objects.equals(input.nextLine(), "gg")) {
+//                break;
+//            }
 
             // Execute one turn
             game.runOneTurn();
@@ -34,6 +34,6 @@ public class Run {
                 break;
             }
         }
-        input.close();
+//        input.close();
     }
 }

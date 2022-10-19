@@ -4,6 +4,7 @@ import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.trained;
 import Characters.Action.Move.npcMovement;
+import Characters.Action.Move.playerMovement;
 import Characters.Entity;
 import Characters.Action.Search.careful;
 import Characters.Subject;
@@ -27,7 +28,8 @@ public class Thief extends Adventurer implements Entity, Subject {
         alive = true;
         combatStyle = new trained();
         searchStyle = new careful();
-        moveStyle = new npcMovement();
+//        moveStyle = new npcMovement();
+        moveStyle = new playerMovement();
         offenseBonus = 1;
         defenseBonus = 0;
         inventory = new ArrayList<>();

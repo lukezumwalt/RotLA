@@ -94,7 +94,7 @@ public class Render {
      * status
      */
     private void printStatus() {
-        System.out.println("Adventurers\t\tRoom\t\tHealth\t\tTreasure");
+        System.out.println("Adventurer\t\tRoom\t\tHealth\t\tTreasure");
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
             StringBuilder treasurePrint = new StringBuilder();

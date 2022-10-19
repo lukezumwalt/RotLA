@@ -82,10 +82,10 @@ public class Brawler extends Adventurer implements Entity, Subject {
     }
 
     public void setPlayerName(String name){
-        this.playerName = name;
+        playerName = name;
     }
     public String getPlayerName(){
-        return this.playerName;
+        return playerName;
     }
 
     @Override

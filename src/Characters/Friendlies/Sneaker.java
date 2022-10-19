@@ -4,6 +4,7 @@ import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.stealth;
 import Characters.Action.Move.npcMovement;
+import Characters.Action.Move.playerMovement;
 import Characters.Entity;
 import Characters.Action.Search.quick;
 import Characters.Subject;
@@ -27,7 +28,8 @@ public class Sneaker extends Adventurer implements Entity, Subject {
         alive = true;
         combatStyle = new stealth();
         searchStyle = new quick();
-        moveStyle = new npcMovement();
+//        moveStyle = new npcMovement();
+        moveStyle = new playerMovement();
         offenseBonus = 0;
         defenseBonus = 0;
         inventory = new ArrayList<>();
