@@ -1,18 +1,17 @@
-package Characters.Action.Combat.combatDecorator;
+package Characters.Action.Celebrate;
 
 import java.util.Random;
 
-import Board.Observer;
 import Characters.Entity;
 import Characters.Action.Combat.combatStyle;
-import Characters.Friendlies.Adventurer;
 
 // Concrete class extending abstract class
-public class spin extends celebrateDecorator {
+public class dance extends celebrateDecorator {
 
     // CONSTRUCTORS
-    public spin(combatStyle decoratedCombat) {
+    public dance(combatStyle decoratedCombat) {
         super(decoratedCombat);
+        // TODO Auto-generated constructor stub
     }
 
     // PUBLIC METHODS
@@ -25,7 +24,7 @@ public class spin extends celebrateDecorator {
         Random celebrateRandom = new Random();
         int numActions = celebrateRandom.nextInt(2);
         for (int i = 0; i < numActions; i++) {
-            System.out.print(" spin");
+            System.out.print(" dance");
         }
     }
 }

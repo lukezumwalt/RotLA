@@ -1,4 +1,4 @@
-package Characters.Action.Combat.combatDecorator;
+package Characters.Action.Celebrate;
 
 import java.util.Random;
 

@@ -2,6 +2,10 @@ package Characters.Friendlies;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Celebrate.dance;
+import Characters.Action.Celebrate.jump;
+import Characters.Action.Celebrate.shout;
+import Characters.Action.Celebrate.spin;
 import Characters.Action.Combat.expert;
 import Characters.Action.Move.npcMovement;
 import Characters.Action.Move.playerMovement;
@@ -24,7 +28,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "B";
         name = "Brawler";
-        health = 3;
+        health = 12;
         alive = true;
         combatStyle = new expert();
         searchStyle = new careless();
@@ -82,10 +86,20 @@ public class Brawler extends Adventurer implements Entity, Subject {
     }
 
     public void setPlayerName(String name){
-        this.playerName = name;
+        playerName = name;
     }
     public String getPlayerName(){
-        return this.playerName;
+        return playerName;
+    }
+
+    @Override
+    public void celebrate() {
+        jump.setCelebrate(this);
+        shout.setCelebrate();
+        dance.setCelebrate();
+        spin.setCelebrate();
+        System.out.print("\n");
+        notifyObservers("celebration");
     }
 
     @Override

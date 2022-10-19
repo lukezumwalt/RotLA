@@ -2,8 +2,13 @@ package Characters.Friendlies;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Celebrate.dance;
+import Characters.Action.Celebrate.jump;
+import Characters.Action.Celebrate.shout;
+import Characters.Action.Celebrate.spin;
 import Characters.Action.Combat.trained;
 import Characters.Action.Move.npcMovement;
+import Characters.Action.Move.playerMovement;
 import Characters.Entity;
 import Characters.Action.Search.careful;
 import Characters.Subject;
@@ -23,11 +28,12 @@ public class Thief extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "T";
         name = "Thief";
-        health = 3;
+        health = 10;
         alive = true;
         combatStyle = new trained();
         searchStyle = new careful();
-        moveStyle = new npcMovement();
+//        moveStyle = new npcMovement();
+        moveStyle = new playerMovement();
         offenseBonus = 1;
         defenseBonus = 0;
         inventory = new ArrayList<>();
@@ -85,6 +91,16 @@ public class Thief extends Adventurer implements Entity, Subject {
     }
     public String getPlayerName(){
         return this.playerName;
+    }
+
+    @Override
+    public void celebrate() {
+        jump.setCelebrate(this);
+        shout.setCelebrate();
+        dance.setCelebrate();
+        spin.setCelebrate();
+        System.out.print("\n");
+        notifyObservers("celebration");
     }
 
     @Override

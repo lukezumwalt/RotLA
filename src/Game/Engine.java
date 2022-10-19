@@ -29,9 +29,9 @@ public class Engine {
     }
 
     private void characterCreator() {
-        Scanner input = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.println(
-                """
+                        """
                         Welcome to Raiders of the Lost Arc-tangent!
                         Please select a character from the following list of options:
 
@@ -40,7 +40,8 @@ public class Engine {
                         [3] SNEAKER
                         [4] THIEF
                         """);
-        int choice = input.nextInt();
+        System.out.print("Selection: ");
+        int choice = in.nextInt();
         String type = "";
         System.out.print("You chose... ");
         switch (choice) {
@@ -63,7 +64,7 @@ public class Engine {
         }
         System.out.println(type + "!");
         System.out.print("\nPlease enter a name for your " + type + ": ");
-        String playerName = input.nextLine();
+        String playerName = in.next();
         this.Player.setPlayerName(playerName);
 
         // Object Creation
@@ -215,15 +216,6 @@ public class Engine {
                     // No treasure and no creatures, move on!
                     p.move();
 
-                    // TODO: In the current structure of treasure, if an adv discovers a treasure
-                    // they already own, they will
-                    // TODO: not retrieve the item. This leaves it a static item belonging to the
-                    // room, so there is a
-                    // TODO: potential of an infinite loop of an adventurer trying to recover a
-                    // treasure they can't obtain.
-                    // TODO: This can be resolved by forcing the adv to ALWAYS move FIRST before
-                    // SEARCHING!
-
                     // Final creature-combat check after final movement.
                     if (thisRoom.getOccupantCreatures().size() > 0) {
                         ArrayList<Entity> mobsToKill = new ArrayList<>();
@@ -252,24 +244,57 @@ public class Engine {
     }
 
     public void processPlayer(Logger recorder){
-        // Loop through list of adventurers
-        //      In practice, only one, but for now, serves to replicate previous success.
-        for(Entity p0 : Adventurers){
-            // Cast to adventurer type
-            Adventurer player = (Adventurer)p0;
+        // Loop through list of player controlled adventurers
+        for(Entity player : Adventurers){
             if(player.getAlive()){
-                recorder.activate(player);
+                recorder.activate((Subject) player);
                 Room thisRoom = player.checkRoom();
 
                 // Room Occupancy Check
                 if(thisRoom.getOccupantCreatures().size() > 0){
                     // Current room has monsters!
-                    UI.solicitCommand(1);
+                    switch(UI.solicitCommand(1)){
+                        case "fight" ->{
+                            // Fight all the mobs in the room
+                            ArrayList<Entity> mobsToKill = new ArrayList<>();
+                            for(Creature mob : thisRoom.getOccupantCreatures() ){
+                                if(player.fight((Entity)mob)){
+                                    mobsToKill.add((Entity) mob);
+                                    mob.notifyObservers("died");
+                                }
+                            }
+                            // Cull defeated mobs
+                            for (Entity k : mobsToKill) {
+                                k.checkRoom().leaveRoom(k);
+                                Creatures.remove(k);
+                            }
+                        }
+                        case "flee" ->{
+                            // Take damage equal to number of mobs in exited room
+                            int totalDamage = 0;
+                            for(Creature mob : thisRoom.getOccupantCreatures() ){
+                                totalDamage++;
+                            }
+                            player.move();
+                            ((Adventurer)player).takeDamage(totalDamage);
+                        }
+                    }
                 }
                 else{
                     // Current room is empty...
-                    UI.solicitCommand(0);
+                    switch(UI.solicitCommand(0)){
+                        case "move" ->{
+                            player.move();
+                        }
+                        case "search" ->{
+                            ((Adventurer)player).search();
+                        }
+                        case "celebrate" ->{
+                            ((Adventurer)player).celebrate();
+                        }
+                    }
                 }
+                recorder.deactivate((Subject) player);
             }
         }
     }
@@ -310,20 +335,27 @@ public class Engine {
 
     public boolean endConditionMet() {
 
-        // Treasure Victory Check
-        int totalTreasure = 0;
-        for (Entity a : Adventurers) {
-            totalTreasure += ((Adventurer) a).getTreasureCount();
-        }
-        if (totalTreasure >= 10) {
-            System.out.println("\n\nADVENTURERS WIN!\n\tThey collected: " + totalTreasure + " treasure!\n\n\tGG!");
-            return true;
-        }
-
-        // Dead Creatures Victory Check
-        if (Creatures.size() == 0) {
-            System.out.println("\n\nADVENTURERS WIN!\n\tThey defeated every creature!\n\n\tGG!");
-            return true;
+        // First, check if adventurer returned to spawn room
+        if(Player.checkRoom() == Facility.get("011")){
+            // Treasure Victory Check
+            int totalTreasure = 0;
+            for (Entity a : Adventurers) {
+                totalTreasure += ((Adventurer) a).getTreasureCount();
+            }
+            if (totalTreasure >= 5) {
+                System.out.println("\n\nADVENTURER(S) WIN!\n\tThey collected: " + totalTreasure + " treasure!\n\n\tGG!");
+                return true;
+            }
+            // Dead Creatures Victory Check
+            else if (Creatures.size() == 0) {
+                System.out.println("\n\nADVENTURER(S) WIN!\n\tThey defeated every creature!\n\n\tGG!");
+                return true;
+            }
+            else{
+                // Condition where hero returned to spawn without one of each treasure nor defeating all creatures
+                System.out.println("\n\nADVENTURER(S) LOSE!\n\tThey left the dungeon before meeting a victory condition!\n\n\tTry again!");
+                return true;
+            }
         }
 
         // Dead Adventurers Victory Check
@@ -331,8 +363,8 @@ public class Engine {
         for (Entity a : Adventurers) {
             totalHealth += ((Adventurer) a).getHealth();
         }
-        if (totalHealth == 0) {
-            System.out.println("\n\nCREATURES WIN!\n\tThey defeated every adventurer!\n\n\tGG!");
+        if (totalHealth <= 0) {
+            System.out.println("\n\nCREATURE(S) WIN!\n\tThey defeated every adventurer!\n\n\tTry again!");
             return true;
         }
 
@@ -411,7 +443,7 @@ public class Engine {
 
     public void initialize() {
         // Instantiate Adventurers
-        // initializeAdventurers();
+//        initializeAdventurers();
         // Instantiate Creatures
         initializeCreatures();
         // Instantiate Treasures
@@ -429,10 +461,10 @@ public class Engine {
     }
 
     private void initializeAdventurers() {
-        // Adventurers.add(new Brawler());
-        // Adventurers.add(new Sneaker());
-        // Adventurers.add(new Runner());
-        // Adventurers.add(new Thief());
+         Adventurers.add(new Brawler());
+         Adventurers.add(new Sneaker());
+         Adventurers.add(new Runner());
+         Adventurers.add(new Thief());
     }
 
     private void initializeCreatures() {
@@ -457,8 +489,8 @@ public class Engine {
     public void runOneTurn() {
         // Logger recorder = new Logger();
         Logger recorder = Logger.getInstance();
-        processAdventurers(recorder);
-//        processPlayer(recorder);
+//        processAdventurers(recorder);
+        processPlayer(recorder);
         processCreatures(recorder);
         view.printFrame();
         // recorder.closeFrame(view.getTurn());

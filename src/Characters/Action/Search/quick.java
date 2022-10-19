@@ -12,15 +12,8 @@ public class quick extends searchStyle{
     public Treasure search(Adventurer self, Room currentRoom) {
         Treasure item;
 
-        // Quick search speed filter.
-        Random skip = new Random();
-        if( 0 == skip.nextInt(2) ){
-            // Too fast, missed your chance!
-            return null;
-        }
-
         // Roll for treasure.
-        if( Dice.rollD6(2) >= 9 ){
+        if( Dice.rollD6(2) >= 6 ){
             // Check to confirm adventurer doesn't already own one
             // of the discovered item.
             for( Treasure select : self.getInventory() ){

@@ -38,6 +38,8 @@ public abstract class Adventurer implements Subject {
     public abstract void setPlayerName(String name);
     public abstract String getPlayerName();
 
+    public abstract void celebrate();
+
     // Getter Suite
     public abstract String getSign();
 

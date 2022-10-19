@@ -11,7 +11,7 @@ public class careless extends searchStyle{
         Treasure item;
 
         // Roll for treasure.
-        if( Dice.rollD6(2) >= 10 ){
+        if( Dice.rollD6(2) >= 7 ){
             // Check to confirm adventurer doesn't already own one
             // of the discovered item.
             for( Treasure select : self.getInventory() ){
