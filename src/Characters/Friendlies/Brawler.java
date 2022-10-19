@@ -4,6 +4,7 @@ import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.expert;
 import Characters.Action.Move.npcMovement;
+import Characters.Action.Move.playerMovement;
 import Characters.Entity;
 import Characters.Subject;
 import Characters.Action.Search.careless;
@@ -27,7 +28,8 @@ public class Brawler extends Adventurer implements Entity, Subject {
         alive = true;
         combatStyle = new expert();
         searchStyle = new careless();
-        moveStyle = new npcMovement();
+//        moveStyle = new npcMovement();
+        moveStyle = new playerMovement();
         offenseBonus = 2;
         defenseBonus = 0;
         inventory = new ArrayList<>();

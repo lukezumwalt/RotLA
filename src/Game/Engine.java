@@ -26,9 +26,6 @@ public class Engine {
 
         // Eager Singleton
         view = Render.getInstance();
-
-        // Initialize Game Properties
-        this.initialize();
     }
 
     private void characterCreator() {
@@ -260,7 +257,7 @@ public class Engine {
                 recorder.activate(player);
                 Room thisRoom = player.checkRoom();
 
-                // Combat Check
+                // Room Occupancy Check
                 if(thisRoom.getOccupantCreatures().size() > 0){
                     // Current room has monsters!
                     UI.solicitCommand(1);
@@ -268,9 +265,7 @@ public class Engine {
                 else{
                     // Current room is empty...
                     UI.solicitCommand(0);
-
                 }
-
             }
         }
     }
@@ -421,7 +416,9 @@ public class Engine {
         createBlankBoard();
         initializeBoard();
         mapNeighborhood();
+    }
 
+    public void playerStart(){
         // User Interface
         view.printBoard();
         characterCreator();
@@ -457,6 +454,7 @@ public class Engine {
         // Logger recorder = new Logger();
         Logger recorder = Logger.getInstance();
         processAdventurers(recorder);
+//        processPlayer(recorder);
         processCreatures(recorder);
         view.printFrame();
         // recorder.closeFrame(view.getTurn());

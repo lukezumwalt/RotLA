@@ -14,7 +14,9 @@ public class Run {
 //        game.view.printFrame();
 //        game.characterCreation();
 
-//        game.initialize();
+        // Initialize Game Properties
+        game.initialize();
+        game.playerStart();
 
 //        System.out.println("Press [Enter] to begin...");
         // Primary Game.Run Loop

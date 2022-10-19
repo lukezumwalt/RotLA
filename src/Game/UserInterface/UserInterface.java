@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class UserInterface {
 
     private static UserInterface uniqueInstance;
-    private Scanner input;
+    private final Scanner userInput;
     private UserInterface() {
         // Empty Private Constructor
-        input = new Scanner(System.in);
+        userInput = new Scanner(System.in);
     }
 
     // Singleton Instance Control
@@ -39,7 +39,7 @@ public class UserInterface {
 
                 // Solicit choice:
                 System.out.print("Selection: ");
-                switch(input.nextInt()){
+                switch(userInput.nextInt()){
                     case 1 ->{
                         // execute movement command query
                     }
@@ -69,7 +69,7 @@ public class UserInterface {
 
                 // Solicit choice:
                 System.out.print("Selection: ");
-                switch(input.nextInt()){
+                switch(userInput.nextInt()){
                     case 1 ->{
                         // execute fight command query
                     }
