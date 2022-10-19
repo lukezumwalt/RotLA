@@ -9,7 +9,7 @@ import java.util.Random;
 import static Board.Room.inspectNeighbors;
 import static Game.Engine.Facility;
 
-public class movement {
+public class npcMovement extends moveStyle {
 
     public void move(Adventurer self){
         // check room to return valid moves
