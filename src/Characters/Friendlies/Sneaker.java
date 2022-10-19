@@ -3,17 +3,13 @@ package Characters.Friendlies;
 import Board.Observer;
 import Board.Room;
 import Characters.Action.Combat.stealth;
-import Characters.Action.Move.movement;
+import Characters.Action.Move.npcMovement;
 import Characters.Entity;
 import Characters.Action.Search.quick;
 import Characters.Subject;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import static Board.Room.inspectNeighbors;
-import static Game.Engine.Facility;
 
 /*
  * code example of Inheritance
@@ -31,7 +27,7 @@ public class Sneaker extends Adventurer implements Entity, Subject {
         alive = true;
         combatStyle = new stealth();
         searchStyle = new quick();
-        moveStyle = new movement();
+        moveStyle = new npcMovement();
         offenseBonus = 0;
         defenseBonus = 0;
         inventory = new ArrayList<>();
@@ -118,7 +114,7 @@ public class Sneaker extends Adventurer implements Entity, Subject {
 
     @Override
     public int getTreasureCount() {
-        return 0;
+        return inventory.size();
     }
 
     public ArrayList<Treasure> getInventory(){

@@ -26,10 +26,9 @@ public class Logger extends Observer {
 
     public static Logger getInstance() {
         if (uniqueInstance == null) {
-            return new Logger();
-        } else {
-            return uniqueInstance;
+            uniqueInstance = new Logger();
         }
+        return uniqueInstance;
     }
 
     public void terminate(int turn) {

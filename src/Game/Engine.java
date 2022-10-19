@@ -9,6 +9,7 @@ import Characters.Entity;
 import Characters.Enemies.*;
 import Characters.Friendlies.*;
 import Characters.Subject;
+import Game.UserInterface.UserInterface;
 import Treasure.*;
 
 import static Board.Room.mapNeighborhood;
@@ -21,12 +22,10 @@ public class Engine {
         Adventurers = new ArrayList<>();
         Creatures = new ArrayList<>();
         Treasures = new ArrayList<>();
+        UI = UserInterface.getInstance();
 
         // Eager Singleton
         view = Render.getInstance();
-
-        // Initialize Game Properties
-        this.initialize();
     }
 
     private void characterCreator() {
@@ -86,6 +85,7 @@ public class Engine {
     private static ArrayList<Entity> Adventurers;
     private static ArrayList<Entity> Creatures;
     private static ArrayList<Treasure> Treasures;
+    private static UserInterface UI;
     private Adventurer Player;
     private final Render view;
 
@@ -251,6 +251,29 @@ public class Engine {
         }
     }
 
+    public void processPlayer(Logger recorder){
+        // Loop through list of adventurers
+        //      In practice, only one, but for now, serves to replicate previous success.
+        for(Entity p0 : Adventurers){
+            // Cast to adventurer type
+            Adventurer player = (Adventurer)p0;
+            if(player.getAlive()){
+                recorder.activate(player);
+                Room thisRoom = player.checkRoom();
+
+                // Room Occupancy Check
+                if(thisRoom.getOccupantCreatures().size() > 0){
+                    // Current room has monsters!
+                    UI.solicitCommand(1);
+                }
+                else{
+                    // Current room is empty...
+                    UI.solicitCommand(0);
+                }
+            }
+        }
+    }
+
     public void processCreatures(Logger recorder) {
         ArrayList<Entity> mobsToDie = new ArrayList<>();
         for (Entity monster : Creatures) {
@@ -397,7 +420,9 @@ public class Engine {
         createBlankBoard();
         initializeBoard();
         mapNeighborhood();
+    }
 
+    public void playerStart(){
         // User Interface
         view.printBoard();
         characterCreator();
@@ -433,6 +458,7 @@ public class Engine {
         // Logger recorder = new Logger();
         Logger recorder = Logger.getInstance();
         processAdventurers(recorder);
+//        processPlayer(recorder);
         processCreatures(recorder);
         view.printFrame();
         // recorder.closeFrame(view.getTurn());
