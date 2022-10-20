@@ -28,6 +28,9 @@ public class Engine {
         view = Render.getInstance();
     }
 
+    // Factory pattern.
+    // Generates a runtime player object based on user input
+    // from a suite of derived Adventurer subclasses.
     private void characterCreator() {
         Scanner in = new Scanner(System.in);
         System.out.println(
@@ -467,6 +470,8 @@ public class Engine {
          Adventurers.add(new Thief());
     }
 
+    // Factory pattern.
+    // Indiscriminate runtime production of Creature subclasses.
     private void initializeCreatures() {
         for (int i = 0; i < 4; ++i) {
             Creatures.add(new Orbiter());

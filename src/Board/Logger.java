@@ -24,6 +24,9 @@ public class Logger extends Observer {
 
     private static Logger uniqueInstance;
 
+    // Singleton: lazy instantiation
+    // The object is restricted to one instance at a time, but is generated
+    // during runtime when requested.
     public static Logger getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new Logger();

@@ -13,22 +13,29 @@ public class quick extends searchStyle{
         Treasure item;
 
         // Roll for treasure.
-        if( Dice.rollD6(2) >= 6 ){
-            // Check to confirm adventurer doesn't already own one
-            // of the discovered item.
-            for( Treasure select : self.getInventory() ){
-                if( select.getClass().getSimpleName().equals(currentRoom.peekTreasure().getClass().getSimpleName()) ){
-                    // Too bad!  You already have this item
-                    return null;
+        if(currentRoom.checkIfTreasure()) {
+            if (Dice.rollD6(2) >= 6) {
+                // Check to confirm adventurer doesn't already own one
+                // of the discovered item.
+                for (Treasure select : self.getInventory()) {
+                    if (select.getClass().getSimpleName().equals(currentRoom.peekTreasure().getClass().getSimpleName())) {
+                        // Too bad!  You already have this item
+                        System.out.println("You already possess this item, move on!");
+                        return null;
+                    }
                 }
-            }
 
-            // Get item in the room and set the room's treasure
-            // availability to false.
-            item = currentRoom.takeTreasure();
-            return item;
+                // Get item in the room and set the room's treasure
+                // availability to false.
+                item = currentRoom.takeTreasure();
+                return item;
+            }
+            // failed roll
+            return null;
         }
-        // failed roll
-        return null;
+        else{
+            System.out.println("No treasure in this room, move on!");
+            return null;
+        }
     }
 }
