@@ -8,6 +8,8 @@ import javax.swing.text.DefaultEditorKit.CutAction;
 
 import org.junit.*;
 
+
+
 import Board.Logger;
 import Board.Render;
 import Board.Room;
@@ -25,6 +27,7 @@ public class UnitTest {
     public void setUp() throws Exception {
         System.out.println("Set up for unit testing.");
         testEngine = new Engine();
+        
     }
 
     @Test
