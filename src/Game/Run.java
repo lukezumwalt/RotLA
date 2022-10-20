@@ -2,6 +2,7 @@ package Game;
 
 import java.util.Objects;
 import java.util.Scanner;
+import test.*;
 
 public class Run {
     public static void main(String[] args) {
