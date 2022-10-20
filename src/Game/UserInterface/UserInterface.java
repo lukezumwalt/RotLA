@@ -20,6 +20,10 @@ public class UserInterface {
         return uniqueInstance;
     }
 
+    // Commanding interface for user control.
+    // Provides a query for user input, and loops through a
+    // set of nested switch statements in order to return the appropriate
+    // action to be made by the Player object in Engine.
     public String solicitCommand(int stateOption){
 //        Scanner userInput = new Scanner(System.in);
         switch(stateOption){
