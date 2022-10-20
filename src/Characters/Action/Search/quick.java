@@ -12,30 +12,30 @@ public class quick extends searchStyle{
     public Treasure search(Adventurer self, Room currentRoom) {
         Treasure item;
 
-        // Quick search speed filter.
-        Random skip = new Random();
-        if( 0 == skip.nextInt(2) ){
-            // Too fast, missed your chance!
+        // Roll for treasure.
+        if(currentRoom.checkIfTreasure()) {
+            if (Dice.rollD6(2) >= 6) {
+                // Check to confirm adventurer doesn't already own one
+                // of the discovered item.
+                for (Treasure select : self.getInventory()) {
+                    if (select.getClass().getSimpleName().equals(currentRoom.peekTreasure().getClass().getSimpleName())) {
+                        // Too bad!  You already have this item
+                        System.out.println("You already possess this item, move on!");
+                        return null;
+                    }
+                }
+
+                // Get item in the room and set the room's treasure
+                // availability to false.
+                item = currentRoom.takeTreasure();
+                return item;
+            }
+            // failed roll
             return null;
         }
-
-        // Roll for treasure.
-        if( Dice.rollD6(2) >= 9 ){
-            // Check to confirm adventurer doesn't already own one
-            // of the discovered item.
-            for( Treasure select : self.getInventory() ){
-                if( select.getClass().getSimpleName().equals(currentRoom.peekTreasure().getClass().getSimpleName()) ){
-                    // Too bad!  You already have this item
-                    return null;
-                }
-            }
-
-            // Get item in the room and set the room's treasure
-            // availability to false.
-            item = currentRoom.takeTreasure();
-            return item;
+        else{
+            System.out.println("No treasure in this room, move on!");
+            return null;
         }
-        // failed roll
-        return null;
     }
 }

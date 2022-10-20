@@ -25,3 +25,6 @@ hs_err_pid*
 # compiled output directory
 /out/
 .idea/
+
+# conditional test files
+Logger-*

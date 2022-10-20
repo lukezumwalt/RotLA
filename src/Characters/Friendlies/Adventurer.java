@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Move.moveStyle;
 import Characters.Subject;
 import Characters.Action.Combat.combatStyle;
 import Characters.Action.Search.searchStyle;
@@ -16,10 +17,12 @@ public abstract class Adventurer implements Subject {
     protected Room currentRoom;
     protected String sign;
     protected String name;
+    protected String playerName;
     protected int health;
     protected boolean alive;
     protected combatStyle combatStyle;
     protected searchStyle searchStyle;
+    protected moveStyle moveStyle;
     protected int offenseBonus; // bias added to roll on attack
     protected int defenseBonus; // bias added to roll on defense
     protected ArrayList<Treasure> inventory;
@@ -31,6 +34,11 @@ public abstract class Adventurer implements Subject {
     public abstract void collectTreasure(Room r);
 
     public abstract void setCurrentRoom(Room newRoom);
+
+    public abstract void setPlayerName(String name);
+    public abstract String getPlayerName();
+
+    public abstract void celebrate();
 
     // Getter Suite
     public abstract String getSign();

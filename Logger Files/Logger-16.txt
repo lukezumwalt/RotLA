@@ -1,7 +1,5 @@
-Brawler entered room [1, 1, 1]
-Sneaker entered room [2, 1, 2]
-Runner found Armor.
-Thief entered room [1, 1, 1]
-Orbiter entered room [3, 1, 0]
-Orbiter entered room [3, 1, 0]
-Orbiter entered room [2, 0, 1]
+Brawler won a fight.
+Orbiter entered room [1, 1, 0]
+Orbiter entered room [3, 0, 1]
+Blinker entered room [2, 1, 1]
+Orbiter entered room [3, 0, 1]

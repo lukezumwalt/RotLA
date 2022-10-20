@@ -15,14 +15,22 @@ import static Game.Engine.getCreatures;
 public class Render {
 
     // CONSTRUCTORS
-    public Render() {
+    private Render() {
         turn = 0;
     }
 
     // PRIVATE ATTRIBUTES
     private int turn;
 
+    /* Unique Instance for Eager Singleton of sole instance */
+    private static final Render uniqueInstance = new Render();
+
     // PUBLIC METHODS
+    /* Unique Singleton call method for accessing private CTOR */
+    public static Render getInstance() {
+        return uniqueInstance;
+    }
+
     /*
      * Code example of Cohesion
      * All methods are relevant to Render class
@@ -38,15 +46,15 @@ public class Render {
     // PRIVATE METHODS
     // prints turn number
     private void printTurn() {
-        turn++;
         System.out.println("\nRotLA Turn: " + turn);
+        turn++;
     }
 
     // printBoard access the Map via get methods that
     // reference a string called a key.
     // then it calls render for adventurers or creatures found
     // in the room based on if the key matches the room key.
-    private void printBoard() {
+    public void printBoard() {
         System.out.println("+-----------------------------------------------------------------------------------+");
         System.out.println("| 0-1-1: " + Engine.Facility.get("011").renderOccupantAdventurers() + " ]");
         for (int i = 1; i < 5; i++) {
@@ -86,11 +94,11 @@ public class Render {
      * status
      */
     private void printStatus() {
-        System.out.println("Adventurers\t\tRoom\t\tHealth\t\tTreasure");
+        System.out.println("Adventurer\t\tRoom\t\tHealth\t\tTreasure");
         for (Entity a0 : getAdventurers()) {
             Adventurer a = (Adventurer) a0;
             StringBuilder treasurePrint = new StringBuilder();
-            for(Treasure t : a.getInventory()){
+            for (Treasure t : a.getInventory()) {
                 treasurePrint.append(t.getClass().getSimpleName()).append(" ");
             }
             System.out.println(a.getClass().getSimpleName() + "\t\t\t" +
@@ -102,7 +110,7 @@ public class Render {
         System.out.println("\nTotal Active Creatures: " + getCreatures().size());
         System.out.println("\nCreatures\t\tRoom");
         for (Entity c0 : getCreatures()) {
-            Creature c = (Creature)c0;
+            Creature c = (Creature) c0;
             System.out.println(c.getClass().getSimpleName() + "\t\t\t" +
                     Arrays.toString(c.checkRoom().getCoordinates()));
         }
@@ -110,7 +118,7 @@ public class Render {
     }
 
     // PUBLIC METHODS
-    public int getTurn(){
+    public int getTurn() {
         return turn;
     }
 }

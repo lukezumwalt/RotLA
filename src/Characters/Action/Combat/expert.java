@@ -1,10 +1,10 @@
 package Characters.Action.Combat;
 
 import Characters.Entity;
-import Characters.Action.Combat.combatDecorator.dance;
-import Characters.Action.Combat.combatDecorator.jump;
-import Characters.Action.Combat.combatDecorator.shout;
-import Characters.Action.Combat.combatDecorator.spin;
+import Characters.Action.Celebrate.dance;
+import Characters.Action.Celebrate.jump;
+import Characters.Action.Celebrate.shout;
+import Characters.Action.Celebrate.spin;
 import Characters.Friendlies.Adventurer;
 
 import static Utilities.Dice.rollD6;

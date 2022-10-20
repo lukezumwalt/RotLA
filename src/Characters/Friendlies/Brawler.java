@@ -2,17 +2,19 @@ package Characters.Friendlies;
 
 import Board.Observer;
 import Board.Room;
+import Characters.Action.Celebrate.dance;
+import Characters.Action.Celebrate.jump;
+import Characters.Action.Celebrate.shout;
+import Characters.Action.Celebrate.spin;
 import Characters.Action.Combat.expert;
+import Characters.Action.Move.npcMovement;
+import Characters.Action.Move.playerMovement;
 import Characters.Entity;
 import Characters.Subject;
 import Characters.Action.Search.careless;
 import Treasure.Treasure;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import static Board.Room.inspectNeighbors;
-import static Game.Engine.Facility;
 
 /*
  * code example of Inheritance
@@ -26,10 +28,12 @@ public class Brawler extends Adventurer implements Entity, Subject {
         entityType = "adventurer";
         sign = "B";
         name = "Brawler";
-        health = 3;
+        health = 12;
         alive = true;
         combatStyle = new expert();
         searchStyle = new careless();
+//        moveStyle = new npcMovement();
+        moveStyle = new playerMovement();
         offenseBonus = 2;
         defenseBonus = 0;
         inventory = new ArrayList<>();
@@ -76,30 +80,26 @@ public class Brawler extends Adventurer implements Entity, Subject {
 
     @Override
     public void move() {
-        if (health <= 0) {
-            // do nothing, ya dead
-            return;
-        } else {
-            // check room to return valid moves
-            String[] addresses = inspectNeighbors(this.currentRoom);
-            // randomly select a valid move from that list
-            int choice;
-            if (addresses.length <= 1) {
-                choice = 0;
-            } else {
-                Random r = new Random();
-                choice = r.nextInt(0, addresses.length);
-            }
-            Room newRoom = Facility.get(addresses[choice]);
-
-            // finally:
-            this.currentRoom.leaveRoom(this);
-            this.setCurrentRoom(newRoom);
-            newRoom.occupyAdventurer(this);
-
-            // Report Adventurer entered new room:
-            notifyObservers("roomEntered");
+        if (this.getAlive()) {
+            moveStyle.move(this);
         }
+    }
+
+    public void setPlayerName(String name){
+        playerName = name;
+    }
+    public String getPlayerName(){
+        return playerName;
+    }
+
+    @Override
+    public void celebrate() {
+        jump.setCelebrate(this);
+        shout.setCelebrate();
+        dance.setCelebrate();
+        spin.setCelebrate();
+        System.out.print("\n");
+        notifyObservers("celebration");
     }
 
     @Override
@@ -133,7 +133,7 @@ public class Brawler extends Adventurer implements Entity, Subject {
 
     @Override
     public int getTreasureCount() {
-        return 0;
+        return inventory.size();
     }
 
     public ArrayList<Treasure> getInventory() {

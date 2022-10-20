@@ -1,20 +1,19 @@
 package Game;
 
-import java.util.Scanner;
-
 public class Run {
     public static void main(String[] args) {
 
-        // instantiate objects
-        Scanner input = new Scanner(System.in);
+//        Scanner input = new Scanner(System.in);
         Engine game = new Engine();
 
+        // Initialize Game Properties
         game.initialize();
+        game.playerStart();
 
-        System.out.println("Press [Enter] to begin...");
+//        System.out.println("Press [Enter] to begin...");
         // Primary Game.Run Loop
         while (true) {
-//            // Debugging condition
+            // Debugging condition
 //            if (Objects.equals(input.nextLine(), "gg")) {
 //                break;
 //            }
@@ -27,6 +26,6 @@ public class Run {
                 break;
             }
         }
-        input.close();
+//        input.close();
     }
 }

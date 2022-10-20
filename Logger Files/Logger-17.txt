@@ -1,7 +1,5 @@
-Brawler entered room [1, 2, 1]
-Sneaker entered room [2, 0, 2]
-Runner entered room [4, 1, 1]
-Thief entered room [1, 1, 2]
-Orbiter entered room [3, 2, 0]
-Orbiter entered room [3, 2, 0]
-Orbiter entered room [2, 0, 0]
+Brawler celebrated.
+Orbiter entered room [1, 0, 0]
+Orbiter entered room [3, 0, 0]
+Blinker entered room [1, 0, 0]
+Orbiter entered room [3, 0, 0]

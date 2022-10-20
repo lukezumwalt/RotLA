@@ -129,14 +129,13 @@ public class Room {
 
     public static void mapNeighborhood() {
         // Spawn Room
-        // ! @TODO: Declare this room illegal to ENTER ...somehow...
         Neighborhood.put("011", new String[] { "111" });
         // First Floor
         Neighborhood.put("100", new String[] { "101", "110" });
         Neighborhood.put("101", new String[] { "100", "102", "111" });
         Neighborhood.put("102", new String[] { "101", "112" });
         Neighborhood.put("110", new String[] { "100", "111", "120" });
-        Neighborhood.put("111", new String[] { "101", "110", "112", "121", "211" });
+        Neighborhood.put("111", new String[] { "011", "101", "110", "112", "121", "211" });
         Neighborhood.put("112", new String[] { "102", "111", "122" });
         Neighborhood.put("120", new String[] { "110", "121" });
         Neighborhood.put("121", new String[] { "111", "120", "122" });
