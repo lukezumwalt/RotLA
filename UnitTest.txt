@@ -1,0 +1,47 @@
+Running JUnit test suite.
+Set up for unit testing.
+Running: testPlayerName
+Tearing down.
+Set up for unit testing.
+Running: testCreatureNumber
+Tearing down.
+Set up for unit testing.
+Running: checkArmor
+Tearing down.
+Set up for unit testing.
+Running: checkSword
+Tearing down.
+Set up for unit testing.
+Running: testTreasureNumber
+Tearing down.
+Set up for unit testing.
+Running: testLoggerInstance
+Tearing down.
+Set up for unit testing.
+Running: checkCreatureRoomOccupancy
+Tearing down.
+Set up for unit testing.
+Running: checkTrap
+Tearing down.
+Set up for unit testing.
+Running: checkPotion
+Tearing down.
+Set up for unit testing.
+Running: checkTeleport
+Tearing down.
+Set up for unit testing.
+Running: checkOrbiterNotInCenterRoom
+Tearing down.
+Set up for unit testing.
+Running: testLoggerTerminate
+Tearing down.
+Set up for unit testing.
+Running: checkGem
+Tearing down.
+Set up for unit testing.
+Running: testRenderInstance
+Tearing down.
+Set up for unit testing.
+Running: checkAdventurerRoomOccupancy
+Tearing down.
+Successful: true ran 15 tests.
